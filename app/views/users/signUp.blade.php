@@ -10,27 +10,27 @@
           <fieldset>
         <legend>Sign up</legend>
         <div class="control-group">
-          <?php echo Form::label('name', 'Name'); ?>
+          <?php echo Form::label('name', 'Name', array('class' => 'control-label'); ?>
           <div class="controls">
             <?php echo Form::text('name'); ?>
           </div>
         </div>
 
         <div class="control-group">
-          <?php echo Form::label('email', 'email'); ?>
+          <?php echo Form::label('email', 'email', array('class' => 'control-label'); ?>
           <div class="controls">
 			  <?php echo Form::text('email'); ?>
           </div>
         </div>
 
         <div class="control-group">
-          <?php echo Form::label('password', 'password'); ?>
+          <?php echo Form::label('password', 'password', array('class' => 'control-label'); ?>
          <div class="controls">
             <?php echo Form::password('password'); ?>
           </div>
         </div>
         <div class="control-group">
-          <?php echo Form::label('password_confirmation', 'password confirmation'); ?>
+          <?php echo Form::label('password_confirmation', 'password confirmation', array('class' => 'control-label'); ?>
           <div class="controls">
             <?php echo Form::password('password_confirmation'); ?>
           </div>
