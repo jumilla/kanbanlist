@@ -17,6 +17,8 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::get('dashboard', 'DashboardController@getIndex');
+
 // Route::get('tasks/index', ['as'=>'tasks', 'uses'=>'TasksController@index']);
 Route::get('tasks', function()
 {
