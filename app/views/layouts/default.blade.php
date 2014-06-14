@@ -56,8 +56,7 @@
 
             <% if params[:controller] == "tasks" and param
               s[:action] == "index" %>
-              {{ View::make("layouts/book_list_dropdown_l
-              i");
+              {{ View::make("layouts/book_list_dropdown_li");
               {{ View::make("layouts/layout_dropdown_li");
               {{ View::make("layouts/theme_dropdown_li");
             <% end %>
@@ -71,7 +70,7 @@
 
 
           <div class="pull-left">
-            {{ View::make("layouts/task_count_table");
+            {{ View::make("layouts/task_count_table"); }}
           </div>
           <% end %>
 
@@ -92,13 +91,11 @@
   </div>
 </header>
 
-
-
-{{ View::make("layouts/new_book_dialog"); }}
-{{ View::make("layouts/remove_book_dialog"); }}
-{{ View::make("layouts/send_mail_dialog"); }}
-{{ View::make("layouts/set_bg_image_dialog"); }}
-{{ View::make("layouts/delete_task_dialog"); }}
+@include('layouts.new_book_dialog')
+@include('layouts.remove_book_dialog')
+@include('layouts.send_mail_dialog')
+@include('layouts.set_bg_image_dialog')
+@include('layouts.delete_task_dialog')
 
  @yield('content')
 

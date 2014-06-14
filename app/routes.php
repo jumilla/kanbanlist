@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\View;
 
 Route::get('/', 'HomeController@index');
 
+Route::get('dashboard', 'DashboardController@getIndex');
+
 // Route::get('tasks/index', ['as'=>'tasks', 'uses'=>'TasksController@index']);
 Route::get('tasks', function()
 {
