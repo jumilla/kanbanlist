@@ -6,15 +6,11 @@
 
   <title>かんばんりすと</title>
   
-  {{ HTML::style('assets/stylesheets/application.css'); }}
-  {{ HTML::style('assets/stylesheets/task_default.css')}}
+  <?= stylesheet_link_tag() ?>
+  <?= stylesheet_link_tag('task_default', ['id'=>'task_theme']) ?>
 
-  {{--
-  <%= stylesheet_link_tag :application %>
-  <%= stylesheet_link_tag "task_default" , id: "task_theme" %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tag %>
-  --}}
+  <?= javascript_include_tag() ?>
+
 
 </head>
 <body id="body_core" style="
