@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
-
+  	{{ var_dump($errors)}}
     {{ Form::open(array('url' => URL::action('UserController@postSignUp'), 'method' => 'POST')) }}
           <fieldset>
         <legend>Sign up</legend>

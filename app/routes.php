@@ -27,3 +27,4 @@ Route::post('users/sign_up','UserController@postSignUp');
 Route::get('users/sign_in','UserController@signIn');
 Route::get('users/sign_out','UserController@signOut');
 Route::get('users/{id}/edit','UserController@edit');
+Route::get('users/{id}','UserController@show');
