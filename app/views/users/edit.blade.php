@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="span12"></div>
-    {{ Form::open(array('url) => 'users/signUp', 'method' => 'put')) }}
+    {{ Form::open(array('url') => 'users/signUp', 'method' => 'put')) }}
       <fieldset>
         <legend>ユーザ情報編集</legend>
         <div class="control-group">
