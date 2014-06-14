@@ -25,6 +25,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		
 	private $_base_bg_path;
 	
+	public function books()
+	{
+		return $this->hasMany('books');
+	}
+	
 	public function bgImgPath(){
 		if ($this->bg_img){
 			return $this->bg_img;
