@@ -1,5 +1,26 @@
 @extends('layouts.default')
 
+@section('headerTaskIndex')
+  {{ View::make("layouts/book_list_dropdown_li"); }}
+  {{ View::make("layouts/layout_dropdown_li"); }}
+  {{ View::make("layouts/theme_dropdown_li"); }}
+@stop
+
+@section('headerTaskIndexForm')
+  <form id="filter_form" method="post" class="navbar-search pull-left">
+  <input type="text" id="filter_str" class="search-query span2" value="" placeholder="Filter"/>
+  </form>
+
+
+  <div class="pull-left">
+    {{ View::make("layouts/task_count_table"); }}
+  </div>
+@stop
+
+@section('headerTaskIndexLi')
+  {{ View::make("layouts/trial_feature_dropdown_li"); }}
+@stop
+
 @section('content')
 <div class="container-fluid">
   <div id="sending_mail" class="alert alert-info" style="display:none"></div>
@@ -60,9 +81,8 @@
     --}}
   </div>
 </div>
-{{-- 
-<%= javascript_include_tag 'tasks' %>
-<%= javascript_include_tag 'add_todo_form' %>
---}}
+
+{{ javascript_include_tag('tasks') }}
+{{ javascript_include_tag('add_todo_form') }}
 
 @stop
