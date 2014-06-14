@@ -49,31 +49,17 @@
               <li><%= link_to raw('<i class="icon-eye-open"></i>'), dashboard_index_path, { rel: "tooltip", title: "Go to your dashboard" } %></li>
               <li><%= link_to raw('<i class="icon-home"></i>'), tasks_path, { rel: "tooltip", title: "Go to your kanbanlist" } %></li>
             <% end %>
+          --}}
+            @yield('headerTaskIndex')
 
-            <% if params[:controller] == "tasks" and param
-              s[:action] == "index" %>
-              {{ View::make("layouts/book_list_dropdown_li");
-              {{ View::make("layouts/layout_dropdown_li");
-              {{ View::make("layouts/theme_dropdown_li");
-            <% end %>
           </ul>
 
+            @yield('headerTaskIndexForm')
 
-          <% if params[:controller] == "tasks" and params[:action] == "index" %>
-          <form id="filter_form" method="post" class="navbar-search pull-left">
-            <input type="text" id="filter_str" class="search-query span2" value="" placeholder="Filter"/>
-          </form>
-
-
-          <div class="pull-left">
-            {{ View::make("layouts/task_count_table"); }}
-          </div>
-          <% end %>
+          {{--
 
           <ul class="nav pull-right">
-            <% if params[:controller] == "tasks" and params[:action] == "index" %>
-              {{ View::make("layouts/trial_feature_dropdown_li");
-            <% end %>
+            @yield('headerTaskIndexLi')
 
             <% if current_user %>
               <li><%= link_to('Logout', [ :destroy, :user_session ], :class => '') %></li>
