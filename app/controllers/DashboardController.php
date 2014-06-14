@@ -12,7 +12,7 @@ class DashboardController extends BaseController {
 			'today_tasks' => [],
 			'books' => [],
 			'task_counts' => ['todo_h' => 0, 'todo_m' => 0, 'todo_l' => 0, 'doing' => 0, 'waiting' => 0],
-			'month_done_list' => [],
+			'month_done_lists' => [],
 		]);
 	}
 	
