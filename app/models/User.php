@@ -33,16 +33,33 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	private $_layout;
 	private $_pomo
 	
-	public by_name($name){
+	private $_base_bg_path;
+	
+	public bg_img_path(){
 		
+	}
+	
+	public add_user($name){
+		
+	}
+	
+	public by_name($name){
+		return User::where('name', '=', $name)->firstOrFail();
 	}
 	
 	public exist($name){
-		
+		if (User::where('name', '=', $name)->get()){
+			return true;
+		}
+		return false;
 	}
 	
 	public bg_img_by_name($name){
-		
+		$user = $this->by_name($name);
+		if ($user){
+			return $user->bg_img;
+		}
+		return null;
 	}
 	
 	public set_bg_img($name, $bg_img){
