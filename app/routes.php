@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\View;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,13 +12,21 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('dashboard', 'DashboardController@getIndex');
 
 // Route::get('tasks/index', ['as'=>'tasks', 'uses'=>'TasksController@index']);
 Route::get('tasks', function()
 {
 	return View::make('tasks/index');
 });
+
+Route::post('tasks/filter_or_update', ['as'=>'getTasks', 'uses'=>'TasksController@index']); 
+
+
+Route::get('users/sign_up','UserController@signUp');
+Route::post('users/sign_up','UserController@postSignUp');
+Route::get('users/sign_in','UserController@signIn');
+Route::get('users/sign_out','UserController@signOut');
+Route::get('users/{id}/edit','UserController@edit');

@@ -122,6 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
+		'Cartalyst\Sentry\SentryServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 
 	),
@@ -190,6 +192,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+		'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 
 	),
 

@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBooksTable extends Migration {
+class CreateTasks extends Migration {
+
 	/**
 	 * Run the migrations.
 	 *
@@ -11,13 +12,19 @@ class CreateBooksTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('books', function(Blueprint $table) {
+		Schema::create('tasks', function($table)
+		{
 			$table->increments('id');
+			$table->integer('user_id')->unsigned();
+			$table->integer('book_id')->unsigned();
+			$table->integer('status');
 			$table->string('name');
-			$table->unsignedInteger('user_id');
+			$table->string('msg');
+			$table->dateTime('doing_at');
+			$table->integer('pomo');
+			$table->integer('order_no');
 			$table->timestamps();
 		});
-
 	}
 
 	/**
@@ -27,6 +34,7 @@ class CreateBooksTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('books');
+		Schema::drop('tasks');
 	}
+
 }

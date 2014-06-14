@@ -15,9 +15,14 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function index()
 	{
-		return View::make('hello');
+
+		$all_user_count = 1000; 
+		$today_task_count = 10000;
+		$all_task_count = 100000;
+		return View::make('index',compact('all_user_count','today_task_count','all_task_count'));
+
 	}
 
 }
