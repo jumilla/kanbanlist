@@ -28,9 +28,9 @@ class CreateUsersTable extends Migration {
 			$table->string('persist_code')->nullable();
 			$table->string('reset_password_code')->nullable();
 			$table->string('name')->nullable();
-			$table->string('bg_img');
-			$table->string('layout');
-			$table->integer('pomo');
+			$table->string('bg_img')->nullable();
+			$table->string('layout')->nullable();
+			$table->integer('pomo')->default(0);
 			$table->timestamps();			
 
 			$table->index('activation_code');
