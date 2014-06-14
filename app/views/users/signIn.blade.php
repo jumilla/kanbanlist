@@ -4,7 +4,7 @@
   <div class="row-fluid">
     <div class="span12"></div>
 
-    {{ Form::open(array('url') => 'users/signUp', 'method' => 'put')) }}
+    {{ Form::open(array('url' => 'users/signUp', 'method' => 'put')) }}
       <fieldset>
         <legend>ログイン</legend>
         <div class="control-group">
