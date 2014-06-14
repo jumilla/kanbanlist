@@ -1,4 +1,5 @@
 @extends('layouts/default')
+@section('content')
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
@@ -39,3 +40,4 @@ $(document).ready(function() {
   });
 });
 </script>
+@stop
