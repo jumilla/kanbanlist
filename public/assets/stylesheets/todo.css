@@ -1,0 +1,195 @@
+.ui-state-highlight { height: 1.5em; border-style : dashed; }
+
+#serverMsg{
+  margin: 0 0 0 20px;
+  width             : 97%   ;
+  height            :  8px    ;
+  padding           : 10px    ;
+  z-index:100;
+}
+
+table#task_count_table {
+  margin: 2px 0 2px 20px;
+  border: 1px #999999 solid;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 8px;
+}
+
+table#task_count_table th {
+  border: 1px #999999 solid;
+  border-width: 0 0 1px 1px;
+}
+
+table#task_count_table td {
+  border: 1px #bbbbbb solid;
+  background: #F5F5F5;
+  border-width: 0 0 1px 1px;
+  text-align: center;
+}
+
+#info_msg li {
+  margin: 0px 0px 0px 4px;
+}
+
+.refresh_alert_msg {
+  white-space: nowrap;
+  font-weight: bold;
+  font-size:  10pt;
+  text-shadow: 1px 1px 1px rgba(200, 200, 200, 0.9);
+  margin-left: 10px;
+  color: #FFFF55;
+}
+
+
+.name_list    {
+  list-style-type: none;
+  margin: 10px 10px 0px 10px;
+  padding: 5px;
+  border : 0px solid #aaaaaa;
+/*  width:  96%; */
+  border-top:1px solid #888;
+  border-right:2px solid #333;
+  border-bottom:2px solid #333;
+  border-left:1px solid #888;
+  background: #eee;
+  color: #111;
+}
+
+.counts {
+  color: black;
+  width: 18px;
+  font-size: 6pt;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(200, 200, 200, 0.9);
+}
+
+.counts-active {
+  color: darkslategray;
+  font-size: 6pt;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(200, 200, 200, 0.9);
+}
+
+#prefix,#add_todo_form_msg  {
+  background-color: #ff9;
+}
+
+.edit-footer {
+  height: 32px;
+}
+
+.task-chars-left {
+  float: left;
+  margin-left: 10px;
+  font-weight: bold;
+  color: #777;
+}
+
+.task-chars-left-add-form {
+  margin-left: 5px;
+  font-weight: bold;
+  color: #777;
+}
+
+.edit-control {
+  float: right;
+  margin-right: 5px;
+}
+
+.sign {
+  font-weight: bold;
+  font-size: 10pt;
+  color: #55f;
+}
+
+.done-list-day{
+  width: 66px;
+}
+
+.done-list-time{
+  width: 34px;
+}
+
+.book-counts{
+  margin-left: 7px;
+}
+
+.book-name{
+  color: dimgray;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: normal;
+
+  text-shadow: 0px 1px 1px white;
+}
+
+#loading_msg_area {
+  color: #888;
+}
+
+#done_list_table tr {
+  background-color: white;
+}
+
+#p_timer_body {
+  margin-top: 20px;
+}
+
+#p_timer_clock {
+  margin: 0 10px;
+}
+
+#p_min, #p_sec, #p_delim {
+  color: tomato;
+  text-shadow: 1px 1px 2px gray;
+}
+
+#p_min {
+  font-size: 36px;
+  margin-left: 10px;
+}
+
+#p_sec, #p_delim {
+  font-size: 12px;
+}
+
+#pomo_done_num {
+  margin-left: 15px;
+  font-size: 24px;
+  color: dodgerblue;
+  text-shadow: 1px 1px 2px gray;
+}
+
+footer {
+  width: 100%;
+  margin-top: 4px;
+  padding: 20px 0;
+  text-align: right;
+  border-top: 1px solid #DDD;
+}
+
+footer span{
+  margin-right: 20px;
+}
+
+.icon-chevron-right {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  opacity: .25;
+}
+
+.zero {
+  color: #aaa;
+}
+
+.btn-group .btn {
+  float: none;
+  margin-left: -5px;
+}
+
+#download_link {
+  text-align: right;
+  margin: 10px;
+}
