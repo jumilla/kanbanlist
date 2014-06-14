@@ -2,7 +2,15 @@
 
 return array(
 
+	'default' => 'sqlite',
+
 	'connections' => array(
+
+		'sqlite' => array(
+			'driver'   => 'sqlite',
+			'database' => __DIR__.'/../../database/local.sqlite',
+			'prefix'   => '',
+		),
 
 		'mysql' => array(
 			'host'      => 'localhost',
