@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
-
+	{{ var_dump($errors) }}
     {{ Form::open(array('url' => 'users/sign_in', 'method' => 'post')) }}
       <fieldset>
         <legend>ログイン</legend>

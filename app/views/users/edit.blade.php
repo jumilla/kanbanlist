@@ -3,6 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="span12"></div>
+    {{ var_dump($errors) }}
     {{ Form::open(array('url') => 'users/edit', 'method' => 'post')) }}
       <fieldset>
         <legend>ユーザ情報編集</legend>
