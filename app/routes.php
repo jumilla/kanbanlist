@@ -23,6 +23,7 @@ Route::get('tasks', function()
 });
 
 Route::get('users/sign_up','UserController@signUp');
+Route::post('users/sign_up','UserController@postSignUp');
 Route::get('users/sign_in','UserController@signIn');
 Route::get('users/sign_out','UserController@signOut');
 Route::get('users/{id}/edit','UserController@edit');

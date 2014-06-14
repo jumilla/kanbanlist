@@ -19,28 +19,22 @@ class CreateUsersTable extends Migration {
 		Schema::create('users',function(Blueprint $table){
 			$table->increments('id');
 			$table->string('email')->unique();
-			$table->string('encrypted_password');
-			$table->string('reset_password_token')->unique();
-			$table->timestamp('reset_password_sent_at');
-			$table->timestamp('remember_created_at');
-			$table->integer('sign_in_count')->unsigned();
-			$table->string('current_sign_in_ip');
-			$table->string('last_sign_in_ip');
-			$table->string('password_salt');
-			$table->string('confirmation_token');
-			$table->timestamp('confirmed_at');
-			$table->timestamp('confirmation_sent_at');
-			$table->integer('failed_attemps')->unsigned();
-			$table->string('unlock_token');
-			$table->timestamp('locked_at');
-			$table->string('authentication_token');
-			$table->string('name');
-			$table->string('pass');
+			$table->string('password');
+			$table->text('permissions')->nullable();
+			$table->boolean('activated')->default(0);
+			$table->string('activation_code')->nullable();
+			$table->timestamp('activated_at')->nullable();
+			$table->timestamp('last_login')->nullable();
+			$table->string('persist_code')->nullable();
+			$table->string('reset_password_code')->nullable();
+			$table->string('name')->nullable();
 			$table->string('bg_img');
 			$table->string('layout');
 			$table->integer('pomo');
 			$table->timestamps();			
 
+			$table->index('activation_code');
+			$table->index('reset_password_code');
 			
 		});
 	}
