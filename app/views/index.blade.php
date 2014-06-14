@@ -1,4 +1,6 @@
 @extends('layouts/default')
+
+@section('content')
 <div id="wrapper">
 <div class="hero-unit">
   <h1>かんばんりすと</h1>
@@ -29,9 +31,10 @@
   </p>
 
   <p>
-  	<?php echo HTML::link('user/profile', 'ユーザー登録'); ?>
-  	<?php echo HTML::link('user/login', 'ログイン') ?>
-  </p>
+    <a href="{{ url('users/sign_up') }}" class="btn btn-primary btn-large">ユーザー登録</a>
+    <a href="{{ url('users/sign_in') }}" class="btn btn-primary btn-large">ログイン</a>
+ </p>
   There are <span id="user_count"><?php echo $all_user_count ?></span> users and <span id="today_tasks"><?php echo $today_task_count ?></span>/<span id="all_tasks"><?php echo $all_task_count ?></span> [today/all] tasks in かんばんりすと.
 </div>
 </div>
+@stop

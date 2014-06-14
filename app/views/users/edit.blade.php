@@ -1,57 +1,50 @@
+@extends('layouts/default')
+@section('content')
 <div class="container">
   <div class="row">
     <div class="span12"></div>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count,"error") %></h2>
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-    <%= form_for(@user, :html => { :method => :put ,:class => "form-horizontal"}) do |f| %>
+    {{ Form::open(array('url') => 'users/edit', 'method' => 'post')) }}
       <fieldset>
         <legend>ユーザ情報編集</legend>
         <div class="control-group">
-          <%= f.label :name, :class => "control-label" %>
+          <?php echo Form::label('name', 'Name'); ?>
           <div class="controls">
-            <%= f.text_field :name %>
+            <?php echo Form::text('name'); ?>
             <span class="help-inline label label-important">必須</span>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :email, :class => "control-label" %>
+          <?php echo Form::label('email', 'email'); ?>
           <div class="controls">
-            <%= f.email_field :email %>
+            <?php echo Form::text('email'); ?>
             <span class="help-inline label label-important">必須</span>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :password, :class => "control-label" %>
+          <?php echo Form::label('password', 'password'); ?>
           <div class="controls">
-            <%= f.password_field :password %>
+            <?php echo Form::password('password'); ?>
             <span class="help-inline label label-important">変更する場合は入力</span>
           </div>
         </div>
         <div class="control-group">
-          <%= f.label :password_confirmation, :class => "control-label" %>
+          <?php echo Form::label('password_confirmation', 'password confirmation'); ?>
           <div class="controls">
-            <%= f.password_field :password_confirmation %>
+            <?php echo Form::password('password_confirmation'); ?>
             <span class="help-inline label label-important">変更する場合は入力</span>
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
-            <%= f.submit "Update", :class => "btn btn-primary" %>
+            <?php echo Form::submit('Update'); ?>
           </div>
         </div>
       </fieldset>
-    <% end %>
+    {{ Form::close() }}
     </div>
   </div>
 </div>
+@stop
