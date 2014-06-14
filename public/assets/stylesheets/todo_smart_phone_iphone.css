@@ -1,0 +1,56 @@
+.label{
+  margin-left: 4px;
+  padding:1px 4px 1px;
+  font-size:11.049999999999999px;
+  font-weight:bold;
+  color:#ffffff;
+  text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color:#999999;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;}
+
+.label-info{background-color:#4183C4;}
+.label-important{background-color:#BD2C00;}
+
+.book-name{
+  color: gray;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.msg-body{
+  font-size: 13px;
+  font-style: normal;
+}
+
+
+/* 文字列を省略しないようにする */
+.ui-header .ui-title, /* header */
+.ui-footer .ui-title, /* footer */
+.ui-btn-inner, /* button */
+.ui-li-heading, /* listview heading */
+.ui-li .ui-btn-text a.ui-link-inherit, /* listview link */
+.ui-li-desc /* listview description */
+{
+  overflow: visible;
+  white-space: normal;
+}
+
+.ui-mini { margin: 0px; }
+
+.task-chars-left,
+.task-chars-left-add-form
+{
+  float: right;
+  margin-right: 10px;
+  font-weight: bold;
+  color: #777;
+}
+
+.task-label {
+  padding: 2px 10px;
+  text-align: center;
+}
+

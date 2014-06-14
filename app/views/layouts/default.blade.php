@@ -6,6 +6,9 @@
 
   <title>かんばんりすと</title>
   
+  {{ HTML::style('assets/stylesheets/application.css'); }}
+  {{ HTML::style('assets/stylesheets/task_default.css')}}
+
   {{--
   <%= stylesheet_link_tag :application %>
   <%= stylesheet_link_tag "task_default" , id: "task_theme" %>
@@ -81,6 +84,7 @@
               <li><%= link_to('Logout', [ :destroy, :user_session ], :class => '') %></li>
             <% end %>
           </ul>
+
           --}}
         </div>
       </div>
@@ -96,7 +100,7 @@
 {{ View::make("layouts/set_bg_image_dialog"); }}
 {{ View::make("layouts/delete_task_dialog"); }}
 
- @yield('content'); 
+ @yield('content')
 
   <footer>
     <span>
