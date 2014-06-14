@@ -15,3 +15,5 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get('tasks/index', ['as'=>'tasks', 'uses'=>'TasksController@index']);
