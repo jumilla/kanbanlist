@@ -29,23 +29,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	private $_email;
 	private $_password;
 	private $_password_confirmation;
-	private $_remember_me
+	private $_remember_me;
 	private $_name;
 	private $_bg_img;
 	private $_layout;
-	private $_pomo
+	private $_pomo;
 	
 	private $_base_bg_path;
 	
-	public bg_img_path(){
+	public function bgImgPath(){
 		
 	}
 	
-	public add_user($name){
+	public function addUser($name){
 		
 	}
 	
-	public by_name($name){
+	public function byName($name){
 		return User::where('name', '=', $name)->firstOrFail();
 		App::error(function(ModelNotFoundException $e)
 		{
@@ -53,23 +53,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		});
 	}
 	
-	public exist($name){
+	public function exist($name){
 		if (User::where('name', '=', $name)->get()){
 			return true;
 		}
 		return false;
 	}
 	
-	public bg_img_by_name($name){
-		$user = $this->by_name($name);
+	public function bgImgByName($name){
+		$user = $this->byName($name);
 		if ($user){
 			return $user->bg_img;
 		}
 		return null;
 	}
 	
-	public set_bg_img($name, $bg_img){
-		$user = $this->by_name($name);
+	public function setBgImg($name, $bg_img){
+		$user = $this->byName($name);
 		if (!$user){
 			return null;
 		}
@@ -77,16 +77,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$user->save();
 	}
 	
-	public layout_by_name($name){
-		$user = $this->by_name($name);
+	public function layoutByName($name){
+		$user = $this->byName($name);
 		if ($user){
 			return $user->layout;
 		}
 		return null;
 	}
 	
-	public set_layout($name, $layout){
-		$user = $this->by_name($name);
+	public function setLayout($name, $layout){
+		$user = $this->byName($name);
 		if (!$user){
 			return null;
 		}
@@ -94,8 +94,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$user->save();
 	}
 	
-	public inc_pomo($name){
-		$user = $this->by_name($name);
+	public function incPomo($name){
+		$user = $this->byName($name);
 		if (!$user){
 			return null;
 		}
