@@ -1,8 +1,10 @@
+@extends('layouts/default')
+@section('content')
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
-    <%= devise_error_messages! %>
-    {{ Form::open(array('url) => 'users/signUp', 'method' => 'put')) }}
+
+    {{ Form::open(array('url' => URL::action('UserController@postSignUp'), 'method' => 'POST')) }}
           <fieldset>
         <legend>Sign up</legend>
         <div class="control-group">
@@ -33,7 +35,8 @@
         </div>
         <div class="control-group">
           <div class="controls">
-            <%= f.submit "Sign in", :class => "btn btn-primary" %>
+             {{Form::submit("Sign in", array('class'=>"btn btn-primary"))}}
+
           </div>
         </div>
       </fieldset>
@@ -41,3 +44,4 @@
     </div>
   </div>
 </div>
+@stop
