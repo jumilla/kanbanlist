@@ -46,15 +46,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 	
 	public by_name($name){
-		return User::where('name', '=', $name)->firstOrFail();
-		App::error(function(ModelNotFoundException $e)
-		{
-		    return null;
-		});
+		return User::where('name', '=', $name)->first();
 	}
 	
 	public exist($name){
-		if (User::where('name', '=', $name)->get()){
+		if (User::where('name', '=', $name)->first()){
 			return true;
 		}
 		return false;
