@@ -1,3 +1,6 @@
+@extends('layouts.default')
+
+@section('content')
 <div class="container-fluid">
   <div id="sending_mail" class="alert alert-info" style="display:none"></div>
   <div id="send_mail_result" class="alert alert-success" style="display:none"></div>
@@ -51,9 +54,14 @@
 
   <div id="download_link">
     Download:
+    {{--
     <%= link_to "CSV", tasks_path(format: "csv") %> |
     <%= link_to "Excel", tasks_path(format: "xls") %>
+    --}}
   </div>
 </div>
+{{-- 
 <%= javascript_include_tag 'tasks' %>
 <%= javascript_include_tag 'add_todo_form' %>
+--}}
+@end
