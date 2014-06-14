@@ -82,8 +82,8 @@
         <td class="todo_m {{ ($book->todo_m == 0) ? 'zero' : '' }}">{{ $book->todo_m }}</td>
         <td class="todo_l {{ ($book->todo_l == 0) ? 'zero' : '' }}">{{ $book->todo_l }}</td>
         <td class="doing {{ ($book->doing == 0) ? 'zero' : '' }}">{{ $book->doing }}</td>
-        <td class="waiting {{ $book->waiting == 0) ? 'zero' : '' }}">{{ $book->waiting }}</td>
-        <td class="done {{ $book->done == 0) ? 'zero' : '' }}">{{ $book->done }}</td>
+        <td class="waiting {{ ($book->waiting == 0) ? 'zero' : '' }}">{{ $book->waiting }}</td>
+        <td class="done {{ ($book->done == 0) ? 'zero' : '' }}">{{ $book->done }}</td>
       </tr>
 @endforeach
     </table>
