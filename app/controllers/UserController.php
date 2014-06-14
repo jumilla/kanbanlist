@@ -3,17 +3,20 @@
 
 class UserController extends BaseController{
 	public function signUp(){
-		echo "OK";
+		return View::make('users/signUp');
 	}
 	
 	public function signIn(){
-		echo "Sign In";
+		return View::make('users/signIn');
 	}
 	public function signOut(){
-		echo "Sign out";
+		//return View::make('users/signOut');
 	}
 	
 	public function edit($id){
-		echo "edit: " .$id;
+		$user = User::find($id);
+		if(!isset($user)) App::abort(404);
+		
+		return View::make('users/edit',compact('user'));
 	}
 }

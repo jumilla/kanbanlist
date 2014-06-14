@@ -1,3 +1,4 @@
+@extends('layouts/default')
 <div id="wrapper">
 <div class="hero-unit">
   <h1>かんばんりすと</h1>
