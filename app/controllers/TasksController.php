@@ -3,10 +3,13 @@
 class TasksController extends BaseController {
 	
 
-	public function index() {
+	public function index()
+	{
+		return View::make('tasks.index');
+	}
 
-		return ("TasksController:index"); 
-
-	} 
+	public function filterOrUpdate()
+	{
+	}
 
 }

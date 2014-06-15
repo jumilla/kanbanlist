@@ -16,13 +16,11 @@ Route::get('/', 'HomeController@index');
 
 Route::get('dashboard', 'DashboardController@getIndex');
 
-// Route::get('tasks/index', ['as'=>'tasks', 'uses'=>'TasksController@index']);
-Route::get('tasks', function()
-{
-	return View::make('tasks/index');
+Route::group(['prefix' => 'tasks'], function() {
+	Route::get('', ['as'=>'tasks', 'uses'=>'TasksController@index']);
+	Route::post('filter_or_update', ['as'=>'getTasks', 'uses'=>'TasksController@filterOrUpdate']); 
 });
 
-Route::post('tasks/filter_or_update', ['as'=>'getTasks', 'uses'=>'TasksController@index']); 
 
 
 Route::get('users/sign_up','UserController@signUp');
