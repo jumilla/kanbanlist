@@ -1,10 +1,12 @@
 <?php
+
 class Book extends Eloquent {
-	public static $default_name = 'All Tasks'
+
+	public static $DEFAULT_NAME = 'All Tasks';
 
 	public function defaulf_name()
 	{
-		return $this->default_name;
+		return static::$DEFAULT_NAME;
 	}
 
 	public function user()
@@ -16,4 +18,5 @@ class Book extends Eloquent {
 	{
 		return $this->hasMany('Task');
 	}
+
 }

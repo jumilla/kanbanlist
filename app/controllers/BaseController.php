@@ -59,9 +59,9 @@ class BaseController extends Controller {
 
 	public function allCountsInfo()
 	{
-		$all_info = Auth:user()->tasks()->count();
-		$all_info['id'] = 0
-		$all_info['name'] = Book->default_name();
+		$all_info = Auth::user()->tasks()->count();
+		$all_info['id'] = 0;
+		$all_info['name'] = Book::DEFAULT_NAME;
 		return $all_info;
 	}
 
@@ -108,22 +108,25 @@ class BaseController extends Controller {
 		return $tasks;
 	}
 
-	public function renderJsonForUpdateBookJson($filter_str = "", $done_num)
+	public function renderJsonForUpdateBookJson($filter_str = '', $done_num)
 	{
 		return Response::json([
-				'task_list_html': get_task_list_html($filter_str, $done_num),
-				'book_name': getBookname(),
-				'prefix': getPrefix(),
-				'task_counts': getTaskCounts(),
-				'all_books': getAllBookCounts()
-			])->setCallback('updateBookJson'));
+			'task_list_html' => get_task_list_html($filter_str, $done_num),
+			'book_name'      => getBookname(),
+			'prefix'         => getPrefix(),
+			'task_counts'    => getTaskCounts(),
+			'all_books'      => getAllBookCounts(),
+		])->setCallback('updateBookJson');
 	}
 
 	public function getTaskListHtml($filter_str, $done_num)
 	{
 		$this->recent_done_num = $done_num;
-		$this->tasks = get_tasks( $filter_str, $done_num );
-		Session::get('layout') = empty(Session::get('layout')) ? 'default';
+		$this->tasks = get_tasks($filter_str, $done_num);
+
+		$layout = Session::get('layout');
+		Session::put('layout', $layout ?: 'default');
 		View::make('tasks/tasklist_' . Session::get('layout'));
 	}
+
 }
