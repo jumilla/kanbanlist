@@ -122,8 +122,9 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
+		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
+		'Jumilla\Erb2Blade\ServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 
 	),
