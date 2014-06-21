@@ -9,9 +9,9 @@
       </div>
       <div class="memdoc_todo">
         <ul id="todo_h" class="droptrue">
-        <% @tasks[:todo_high_tasks].each do |task| %>
-          <%= render "tasks/task", {:task => task, :display => "block" } %>
-        <% end %>
+        @foreach ($tasks['todo_high_tasks'] as $task)
+          @include("tasks/task", ['task' => $task, 'display' => "block" ])
+        @endforeach
         </ul>
       </div>
       <div class="memproto_todo">
@@ -19,9 +19,9 @@
       </div>
       <div class="memdoc_todo">
         <ul id="todo_m" class="droptrue">
-        <% @tasks[:todo_mid_tasks].each do |task| %>
-          <%= render "tasks/task", {:task => task, :display => "block" } %>
-        <% end %>
+        @foreach ($tasks['todo_mid_tasks'] as $task)
+          @include("tasks/task", ['task' => $task, 'display' => "block" ])
+        @endforeach
         </ul>
       </div>
       <div class="memproto_todo">
@@ -29,9 +29,9 @@
       </div>
       <div class="memdoc_todo_bottom">
         <ul id="todo_l" class="droptrue">
-        <% @tasks[:todo_low_tasks].each do |task| %>
-          <%= render "tasks/task", {:task => task, :display => "block" } %>
-        <% end %>
+        @foreach ($tasks['todo_low_tasks'] as $task)
+          @include("tasks/task", ['task' => $task, 'display' => "block" ])
+        @endforeach
         </ul>
       </div>
     </div>
@@ -44,9 +44,9 @@
       </div>
       <div class="memdoc_doing">
         <ul id="doing" class="droptrue">
-        <% @tasks[:doing_tasks].each do |task| %>
-          <%= render "tasks/task", {:task => task, :display => "block" } %>
-        <% end %>
+        @foreach ($tasks['doing_tasks'] as $task)
+          @include("tasks/task", ['task' => $task, 'display' => "block" ])
+        @endforeach
         </ul>
       </div>
     </div>
@@ -57,22 +57,22 @@
       </div>
       <div class="memdoc_waiting">
         <ul id="waiting" class="droptrue">
-        <% @tasks[:waiting_tasks].each do |task| %>
-          <%= render "tasks/task", {:task => task, :display => "block" } %>
-        <% end %>
+        @foreach ($tasks['waiting_tasks'] as $task)
+          @include("tasks/task", ['task' => $task, 'display' => "block" ])
+        @endforeach
         </ul>
       </div>
     </div>
 
     <div class="memitem">
       <div class="memproto">
-        <div class="memname_done"><center>Done - Recent <%= @recent_done_num %> - </center></div>
+        <div class="memname_done"><center>Done - Recent {{ $recent_done_num }} - </center></div>
       </div>
       <div class="memdoc_done">
         <ul id="done" class="droptrue">
-        <% @tasks[:done_tasks].each do |task| %>
-          <%= render "tasks/task", {:task => task, :display => "block", :done => true } %>
-        <% end %>
+        @foreach ($tasks['done_tasks'] as $task)
+          @include("tasks/task", ['task' => $task, 'display' => "block", 'done' => true])
+        @endforeach
         </ul>
       </div>
     </div>

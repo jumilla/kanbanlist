@@ -1,17 +1,18 @@
   <div data-role="header" data-position="fixed">
-    <?php switch ($state) : ?>
-    <?php case 'todo','doing','done': ?>
+    <?php switch ($state ): ?>
+    <?php case 'todo': ?>
+    <?php case 'doing': ?>
+    <?php case 'done': ?>
       <a href="#add_todo_page" id="show_add_todo_form" data-icon="plus" class="ui-btn-left">Add</a>
-    <?php break; ?>
     <?php case 'book': ?>
       <a href="#todo_nav" class="ui-btn-left">Todo</a>
-    <?php break; ?>
-    <?php endswitch; ?>
+        <?php endswitch;?>
 
     <h3>かんばんりすと</h3>
-    <?php switch($state) : ?>
-    <?php case 'todo','doing','done': ?>
+    <?php switch ($state ): ?>
+    <?php case 'todo': ?>
+    <?php case 'doing': ?>
+    <?php case 'done': ?>
       <a href="#book_list_page" class="ui-btn-right">Book</a>
-    <?php break; ?>
-    <?php endswitch; ?>
+    <?php endswitch;?>
   </div>
