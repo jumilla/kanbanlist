@@ -40,40 +40,47 @@ class TasksController extends BaseController
 		$task = Task::create([
 			'user_id' => Auth::user()->id,
 			'book_id' => Book::getIdInMsg(Auth::user(), Input::get('msg')),
+			'status' => Task::$status_table[Input::get('priority', 'todo_m')],
 			'name' => Auth::user()->name,
 			'msg' => Input::get('msg'),
 		]);
-		$task->update_status(Input::get('priority', 'todo_m'));
 		$task->save();
 
-		$move_id = $this->isMovedFromBook(task) ? $task->id : 0;
-		$task_html = View::make('task')->with([locals => ['task' => $task, 'display' => "none" ]]);
+		$moveId = $this->isMovedFromBook($task) ? $task->id : 0;
+		$taskHtml = View::make('tasks._task')->with([
+			'task' => $task,
+			'display' => 'none',
+			'done' => false,
+		])->render();
 
-		return Response::json(['id'           => $task->id,
-							   'status'       => $task->statusSym(),
-							   'li_html'      => $task_html,
-							   'move_task_id' => $move_id,
-							   'task_counts'  => $this->getTaskCounts(),
-							   'all_books'    => $this->getAllBookCounts() ])->setCallback('addTodoResponse');
+		return Response::json([
+			'id'           => $task->id,
+			'status'       => $task->statusSymbol(),
+			'li_html'      => $taskHtml,
+			'move_task_id' => $moveId,
+			'task_counts'  => $this->getTaskCounts(),
+			'all_books'    => $this->getAllBookCounts(),
+		])->setCallback('addTodoResponse');
 	}
 
 	public function update()
 	{
 		$task = Task::find(Input::get('id'));
-		if (Input::get('status') != '') {
-			$task->updateStatus(Input::get('status'));
-		}
 		$task->book_id = Book::getIdInMsg(Auth::user(), Input::get('msg'));
+		if (Input::get('status') != '') {
+			$task->status = Task::$status_table[Input::get('status')];
+		}
 		$task->msg = Input::get('msg');
 		$task->save();
 
-		$move_id = $this->isMovedFromBook($task) ? $task->id : 0;
+		$moveId = $this->isMovedFromBook($task) ? $task->id : 0;
 
 		$this->doHooks($task);
-		return Response::json(['task_counts'  => $this->getTaskCounts(),
-							   'move_task_id' => $move_id,
-							   'all_books'    => $this->getAllBookCounts() ])
-					->setCallback('updateTaskJson');
+		return Response::json([
+			'task_counts'  => $this->getTaskCounts(),
+			'move_task_id' => $moveId,
+			'all_books'    => $this->getAllBookCounts(),
+		])->setCallback('updateTaskJson');
 	}
 
 	public function destroy()
@@ -81,10 +88,11 @@ class TasksController extends BaseController
 		$task = Task::find(Input::get('id'));
 		$task->delete();
 
-		return Response::json(['task_counts'  => $this->getTaskCounts(),
-							   'move_task_id' => 0,
-							   'all_books'    => $this->getAllBookCounts() ])
-					->setCallback('updateTaskJson');
+		return Response::json([
+			'task_counts'  => $this->getTaskCounts(),
+			'move_task_id' => 0,
+			'all_books'    => $this->getAllBookCounts(),
+		])->setCallback('updateTaskJson');
 	}
 
 	public function updateOrder()
@@ -94,7 +102,7 @@ class TasksController extends BaseController
 		}
 
 		// 並び順の変更はタイムスタンプを更新したくない
-		foreach(Input::get('id') as $i=>$task_id){
+		foreach (Input::get('id') as $i=>$task_id) {
 			$target_task = Task::find($task_id);
 			$target_task->timestamps = false;
 			$target_task->order_no = $i;
@@ -105,21 +113,25 @@ class TasksController extends BaseController
 		return 'update_order ok';
 	}
 
-	public function filterOrUpdate(){
+	public function filterOrUpdate()
+	{
 		$this->setLayout(Input::get('layout'));
-		$this->renderJsonForUpdateBookJson(Input::get('filter'), 15);
+		return $this->renderJsonForUpdateBookJson(Input::get('filter'), 15);
 	}
 
-	public function silentUpdate(){
-	$this->user_name = Auth::user()->name;
+	public function silentUpdate()
+	{
+		$this->user_name = Auth::user()->name;
 
-		return Response::json(['task_list_html' => $this->getTaskListHtml(Input::get('filter'), 15),
-							   'task_counts' => $this->getTaskCounts(),
-							   'all_books' => $this->getAllBookCounts()])
-					->setCallback('updateSilentJson');
+		return Response::json([
+			'task_list_html' => $this->getTaskListHtml(Input::get('filter'), 15),
+			'task_counts' => $this->getTaskCounts(),
+			'all_books' => $this->getAllBookCounts(),
+		])->setCallback('updateSilentJson');
 	}
 
-	public function donelist(){
+	public function donelist()
+	{
 		$this->tasks = $this->curretTasks()->done;
 		if (Input::get('year')->blank == false){
 			$select_month = Carbon::createFromDate( Input::get('year'), Input::get('month'), 0);
@@ -133,7 +145,8 @@ class TasksController extends BaseController
 //        });
 	}
 
-	public function  sendMail(){
+	public function sendMail()
+	{
 		$mail_addr    = Input::get('mail_addr');
 		$mail_comment = Input::get('comment');
 
@@ -143,10 +156,12 @@ class TasksController extends BaseController
 			$mail_comment,
 			$this->getTasks('', 15)
 		)->deliver();
+
 		return Response::json(['addr' => $mail_addr])->setCallback('showMailResult');
 	}
 
-	private function doHooks($task){
+	private function doHooks($task)
+	{
 		switch ($task->status_sym) {
 			case 'done':
 				$hook_name = dirname(__FILE__) . '/hooks/update_task_' . Auth::user()->email;
@@ -157,11 +172,13 @@ class TasksController extends BaseController
 		}
 	}
 
-	public function isMovedFromBook($task){
+	public function isMovedFromBook($task)
+	{
 		return ($this->currentBook() != null) and ($this->currentBook()->id != ($task->book ? $task->book->id : 0 ));
 	}
 
-	public function setLayout($layout_name){
+	public function setLayout($layout_name)
+	{
 		if (!empty($layout_name)){
 			Session::set('layout', $layout_name);
 		}

@@ -1,9 +1,9 @@
 {{-- TODO: include too many logics. I want to separate the logic to javascript. --}}
-<?php done ||= false  ?>
-<li id="id_{{ $task->id }}" class="task_elem" style="display:{{ display }}">
+<?php // done ||= false  ?>
+<li id="id_{{ $task->id }}" class="task_elem" style="display:{{ $display }}">
 <div class="sorttime" alt="{{ $task->updated_at }}" id="ms_notyet_{{ $task->id }}">
   {{-- for active display --}}
-  <div id="edit_link_ms_{{ $task->id }}" style="display:{{ done == false ? "block" : "none" }}">
+  <div id="edit_link_ms_{{ $task->id }}" style="display:{{ $done == false ? "block" : "none" }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">
@@ -13,7 +13,7 @@
           <table class="task-tool-active-area" cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
             <tr>
               <td class="taskLabel" align="left" width="10px">
-                <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at.strftime("%m/%d") }}</span></font>&nbsp;
+                <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("%m/%d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel taskBody" align="left">
                 <div id="msg_{{ $task->id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;
@@ -49,7 +49,7 @@
   </div>
 
   {{-- for done display --}}
-  <div id="fixed_{{ $task->id }}" style="display:{{ done == false ? "none" : "block" }}">
+  <div id="fixed_{{ $task->id }}" style="display:{{ $done == false ? "none" : "block" }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">
@@ -59,7 +59,7 @@
           <table class="task-tool-active-area" cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
             <tr>
               <td align="left" width="10px">
-                <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at.strftime("%m/%d") }}</span></font>&nbsp;
+                <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("%m/%d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel" align="left">
                 <div id="fixed_msg_{{ $task->id }}" style="display:inline;word-break:break-all;"></div>
@@ -81,7 +81,7 @@
 
 <script>
 (function(){
-  var msg_array = {{ to_js_array(task.msg) }};
+  var msg_array = ["{{ $task->msg }}"];
   var taskAction = KanbanList.taskAction;
   taskAction.realize({{ $task->id }}, msg_array);
 }());

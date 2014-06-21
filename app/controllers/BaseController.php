@@ -17,14 +17,7 @@ class BaseController extends Controller {
 
 	public function currentBook()
 	{
-		if (Session::get('book_id') != null && Session::get('book_id') != 0)
-		{
-			return Auth::user()->books->find(Session::get('book_id'));
-		}
-		else
-		{
-			return null;
-		}
+		return Session::has('book_id') ? Book::find(Session::get('book_id')) : null;
 	}
 
 	public function currentTasks()
@@ -49,19 +42,19 @@ class BaseController extends Controller {
 
 	public function getTaskCounts()
 	{
-		return $this->currentBook() ? $this->currentBook()->tasks()->count() : Auth::user()->tasks()->count();
+		return $this->currentBook() ? $this->currentBook()->tasks->count() : Auth::user()->tasks->count();
 	}
 
 	public function getAllBookCounts()
 	{
-		return array_merge(array($this->allCountsInfo()), $this->allCountsInfoArray());
+		return array_merge($this->allCountsInfo(), $this->booksCountInfoArray());
 	}
 
 	public function allCountsInfo()
 	{
-		$all_info = Auth::user()->tasks()->count();
+		$all_info = Auth::user()->tasks()->select('status', DB::raw('count(*) as total'))->groupBy('status')->get()->toArray();
 		$all_info['id'] = 0;
-		$all_info['name'] = Book::DEFAULT_NAME;
+		$all_info['name'] = Book::$DEFAULT_NAME;
 		return $all_info;
 	}
 
@@ -111,11 +104,11 @@ class BaseController extends Controller {
 	public function renderJsonForUpdateBookJson($filter_str = '', $done_num)
 	{
 		return Response::json([
-			'task_list_html' => get_task_list_html($filter_str, $done_num),
-			'book_name'      => getBookname(),
-			'prefix'         => getPrefix(),
-			'task_counts'    => getTaskCounts(),
-			'all_books'      => getAllBookCounts(),
+			'task_list_html' => $this->getTaskListHtml($filter_str, $done_num),
+			'book_name'      => $this->getBookname(),
+			'prefix'         => $this->getPrefix(),
+			'task_counts'    => $this->getTaskCounts(),
+			'all_books'      => $this->getAllBookCounts(),
 		])->setCallback('updateBookJson');
 	}
 

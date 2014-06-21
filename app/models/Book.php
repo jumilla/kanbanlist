@@ -9,7 +9,7 @@ class Book extends Eloquent {
 
 	public static $DEFAULT_NAME = 'All Tasks';
 
-	protected $guarded = [];
+	protected $guarded = ['id'];
 
 	public function defaulf_name()
 	{
@@ -31,7 +31,14 @@ class Book extends Eloquent {
 		foreach (static::$book_name_patterns as $book_name_pattern) {
 			$matches;
 			if (preg_match($book_name_pattern, $msg, $matches)) {
-				return $user->books->findOrCreateByName($matches[1]);
+				$bookName = $matches[1];
+				$book = static::whereName($bookName)->first();
+				if (!$book) {
+					$book = static::create([
+						'name' => $bookName,
+					]);
+				}
+				return $book->id;
 			}
 		}
 		return null;

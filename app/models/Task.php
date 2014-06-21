@@ -4,7 +4,7 @@ use Carbon\Carbon;
 
 class Task extends Eloquent
 {
-	public $status_table = [
+	public static $status_table = [
 		'todo_h' => 0,
 		'todo_m' => 1,
 		'todo_l' => 2,
@@ -13,7 +13,7 @@ class Task extends Eloquent
 		'done' => 5,
 	];
 
-	protected $guarded = [];
+	protected $guarded = ['id'];
 
 	public function user()
 	{
@@ -27,84 +27,91 @@ class Task extends Eloquent
 
 	public function scopeByNameAndStatus($query, $name, $status)
 	{
-		$query
+		return $query
 			->where('name', $name)
-			->where('status', $this->status_table[$status]);
+			->where('status', static::$status_table[$status])
+		;
 	}
 
 	public function scopeByStatus($query, $status)
 	{
-		$query
-			->where('status', $this->status_table[$status])
+		return $query
+			->where('status', static::$status_table[$status])
 			->orderBy('order_no', 'ASC')
-			->orderBy('updated_at', 'DESC');
+			->orderBy('updated_at', 'DESC')
+		;
 	}
 
 	public function scopeByStatusAndFilter($query, $status, $filter)
 	{
-		$query
-			->where('status', $this->status_table[$status])
+		return $query
+			->where('status', static::$status_table[$status])
 			->whereLike('msg', 'like', "%#%")//todo
 			->orderBy('order_no', 'ASC')
-			->orderBy('updated_at', 'DESC');
+			->orderBy('updated_at', 'DESC')
+		;
 		//where("status = ? and msg LIKE ?", @@status_table[status] , "%#{URI.decode(filter)}%").order('order_no ASC, updated_at DESC')
 	}
 
 	public function scopeFiltered($query, $name, $filter)
 	{
+		return $query
 		//where("name = ? and msg LIKE ?", name ,"%#{URI.encode(filter)}%").order('order_no ASC, updated_at DESC')
+		;
 	}
 
 	public function scopeDone($query)
 	{
-		$query
-			->where('status', $this->status_table['done'])
-			->orderBy('updated_at', 'DESC');
+		return $query
+			->where('status', static::$status_table['done'])
+			->orderBy('updated_at', 'DESC')
+		;
 	}
 
 	public function scopeDoneAndFilter($query, $filter)
 	{
+		return $query
 		//where("status = ? and msg LIKE ?", @@status_table[:done] , "%#{URI.decode(filter)}%").order('updated_at DESC')
+		;
 	}
 
 	public function scopeTodayDone($query)
 	{
+		return $query
 		//where("status = ? and updated_at LIKE ?", @@status_table[:done], "#{Time.now.strftime("%Y-%m-%d")}%").order('updated_at DESC' )
+		;
 	}
 
 	public function scopeSelectMonth($query)
 	{
+		return $query
 		//$select_mon;
 //        where(" updated_at >= ? and updated_at < ? ", select_mon, select_mon + 1.month )
+		;
 	}
 
 	public function scopeNewestAdd($query)
 	{
+		return $query
 //        where("status != ?", @@status_table[:done]).order('created_at DESC' ).limit(10);
+		;
 	}
 
 	public function scopeNewestDone($query)
 	{
+		return $query
 //        where("status = ?", @@status_table[:done]).order('updated_at DESC' ).limit(10);
+		;
 	}
 
 	public function scopeOldestUpdate($query)
 	{
+		return $query
 //        where("status != ?", @@status_table[:done]).order('updated_at ASC' ).limit(10);
+		;
 	}
 
-	public function allCounts()
-	{
-//    counts = {}
-//    @@status_table.each_key {|status| counts[status] = 0 }
-//
-//    self.group(:status).count(:status).each {|status_value, count|
-//counts[@@status_table.key(status_value)] = count
-//    }
-//    counts
-	}
-
-	public function doneMonthList()
+	public static function doneMonthList()
 	{
 //    from_month = Time.now - 1.year
 //    to_month   = self.to_done_month
@@ -117,7 +124,7 @@ class Task extends Eloquent
 //    return month_list
 	}
 
-	public function fromDoneMonth()
+	public static function fromDoneMonth()
 	{
 //    last_task = self.done.last
 //    if last_task
@@ -128,7 +135,7 @@ class Task extends Eloquent
 //    }
 	}
 
-	public function toDoneMonth()
+	public static function toDoneMonth()
 	{
 //    first_task = self.done.first
 //    if first_task
@@ -144,12 +151,12 @@ class Task extends Eloquent
 		return static::where('created_at', '>=', Carbon::today())->where('created_at', '<=', Carbon::now())->count();
 	}
 
-	public function todayTouch()
+	public static function todayTouch()
 	{
 //    self.where('status != ? and updated_at >= ? and updated_at <= ?', @@status_table[:done], 1.day.ago, Time.now).order("updated_at DESC")
 	}
 
-	public function csv($options = [])
+	public static function csv($options = [])
 	{
 //
 //    csv_data = CSV.generate(options) do |csv|
@@ -166,35 +173,30 @@ class Task extends Eloquent
 //      #csv_data.encode(Encoding::SJIS)
 	}
 
-	public function statusSym()
+	public function statusSymbol()
 	{
-		return $this->status_table[$this->status];
-//    @@status_table.key(status)
+		return array_search($this->status, static::$status_table);
 	}
 
-	public function updateStatus($status)
+	public function bookName()
 	{
-//    self.status = @@status_table[status.to_sym]
+		if ($this->book_id){
+			return $this->book->name;
+		}
+		return '';
 	}
 
 	public function msgWithoutBookName()
 	{
-		if (!$this->book) {
+		if (!$this->book_id) {
 			return $this->msg;
 		}
 
 		$msg = $this->msg;
 		foreach (Book::$book_name_patterns as $book_name_pattern) {
-			$msg = preg_replace($book_name_pattern, $this->msg, '');
+			$msg = preg_replace($book_name_pattern, '', $this->msg);
 		}
 		return $msg;
 	}
 
-	public function bookName()
-	{
-		if ($this->book){
-			return $this->book->name;
-		}
-		return '';
-	}
 }

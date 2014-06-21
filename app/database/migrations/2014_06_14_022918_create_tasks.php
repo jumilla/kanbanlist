@@ -16,13 +16,13 @@ class CreateTasks extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->integer('book_id')->unsigned();
+			$table->integer('book_id')->unsigned()->nullable();
 			$table->integer('status');
 			$table->string('name');
 			$table->string('msg');
-			$table->dateTime('doing_at');
-			$table->integer('pomo');
-			$table->integer('order_no');
+			$table->dateTime('doing_at')->nullable();
+			$table->integer('pomo')->default(0);
+			$table->integer('order_no')->default(0);
 			$table->timestamps();
 		});
 	}

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 
 		DB::table('users')->truncate();
 		User::create([
+			'name' => 'Sampler',
 			'email' => 'sample@kanban.list',
 			'password' => Hash::make('sample'),
 			'activated' => true,

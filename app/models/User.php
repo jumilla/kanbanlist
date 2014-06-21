@@ -33,7 +33,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	public function books()
 	{
-		return $this->hasMany('books');
+		return $this->hasMany('Book');
+	}
+	
+	public function tasks()
+	{
+		return $this->hasMany('Task');
 	}
 	
 	public function bgImgPath(){

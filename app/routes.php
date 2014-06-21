@@ -26,7 +26,7 @@ Route::group(['prefix' => ''], function() {
 });
 
 Route::group(['prefix' => 'dashboard', 'before' => 'auth'], function() {
-	Route::get('dashboard',
+	Route::get('',
 		['as' => 'dashboard', 'uses' => 'DashboardController@getIndex']);
 });
 
