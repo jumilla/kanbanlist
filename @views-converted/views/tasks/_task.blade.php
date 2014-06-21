@@ -1,28 +1,28 @@
 {{-- TODO: include too many logics. I want to separate the logic to javascript. --}}
 <?php done ||= false  ?>
-<li id="id_{{ task.id }}" class="task_elem" style="display:{{ display }}">
-<div class="sorttime" alt="{{ task.updated_at }}" id="ms_notyet_{{ task.id }}">
+<li id="id_{{ $task.id }}" class="task_elem" style="display:{{ display }}">
+<div class="sorttime" alt="{{ $task.updated_at }}" id="ms_notyet_{{ $task.id }}">
   {{-- for active display --}}
-  <div id="edit_link_ms_{{ task.id }}" style="display:{{ done == false ? "block" : "none" }}">
+  <div id="edit_link_ms_{{ $task.id }}" style="display:{{ done == false ? "block" : "none" }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">
-          <input type="checkbox" id="check_done_{{ task.id }}"/>
+          <input type="checkbox" id="check_done_{{ $task.id }}"/>
         </td>
         <td>
           <table class="task-tool-active-area" cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
             <tr>
               <td class="taskLabel" align="left" width="10px">
-                <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ task.id }}" style="display:inline;">{{ task.updated_at.strftime("%m/%d") }}</span></font>&nbsp;
+                <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ $task.id }}" style="display:inline;">{{ $task.updated_at.strftime("%m/%d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel taskBody" align="left">
-                <div id="msg_{{ task.id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;
+                <div id="msg_{{ $task.id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;
               </td>
               <td align="right" width="40px">
-                <div id="ms_{{ task.id }}_menu" style="display:inline;">
+                <div id="ms_{{ $task.id }}_menu" style="display:inline;">
                   <span class="task-tool" style="display: none">
-                    <i id="edit_button_{{ task.id }}" class="icon-pencil"></i>
-                    <i id="delete_button_{{ task.id }}" class="icon-trash"></i>
+                    <i id="edit_button_{{ $task.id }}" class="icon-pencil"></i>
+                    <i id="delete_button_{{ $task.id }}" class="icon-trash"></i>
                   </span>
                 </div>
               </td>
@@ -34,14 +34,14 @@
   </div>
 
   {{-- for editing --}}
-  <div id="edit_form_ms_{{ task.id }}" style="display:none">
-    <form id="edit_form_{{ task.id }}" method="post" style="display:inline">
-      <textarea id="ms_{{ task.id }}_edit" rows="4" style="font-weight:normal;padding:2px;overflow:auto; width: 98%;" onfocus="this.style.background='#ffc';" tabindex=1 maxlength="200"/></textarea>
+  <div id="edit_form_ms_{{ $task.id }}" style="display:none">
+    <form id="edit_form_{{ $task.id }}" method="post" style="display:inline">
+      <textarea id="ms_{{ $task.id }}_edit" rows="4" style="font-weight:normal;padding:2px;overflow:auto; width: 98%;" onfocus="this.style.background='#ffc';" tabindex=1 maxlength="200"/></textarea>
       <div class="edit-footer">
         <span class="task-chars-left"></span>
         <span class="edit-control">
-          <input type="submit" id="edit_cancel_{{ task.id }}" class="btn" value="Cancel" style="font-size:10px" tabindex=4 />
-          <input type="submit" id="edit_apply_{{ task.id }}" class="btn btn-primary" value="Apply" style="font-size:10px" tabindex=3 />
+          <input type="submit" id="edit_cancel_{{ $task.id }}" class="btn" value="Cancel" style="font-size:10px" tabindex=4 />
+          <input type="submit" id="edit_apply_{{ $task.id }}" class="btn btn-primary" value="Apply" style="font-size:10px" tabindex=3 />
           <input type="submit" class="btn btn-primary" value="OK" style="font-size:10px" tabindex=2 />
         </span>
       </div>
@@ -49,24 +49,24 @@
   </div>
 
   {{-- for done display --}}
-  <div id="fixed_{{ task.id }}" style="display:{{ done == false ? "none" : "block" }}">
+  <div id="fixed_{{ $task.id }}" style="display:{{ done == false ? "none" : "block" }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">
-          <input type="checkbox" id="check_return_{{ task.id }}" checked="checked"/>
+          <input type="checkbox" id="check_return_{{ $task.id }}" checked="checked"/>
         </td>
         <td>
           <table class="task-tool-active-area" cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
             <tr>
               <td align="left" width="10px">
-                <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ task.id }}" style="display:inline;">{{ task.updated_at.strftime("%m/%d") }}</span></font>&nbsp;
+                <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ $task.id }}" style="display:inline;">{{ $task.updated_at.strftime("%m/%d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel" align="left">
-                <div id="fixed_msg_{{ task.id }}" style="display:inline;word-break:break-all;"></div>
+                <div id="fixed_msg_{{ $task.id }}" style="display:inline;word-break:break-all;"></div>
               </td>
               <td align="right" width="40px">
                 <span class="task-tool" style="display: none">
-                  <i id="fixed_delete_button_{{ task.id }}" class="icon-trash"></i>
+                  <i id="fixed_delete_button_{{ $task.id }}" class="icon-trash"></i>
                 </span>
               </td>
             </tr>
@@ -83,6 +83,6 @@
 (function(){
   var msg_array = {{ to_js_array(task.msg) }};
   var taskAction = KanbanList.taskAction;
-  taskAction.realize({{ task.id }}, msg_array);
+  taskAction.realize({{ $task.id }}, msg_array);
 }());
 </script>

@@ -5,7 +5,7 @@
       <div class="span4">
         <ul class="nav nav-tabs nav-stacked">
           @foreach ($month_list as $l)
-            <li>{{ link_to raw("#{l[:date].strftime("%Y-%m")} (#{l[:count]}) <i class='icon-chevron-right'></i>") , :year => l[:date].year ,:month => l[:date].mon }}</li>
+            <li>{{ link_to raw("#{l['date'].strftime("%Y-%m")} (#{l['count']}) <i class='icon-chevron-right'></i>") , :year => l['date'].year ,:month => l['date'].mon }}</li>
           @end
         </ul>
         <div id="done_chart"></div>
@@ -21,16 +21,16 @@
               @if (latest_day == nil or latest_day != current_day )
                 <?php latest_day = current_day  ?>
                 <td class="done-list-day"><span class="label label-info">{{ current_day }}</span></td>
-                <td class="done-list-time"><span class="label">{{ task.updated_at.strftime("%2H:%2S") }}</span></td>
-                <td id="done_{{ task.id }}"></td>
+                <td class="done-list-time"><span class="label">{{ $task.updated_at.strftime("%2H:%2S") }}</span></td>
+                <td id="done_{{ $task.id }}"></td>
               @else
                 <td></td>
-                <td><span class="label">{{ task.updated_at.strftime("%2H:%2S") }}</span></td>
-                <td id="done_{{ task.id }}"></td>
+                <td><span class="label">{{ $task.updated_at.strftime("%2H:%2S") }}</span></td>
+                <td id="done_{{ $task.id }}"></td>
               @end
               <script>
                 var msg_array = {{ to_js_array(task.msg) }};
-                $("#done_{{ task.id }}").html(taskAction.display_filter(msg_array.join('\n')));
+                $("#done_{{ $task.id }}").html(taskAction.display_filter(msg_array.join('\n')));
               </script>
             </tr>
           @end
@@ -65,7 +65,7 @@ $(document).ready(function() {
       xAxis: {
         categories: [
         @foreach ($month_done_list as $m)
-          '{{ m[:date].strftime("%m") }}',
+          '{{ m['date'].strftime("%m") }}',
         @end
         ]
       },
@@ -78,7 +78,7 @@ $(document).ready(function() {
       { name: 'Done',
         data: [
         @foreach ($month_done_list as $m)
-          { name: 'done', y: {{ m[:count] }} },
+          { name: 'done', y: {{ m['count'] }} },
         @end
         ],
       }]
