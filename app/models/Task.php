@@ -14,8 +14,8 @@ class Task extends Eloquent
     ];
 
     public $book_name_patterns = [
-        '/^\[(.+?)\][ ]*/)',
-        '/^��(.+?)��[ ]*/)',
+        '/^\[(.+?)\][ ]*/',
+        '/^【(.+?)】[ ]*/',
     ];
 
     public function user()

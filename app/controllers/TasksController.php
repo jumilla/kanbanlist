@@ -7,30 +7,30 @@ class TasksController extends BaseController
     public function index()
     {
         if (Input::get('book_id') != null) {
-            Session:set('book_id', Input::get('book_id'));
+            Session::set('book_id', Input::get('book_id'));
         }
 
         if (Input::get('layout') != null) {
             $this->setLayout(Input::get('layout'));
         }
 
-        if (UserAgent::isSmartphone()){
-            $this->user_name = Auth::user()->name;
-            $this->get_task_counts = getTaskCounts();
-            $this->book_name = getBookName();
-            $this->current_book_id = $this->currentBook() ? $this->currentBook()->id : 0;
-            $this->prefix = $this->getPrefix();
-            $this->recent_done_now = 10;
-            $this->books = $this->getAllBookCounts();
-            $this->tasks = $this->getTasks('', $this->recent_done_now);
-        } else {
+//        if (UserAgent::isSmartphone()){
+//            $this->user_name = Auth::user()->name;
+//            $this->get_task_counts = getTaskCounts();
+//            $this->book_name = getBookName();
+//            $this->current_book_id = $this->currentBook() ? $this->currentBook()->id : 0;
+//            $this->prefix = $this->getPrefix();
+//            $this->recent_done_now = 10;
+//            $this->books = $this->getAllBookCounts();
+//            $this->tasks = $this->getTasks('', $this->recent_done_now);
+//        } else {
             $this->tasks = $this->currentTasks();
         //        respond_to do |format|
         //            format.html
         //            format.csv { send_data(current_tasks.csv) }
         //            format.xls
         //        end
-        }
+//        }
     }
 
     public function create() {
@@ -41,11 +41,11 @@ class TasksController extends BaseController
         $task->book = $task->getBookIdInMsgByUser(Auth::user());
         $task->save();
 
-        $move_id = $this->isMovedFromBook?(task) ? $task->id : 0;
+        $move_id = $this->isMovedFromBook(task) ? $task->id : 0;
         $task_html = View::make('task')->with([locals => ['task' => $task, 'display' => "none" ]]);
 
         return Response::json(['id'           => $task->id,
-                               'status'       => $task->status_sym,
+                               'status'       => $task->statusSym(),
                                'li_html'      => $task_html,
                                'move_task_id' => $move_id,
                                'task_counts'  => $this->getTaskCounts(),
@@ -54,7 +54,7 @@ class TasksController extends BaseController
 
     public function update() {
         $task = Task::find(Input::get('id'));
-        if Input::get('status') != '') {
+        if (Input::get('status') != '') {
             $task->updateStatus(Input::get('status'));
         }
         $task->msg = Input::get('msg');
