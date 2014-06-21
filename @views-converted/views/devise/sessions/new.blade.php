@@ -1,31 +1,32 @@
+@extends('layouts/default')
+@section('content')
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
-
-    {{ form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| }}
+    {{ Form::open(['url' => 'users/sign_in', 'method' => 'post', 'class' => 'form-horizontal']}}
       <fieldset>
         <legend>ログイン</legend>
         <div class="control-group">
-          {{ f.label :email, :class => "control-label" }}
+          {{ Form::label('email', 'email', ['class' => 'control-label']) }}
           <div class="controls">
-            {{ f.email_field :email }}
+            {{ Form::text('email') }}
           </div>
         </div>
         <div class="control-group">
-          {{ f.label :password, :class => "control-label" }}
+          {{ Form::label('password', 'password', ['class' => 'control-label']) }}
           <div class="controls">
-            {{ f.password_field :password }}
+            {{ Form::password('password') }}
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
-            {{ f.submit "ログイン", :class => "btn btn-primary" }}
+            {{ Form::submit('ログイン', ['class' => 'btn btn-primary']) }}
             <button id="login_with_sample" class="btn btn-inverse">サンプルアカウントでログイン</button>
           </div>
         </div>
       </fieldset>
-    @end
+    {{ Form::close() }}
     </div>
   </div>
 </div>
@@ -38,4 +39,4 @@ $(document).ready(function() {
   });
 });
 </script>
-
+@stop
