@@ -6,19 +6,19 @@
       <span id="todo_h_label" class="cancel"><div class="task-label">High</div></span>
       @foreach ($tasks['todo_high_tasks'] as $t)
         @include("task_smart_phone_iphone", ['task' => $t] }}
-      @end
+      @endforeach
     </ul>
     <ul data-role="listview" id="todo_m" data-inset="true" class="sortable">
       <span id="todo_m_label" class="cancel"><div class="task-label">Middle</div></span>
       @foreach ($tasks['todo_mid_tasks'] as $t)
         @include("task_smart_phone_iphone", ['task' => $t] }}
-      @end
+      @endforeach
     </ul>
     <ul data-role="listview" id="todo_l" data-inset="true" class="sortable">
       <span id="todo_l_label" class="cancel"><div class="task-label">Low</div></span>
       @foreach ($tasks['todo_low_tasks'] as $t)
         @include("task_smart_phone_iphone", ['task' => $t] }}
-      @end
+      @endforeach
     </ul>
   </div>
 
@@ -33,13 +33,13 @@
       <span id="doing_label" class="cancel"><div class="task-label">Doing</div></span>
       @foreach ($tasks['doing_tasks'] as $t)
         @include("task_smart_phone_iphone", ['task' => $t] }}
-      @end
+      @endforeach
     </ul>
     <ul data-role="listview" id="waiting" data-inset="true">
       <span id="waiting_label" class="cancel"><div class="task-label">Waiting</div></span>
       @foreach ($tasks['waiting_tasks'] as $t)
         @include("task_smart_phone_iphone", ['task' => $t] }}
-      @end
+      @endforeach
     </ul>
   </div>
 
@@ -54,7 +54,7 @@
       <span id="done_label" class="cancel"><div class="task-label">Done</div></span>
       @foreach ($tasks['done_tasks'] as $t)
         @include("task_smart_phone_iphone", ['task' => $t] }}
-      @end
+      @endforeach
     </ul>
   </div>
 
@@ -101,7 +101,7 @@
 </div>
 
 <div data-role="page" id="add_todo_page" data-theme="d">
-  @include("header_smart_phone_iphone", {:state => 'add'} }}
+  @include("header_smart_phone_iphone", ['state' => 'add'] }}
 
   <div data-role="content">
     <form method="post" class="add_todo_form form-inline">
@@ -121,10 +121,10 @@
   @include("header_smart_phone_iphone", {:state => 'book'} }}
   <div data-role="content">
     <div class="ui-grid-b">
-      <?php block_name = ["a","b","c"]  ?>
-      @foreach (@books as i => b)
-        <div class="ui-block-{{ block_name[i % block_name.length] }}"><div data-id="{{ b["id"] }}" class="book-selector ui-bar ui-bar-d" style="height:50px">{{ b["name"] }}</div></div>
-      @end
+      <?php $block_name = ["a","b","c"]  ?>
+      @foreach ($books as $i => $b)
+        <div class="ui-block-{{ $block_name[$i % $block_name.length] }}"><div data-id="{{ $b["id"] }}" class="book-selector ui-bar ui-bar-d" style="height:50px">{{ $b["name"] }}</div></div>
+      @endforeach
     </div>
   </div>
 </div>
@@ -136,8 +136,8 @@
   taskAction.initial_setting();
 
   var current_book = {
-    id : {{ @current_book_id }},
-    name : '{{ @current_book_id != 0 ? @book_name : "" }}'
+    id : {{ $current_book_id }},
+    name : '{{ $current_book_id != 0 ? $book_name : "" }}'
   }
   var addForm = KanbanList.addForm;
   addForm.initial(current_book);

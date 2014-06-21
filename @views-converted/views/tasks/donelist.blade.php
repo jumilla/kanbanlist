@@ -6,7 +6,7 @@
         <ul class="nav nav-tabs nav-stacked">
           @foreach ($month_list as $l)
             <li>{{ link_to raw("#{l['date'].strftime("%Y-%m")} (#{l['count']}) <i class='icon-chevron-right'></i>") , :year => l['date'].year ,:month => l['date'].mon }}</li>
-          @end
+          @endforeach
         </ul>
         <div id="done_chart"></div>
       </div>
@@ -27,13 +27,13 @@
                 <td></td>
                 <td><span class="label">{{ $task.updated_at.strftime("%2H:%2S") }}</span></td>
                 <td id="done_{{ $task.id }}"></td>
-              @end
+              @endif
               <script>
                 var msg_array = {{ to_js_array(task.msg) }};
                 $("#done_{{ $task.id }}").html(taskAction.display_filter(msg_array.join('\n')));
               </script>
             </tr>
-          @end
+          @endforeach
         </table>
         {{ will_paginate($tasks) }}
       </div>
@@ -66,7 +66,7 @@ $(document).ready(function() {
         categories: [
         @foreach ($month_done_list as $m)
           '{{ m['date'].strftime("%m") }}',
-        @end
+        @endforeach
         ]
       },
       yAxis: {
@@ -79,7 +79,7 @@ $(document).ready(function() {
         data: [
         @foreach ($month_done_list as $m)
           { name: 'done', y: {{ m['count'] }} },
-        @end
+        @endforeach
         ],
       }]
     });

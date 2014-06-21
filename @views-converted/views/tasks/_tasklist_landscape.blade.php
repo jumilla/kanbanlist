@@ -11,7 +11,7 @@
         <ul id="todo_h" class="droptrue">
         @foreach ($tasks['todo_high_tasks'] as $task)
           @include("tasks/task", ['task' => $task, 'display' => "block" ])
-        @end
+        @endforeach
         </ul>
       </div>
       <div class="memproto_todo">
@@ -21,7 +21,7 @@
         <ul id="todo_m" class="droptrue">
         @foreach ($tasks['todo_mid_tasks'] as $task)
           @include("tasks/task", ['task' => $task, 'display' => "block" ])
-        @end
+        @endforeach
         </ul>
       </div>
       <div class="memproto_todo">
@@ -31,7 +31,7 @@
         <ul id="todo_l" class="droptrue">
         @foreach ($tasks['todo_low_tasks'] as $task)
           @include("tasks/task", ['task' => $task, 'display' => "block" ])
-        @end
+        @endforeach
         </ul>
       </div>
     </div>
@@ -46,7 +46,7 @@
         <ul id="doing" class="droptrue">
         @foreach ($tasks['doing_tasks'] as $task)
           @include("tasks/task", ['task' => $task, 'display' => "block" ])
-        @end
+        @endforeach
         </ul>
       </div>
     </div>
@@ -59,7 +59,7 @@
         <ul id="waiting" class="droptrue">
         @foreach ($tasks['waiting_tasks'] as $task)
           @include("tasks/task", ['task' => $task, 'display' => "block" ])
-        @end
+        @endforeach
         </ul>
       </div>
     </div>
@@ -74,7 +74,7 @@
         <ul id="done" class="droptrue">
         @foreach ($tasks['done_tasks'] as $task)
           @include("tasks/task", ['task' => $task, 'display' => "block", 'done' => true])
-        @end
+        @endforeach
         </ul>
       </div>
     </div>

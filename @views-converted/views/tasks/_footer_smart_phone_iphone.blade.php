@@ -14,7 +14,7 @@
           <li><a href="#todo_nav">Todo</a></li>
           <li><a href="#doing_nav">Doing</a></li>
           <li><a href="#done_nav" class="ui-btn-active ui-state-persist">Done</a></li>
-        @end
+        <?php endswitch;?>
       </ul>
     </div>
 </div>

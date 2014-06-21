@@ -20,8 +20,8 @@
         <Cell><Data ss:Type="String">{{$t.status_sym }}</Data></Cell>
         <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t.updated_at)}}</Data></Cell>
       </Row>
-      @end
-    @end
+      @endforeach
+    @endforeach
     @foreach ($tasks.done as $t)
       <Row>
         <Cell><Data ss:Type="String">{{ $t.book_name }}</Data></Cell>
@@ -29,7 +29,7 @@
         <Cell><Data ss:Type="String">{{ $t.status_sym }}</Data></Cell>
         <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t.updated_at)}}</Data></Cell>
       </Row>
-    @end
+    @endforeach
     </Table>
   </Worksheet>
 </Workbook>
