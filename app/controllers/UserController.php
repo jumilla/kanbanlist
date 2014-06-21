@@ -32,7 +32,7 @@ class UserController extends BaseController {
 		
 			// Send activation code to the user so he can activate the account
 
-			Sentry::login($user);
+			Auth::login(User::find($user->getId()), false);
 		}
 		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
 		{
@@ -73,10 +73,7 @@ class UserController extends BaseController {
 				'password' => Input::get('password'),
 			));
 		
-			// Let's get the activation code
-			$activationCode = $user->getActivationCode();
-		
-			// Send activation code to the user so he can activate the account
+			Auth::login(User::find($user->getId()), false);
 		}
 		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
 		{
