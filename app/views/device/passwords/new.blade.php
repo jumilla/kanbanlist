@@ -1,12 +1,12 @@
 <h2>Forgot your password?</h2>
 
-{{ form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| }}
-  {{ devise_error_messages! }}
+{{ Form::open(['url' => 'password_path(resource_name)', 'method' => 'post') }}
+  {{ $devise_error_messages }}
 
-  <p>{{ f.label :email }}<br />
-  {{ f.email_field :email }}</p>
+  <p>{{ Form::label('email') }}<br />
+  {{ Form::email('email') }}</p>
 
-  <p>{{ f.submit "Send me reset password instructions" }}</p>
-@end
+  <p>{{ Form::submit('Send me reset password instructions') }}</p>
+{{ Form::close() }}
 
-{{ render :partial => "devise/shared/links" }}
+@include("devise/shared/links")

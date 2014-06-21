@@ -1,16 +1,16 @@
 <h2>Change your password</h2>
 
-{{ form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| }}
-  {{ devise_error_messages! }}
-  {{ f.hidden_field :reset_password_token }}
+{{ Form::open(['url' => 'password_path(resource_name)', 'method' => 'put') }}
+  {{ $devise_error_messages }}
+  {{ Form::hidden('reset_password_token', 'reset_password_token') }}
 
-  <p>{{ f.label :password, "New password" }}<br />
-  {{ f.password_field :password }}</p>
+  <p>{{ Form::label('password', 'password') }}<br />
+  {{ Form::password('password') }}</p>
 
-  <p>{{ f.label :password_confirmation, "Confirm new password" }}<br />
-  {{ f.password_field :password_confirmation }}</p>
+  <p>{{ Form::label('password_confirmation', 'Confirm new password') }}<br />
+  {{ Form::password('password_confirmation') }}</p>
 
-  <p>{{ f.submit "Change my password" }}</p>
-@end
+  <p>{{ Form::submit('Change my password') }}</p>
+{{ Form::close() }}
 
-{{ render :partial => "devise/shared/links" }}
+@include("devise/shared/links")

@@ -12,6 +12,13 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		// $this->call('UserTableSeeder');
+
+		DB::table('users')->truncate();
+		User::create([
+			'email' => 'sample@kanban.list',
+			'password' => Hash::make('sample'),
+			'activated' => true,
+		]);
 	}
 
 }
