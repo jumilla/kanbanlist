@@ -1,41 +1,41 @@
-<%= javascript_include_tag 'donelist' %>
+{{ javascript_include_tag 'donelist' }}
 <div class="container-fluid">
   <div class="donenote">
     <div class="row-fluid">
       <div class="span4">
         <ul class="nav nav-tabs nav-stacked">
-          <% @month_list.each do |l| %>
-            <li><%= link_to raw("#{l[:date].strftime("%Y-%m")} (#{l[:count]}) <i class='icon-chevron-right'></i>") , :year => l[:date].year ,:month => l[:date].mon  %></li>
-          <% end %>
+          @foreach ($month_list as $l)
+            <li>{{ link_to raw("#{l['date'].strftime("%Y-%m")} (#{l['count']}) <i class='icon-chevron-right'></i>") , :year => l['date'].year ,:month => l['date'].mon }}</li>
+          @endforeach
         </ul>
         <div id="done_chart"></div>
       </div>
 
       <div class="span8">
-        <%= will_paginate(@tasks) %>
+        {{ will_paginate($tasks) }}
         <table id="done_list_table" class="table table-striped table-bordered">
-          <% latest_day = nil %>
-          <% @tasks.each do |task| %>
-            <% current_day = task.updated_at.strftime("%Y-%m-%d") %>
+          <?php $latest_day = null  ?>
+          @foreach ($tasks as $task)
+            <?php $current_day = $task.updated_at.strftime("%Y-%m-%d")  ?>
             <tr>
-              <% if latest_day == nil or latest_day != current_day %>
-                <% latest_day = current_day %>
-                <td class="done-list-day"><span class="label label-info"><%= current_day %></span></td>
-                <td class="done-list-time"><span class="label"><%= task.updated_at.strftime("%2H:%2S") %></span></td>
-                <td id="done_<%= task.id %>"></td>
-              <% else %>
+              @if ($latest_day == null || $latest_day != $current_day )
+                <?php $latest_day = $current_day  ?>
+                <td class="done-list-day"><span class="label label-info">{{ current_day }}</span></td>
+                <td class="done-list-time"><span class="label">{{ strftime("%2H:%2S", $task.updated_at) }}</span></td>
+                <td id="done_{{ $task.id }}"></td>
+              @else
                 <td></td>
-                <td><span class="label"><%= task.updated_at.strftime("%2H:%2S") %></span></td>
-                <td id="done_<%= task.id %>"></td>
-              <% end %>
+                <td><span class="label">{{ strftime("%2H:%2S", $task.updated_at) }}</span></td>
+                <td id="done_{{ $task.id }}"></td>
+              @endif
               <script>
-                var msg_array = <%= to_js_array(task.msg) %>;
-                $("#done_<%= task.id %>").html(taskAction.display_filter(msg_array.join('\n')));
+                var msg_array = {{ to_js_array($task.msg) }};
+                $("#done_{{ $task.id }}").html(taskAction.display_filter(msg_array.join('\n')));
               </script>
             </tr>
-          <% end %>
+          @endforeach
         </table>
-        <%= will_paginate(@tasks) %>
+        {{ will_paginate($tasks) }}
       </div>
     </div>
   </div>
@@ -64,9 +64,9 @@ $(document).ready(function() {
       },
       xAxis: {
         categories: [
-        <% @month_done_list.each do |m| %>
-          '<%= m[:date].strftime("%m") %>',
-        <% end %>
+        @foreach ($month_done_list as $m)
+          '{{ m['date'].strftime("%m") }}',
+        @endforeach
         ]
       },
       yAxis: {
@@ -77,9 +77,9 @@ $(document).ready(function() {
       series: [
       { name: 'Done',
         data: [
-        <% @month_done_list.each do |m| %>
-          { name: 'done', y: <%= m[:count] %> },
-        <% end %>
+        @foreach ($month_done_list as $m)
+          { name: 'done', y: {{ m['count'] }} },
+        @endforeach
         ],
       }]
     });
