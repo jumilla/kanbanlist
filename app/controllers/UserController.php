@@ -56,7 +56,7 @@ class UserController extends BaseController {
 			;
 		}
 
-		return Redirect::route('dashboard');
+		return Redirect::route('tasks.index');
 	}
 
 	public function getSignin()
@@ -97,7 +97,7 @@ class UserController extends BaseController {
 			;
 		}
 
-		return Redirect::route('dashboard');
+		return Redirect::route('tasks.index');
 	}
 
 	public function signout()
