@@ -14,8 +14,8 @@ class Task extends Eloquent
     ];
 
     public $book_name_patterns = [
-        '/^\[(.+?)\][ ]*/)',
-        '/^°æ(.+?)°ø[ ]*/)',
+        '/^\[(.+?)\][ ]*/',
+        '/^„Äê(.+?)„Äë[ ]*/',
     ];
 
     public function user()
@@ -165,7 +165,7 @@ class Task extends Eloquent
 //      self.done.each do |t|
 //csv << [t.book_name, t.msg_without_book_name, t.status_sym, t.updated_at]
 //    }
-//    #SJIS§Àâ‰ìQ§π§Î§´§…§¶§´êò§‡
+//    #SJISÔøΩÀâÔøΩQÔøΩÔøΩÔøΩÎ§´ÔøΩ…§ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 //    #csv_data.encode(Encoding::SJIS)
     }
 
