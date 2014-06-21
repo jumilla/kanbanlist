@@ -2,12 +2,12 @@
 
 [オリジナル - Rails版](https://github.com/volpe28v/kanban-list)
 
-##ローカル環境で動かす
-Vagrantをインストールする
-`git clone`したディレクトリに移動
-`vagrant up`
-`vagrant ssh`
-※`vagrant ssh` のコマンドが実行できない場合は、PuttyなどのSSHクライアントで接続してください。  
+##ローカル環境で動かす  
+Vagrantをインストールする  
+`git clone`したディレクトリに移動  
+`vagrant up`  
+`vagrant ssh`  
+※`vagrant ssh` のコマンドが実行できない場合は、PuttyなどのSSHクライアントで接続してください。    
 **ホストIP： 192.168.33.10**  
 **ユーザ名： vagrant**  
 **パスワード： vagrant** 
