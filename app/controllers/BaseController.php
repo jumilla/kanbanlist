@@ -29,7 +29,7 @@ class BaseController extends Controller {
 
 	public function currentTasks()
 	{
-		return $this->currentBook() ? $this->currentBook()->tasks() : Auth::user()->tasks();
+		return $this->currentBook() ? $this->currentBook()->tasks : Auth::user()->tasks;
 	}
 
 	public function userEmail()
