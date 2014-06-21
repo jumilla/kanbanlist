@@ -65,7 +65,7 @@ class BaseController extends Controller {
 		return $all_info;
 	}
 
-	public function allCountsInfoArray()
+	public function booksCountInfoArray()
 	{
 		return []; //Auth::user()->books
 	}
@@ -85,12 +85,12 @@ class BaseController extends Controller {
 	public function getUnfilteredTasks($target_tasks, $done_num)
 	{
 		$tasks = [
-			'todo_high_tasks' => $target_tasks.byStatus('todo_h'),
-			'todo_mid_tasks'  => $target_tasks.byStatus('todo_m'),
-			'todo_low_tasks'  => $target_tasks.byStatus('todo_l'),
-			'doing_tasks'     => $target_tasks.byStatus('doing'),
-			'waiting_tasks'   => $target_tasks.byStatus('waiting'),
-			'done_tasks'      => $target_tasks.done.limit($done_num),
+			'todo_high_tasks' => $target_tasks->byStatus('todo_h'),
+			'todo_mid_tasks'  => $target_tasks->byStatus('todo_m'),
+			'todo_low_tasks'  => $target_tasks->byStatus('todo_l'),
+			'doing_tasks'     => $target_tasks->byStatus('doing'),
+			'waiting_tasks'   => $target_tasks->byStatus('waiting'),
+			'done_tasks'      => $target_tasks->done->limit($done_num),
 		];
 		return $tasks;
 	}
@@ -98,12 +98,12 @@ class BaseController extends Controller {
 	public function getFilteredTasks($target_tasks, $filter_word, $done_num = 10)
 	{
 		$tasks = [
-			'todo_high_tasks' => $target_tasks.byStatusAndFilter('todo_h'),
-			'todo_mid_tasks'  => $target_tasks.byStatusAndFilter('todo_m'),
-			'todo_low_tasks'  => $target_tasks.byStatusAndFilter('todo_l'),
-			'doing_tasks'     => $target_tasks.byStatusAndFilter('doing'),
-			'waiting_tasks'   => $target_tasks.byStatusAndFilter('waiting'),
-			'done_tasks'      => $target_tasks.doneAndFilter($filter_word).limit($done_num),
+			'todo_high_tasks' => $target_tasks->byStatusAndFilter('todo_h'),
+			'todo_mid_tasks'  => $target_tasks->byStatusAndFilter('todo_m'),
+			'todo_low_tasks'  => $target_tasks->byStatusAndFilter('todo_l'),
+			'doing_tasks'     => $target_tasks->byStatusAndFilter('doing'),
+			'waiting_tasks'   => $target_tasks->byStatusAndFilter('waiting'),
+			'done_tasks'      => $target_tasks->doneAndFilter($filter_word)->limit($done_num),
 		];
 		return $tasks;
 	}

@@ -23,9 +23,19 @@ Route::group(['prefix' => 'tasks'], function() {
 
 
 
-Route::get('users/sign_up','UserController@signUp');
-Route::post('users/sign_up','UserController@postSignUp');
-Route::get('users/sign_in','UserController@signIn');
-Route::get('users/sign_out','UserController@signOut');
-Route::get('users/{id}/edit','UserController@edit');
-Route::get('users/{id}','UserController@show');
+Route::get('user/signup', ['as' => 'user.signup',
+	'uses' => 'UserController@getSignup']);
+Route::post('user/signup', ['as' => '',
+	'uses' => 'UserController@postSignup']);
+Route::get('user/signin', ['as' => 'user.signin',
+	'uses' => 'UserController@getSignin']);
+Route::post('user/signin', ['as' => '',
+	'uses' => 'UserController@postSignin']);
+Route::get('user/signout', ['as' => 'user.signout',
+	'uses' => 'UserController@signout']);
+Route::get('user/{id}', ['as' => 'user.show',
+	'uses' => 'UserController@show']);
+Route::get('user/{id}/edit', ['as' => 'user.edit',
+	'uses' => 'UserController@edit']);
+Route::post('user/{id}/edit', ['as' => 'user.update',
+	'uses' => 'UserController@update']);
