@@ -3,32 +3,30 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
-	{{ var_dump($errors) }}
-    {{ Form::open(array('url' => 'users/sign_in', 'method' => 'post')) }}
+    {{ Form::open(['url' => 'users/sign_in', 'method' => 'post', 'class' => 'form-horizontal']) }}
       <fieldset>
         <legend>ログイン</legend>
         <div class="control-group">
-          <?php echo Form::label('email', 'email', array('class' => 'control-label')); ?>
+          {{ Form::label('email', 'email', ['class' => 'control-label']) }}
           <div class="controls">
-            <?php echo Form::text('email'); ?>
+            {{ Form::text('email') }}
           </div>
         </div>
         <div class="control-group">
-          <?php echo Form::label('password', 'password', array('class' => 'control-label')); ?>
+          {{ Form::label('password', 'password', ['class' => 'control-label']) }}
           <div class="controls">
-            <?php echo Form::password('password'); ?>
+            {{ Form::password('password') }}
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
-            <?php echo Form::submit('ログイン'); ?>
+            {{ Form::submit('ログイン', ['class' => 'btn btn-primary']) }}
             <button id="login_with_sample" class="btn btn-inverse">サンプルアカウントでログイン</button>
           </div>
         </div>
       </fieldset>
     {{ Form::close() }}
-    </div>
   </div>
 </div>
 <script>
