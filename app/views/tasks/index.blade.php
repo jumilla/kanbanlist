@@ -44,7 +44,7 @@
   </div>
 
   <div id="loader" class="well" style="display:none">
-    <center><img src="{{ image_path('loader.gif') }}"></center>
+    <center><img src="{{-- image_path('loader.gif') --}}"></center>
     <center><p id="loading_msg_area">Tips: <span id="loading_msg"></span></p></center>
   </div>
 
@@ -60,6 +60,5 @@
 </div>
 {{ javascript_include_tag('tasks') }}
 {{ javascript_include_tag('add_todo_form') }}
-
 @stop
 
