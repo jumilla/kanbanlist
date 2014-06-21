@@ -144,7 +144,7 @@ class Task extends Eloquent
 
 	public static function todayCount()
 	{
-		return static::where('created_at', '>=', Carbon::today())->where('created_at' <= Carbon::now())->count();
+		return static::where('created_at', '>=', Carbon::today())->where('created_at', '<=', Carbon::now())->count();
     }
 
     public function todayTouch()
