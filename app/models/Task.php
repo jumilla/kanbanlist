@@ -156,6 +156,7 @@ class Task extends Eloquent
 
     public function status_sym()
     {
+        return $this->status_table[$this->status];
 //    @@status_table.key(status)
     }
 
@@ -166,34 +167,32 @@ class Task extends Eloquent
 
     public function get_book_id_in_msg_by_user($user)
     {
-//    @@book_name_patterns.each{|pattern|
-//      if pattern =~ self.msg
+        foreach($this->book_name_patterns as $book_name_pattern){
+            if(preg_match("#{$book_name_pattern}#", $this->msg)){
 //      return user.books.find_or_create_by_name($1)
-//      }
-//    }
-//
-//    nil
+            }
+        }
+        return null;
     }
 
     public function msg_without_book_name()
     {
-//    return self.msg if self.book == nil
-//
-//@@book_name_patterns.each{|pattern|
-//      if pattern =~ self.msg
-//      return self.msg.sub(pattern,"")
-//      }
-//    }
-//
-//    self.msg
+        if(!$this->book){
+            return $this->msg;
+        }
+        foreach($this->book_name_patterns as $book_name_pattern){
+            if(preg_match("#{$book_name_pattern}#", $this->msg)){
+                //return self.msg.sub(pattern,"")
+            }
+        }
+        return $this->msg;
     }
 
     public function book_name()
     {
-//    if self.book != nil
-//    self.book.name
-//    else
-//        ""
-//    }
+        if($this->book){
+            return $this->book->name;
+        }
+        return '';
     }
 }
