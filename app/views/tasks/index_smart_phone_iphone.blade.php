@@ -118,7 +118,7 @@
 </div>
 
 <div data-role="page" id="book_list_page" data-theme="d">
-  @include("header_smart_phone_iphone", {:state => 'book'} }}
+  @include("header_smart_phone_iphone", ['state' => 'book'])
   <div data-role="content">
     <div class="ui-grid-b">
       <?php $block_name = ["a","b","c"]  ?>
