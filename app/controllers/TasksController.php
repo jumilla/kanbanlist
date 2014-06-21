@@ -105,7 +105,7 @@ class TasksController extends BaseController
     public function silentUpdate(){
     $this->user_name = Auth::user()->name;
 
-        return Response::json(['task_list_html' => get_task_list_html(Input::get('filter'), 15),
+        return Response::json(['task_list_html' => $this->getTaskListHtml(Input::get('filter'), 15),
                                'task_counts' => $this->getTaskCounts(),
                                'all_books' => $this->getAllBookCounts()])
                     ->setCallback('updateSilentJson');
@@ -117,7 +117,7 @@ class TasksController extends BaseController
             $select_month = Carbon::createFromDate( Input::get('year'), Input::get('month'), 0);
             $this->tasks = $this->tasks->selectMonth($select_month);
         }
-        $this->tasks = $this->tasks->paginate(:page => Input::get('page'), :per_page => 100);
+        $this->tasks = $this->tasks->paginate(100);
 
         $this->month_list = $this->curretTasks()->done_month_list;
 //        $this->month_done_list = $this->curretTasks()->done_month_list->sortBy(function(){
