@@ -165,8 +165,8 @@ class Task extends Eloquent
 //      self.done.each do |t|
 //csv << [t.book_name, t.msg_without_book_name, t.status_sym, t.updated_at]
 //    }
-//    #SJIS�ˉ�Q���뤫�ɤ�������
-//    #csv_data.encode(Encoding::SJIS)
+//    #SJISに変換するかどうか悩む
+//      #csv_data.encode(Encoding::SJIS)
     }
 
     public function statusSym()
