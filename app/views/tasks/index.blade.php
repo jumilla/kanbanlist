@@ -41,7 +41,7 @@
   </div>
 
   <div id="loader" class="well" style="display:none">
-    <center><img src="{{ image_path 'loader.gif' }}"></center>
+    <center><img src="{{ asset 'loader.gif' }}"></center>
     <center><p id="loading_msg_area">Tips: <span id="loading_msg"></span></p></center>
   </div>
 
