@@ -27,16 +27,26 @@ class Task extends Eloquent
 
     public function scope_by_name_and_status($query, $name, $status)
     {
-        //where(:name => name, :status => @@status_table[status])
+        $query
+            ->where('name', $name)
+            ->where('status', $this->status_table[$status]);
     }
 
     public function scope_by_status($query, $status)
     {
-        //where(:status => @@status_table[status]).order("order_no ASC, updated_at DESC")
+        $query
+            ->where('status', $this->status_table[$status])
+            ->orderBy('order_no', 'ASC')
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function scope_by_status_and_filter($query, $status, $filter)
     {
+        $query
+            ->where('status', $this->status_table[$status])
+            ->whereLike('msg', 'like', "%#%")//todo
+            ->orderBy('order_no', 'ASC')
+            ->orderBy('updated_at', 'DESC');
         //where("status = ? and msg LIKE ?", @@status_table[status] , "%#{URI.decode(filter)}%").order('order_no ASC, updated_at DESC')
     }
 
@@ -47,7 +57,9 @@ class Task extends Eloquent
 
     public function scope_done($query)
     {
-        //where(:status => @@status_table[:done]).order('updated_at DESC');
+        $query
+            ->where('status', $this->status_table['done'])
+            ->orderBy('updated_at', 'DESC');
     }
 
     public function scope_done_and_filter($query, $filter)
