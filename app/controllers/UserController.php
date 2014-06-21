@@ -1,25 +1,76 @@
 <?php
 
-
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
-class UserController extends BaseController{
-	public function signUp(){
-		return View::make('users/signUp');
+
+class UserController extends BaseController {
+
+	public function getSignup()
+	{
+		return View::make('users/signup');
 	}
-	public function postSignUp(){
+
+	public function postSignup()
+	{
 		//TODO: validator add 
-		$validator = Validator::make(Input::all(),User::$rules);
-		if($validator->fails()){
-			return Redirect::to(URL::action('UserController@signUp'))->withErrors($validator);
+		$validator = Validator::make(Input::all(), User::$rules);
+		if ($validator->fails()) {
+			return Redirect::route('user.signup')->withErrors($validator)->withInput();
 		}
-		try
-		{
+
+		try {
 			// Let's register a user.
 			$user = Sentry::register(array(
-					'email'    => Input::get('email'),
-					'password' => Input::get('password'),
-					'name'     => Input::get('name')
+				'email'    => Input::get('email'),
+				'password' => Input::get('password'),
+				'name'     => Input::get('name'),
+				'activated' => true,
+			));
+		
+			// Let's get the activation code
+			//$activationCode = $user->getActivationCode();
+		
+			// Send activation code to the user so he can activate the account
+
+			Sentry::login($user);
+		}
+		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+		{
+			return Redirect::route('user.signin')
+				->withErrors(['username_reired', 'Login field is required.'])
+				->withInput()
+			;
+		}
+		catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+		{
+			return Redirect::route('user.signin')
+				->withErrors(['password_reired', 'Password field is required.'])
+				->withInput()
+			;
+		}
+		catch (Cartalyst\Sentry\Users\UserExistsException $e)
+		{
+			return Redirect::route('user.signup')
+				->withErrors(['existed_error', 'User with this login already exists.'])
+				->withInput()
+			;
+		}
+
+		return Redirect::route('dashboard');
+	}
+
+	public function getSignin()
+	{
+		return View::make('users/signin');
+	}
+
+	public function postSignin()
+	{
+		try {
+			// Let's register a user.
+			$user = Sentry::authenticate(array(
+				'email'    => Input::get('email'),
+				'password' => Input::get('password'),
 			));
 		
 			// Let's get the activation code
@@ -29,37 +80,63 @@ class UserController extends BaseController{
 		}
 		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
 		{
-			echo 'Login field is required.';
-			//validated in validator
-			
+			return Redirect::route('user.signin')
+				->withErrors(['username_reired', 'Login field is required.'])
+				->withInput()
+			;
 		}
 		catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
 		{
-			echo 'Password field is required.';
-			//validated in validator
+			return Redirect::route('user.signin')
+				->withErrors(['password_reired', 'Password field is required.'])
+				->withInput()
+			;
 		}
 		catch (Cartalyst\Sentry\Users\UserExistsException $e)
 		{
-			return Redirect::to(URL::action('UserController@signUp'))
-					->withErrors(array('existed_error','User with this login already exists.'));
+			return Redirect::route('user.signin')
+				->withErrors(['existed_error', 'User with this login already exists.'])
+				->withInput()
+			;
 		}
-		
+
+		return Redirect::route('dashboard');
 	}
-	public function signIn(){
-		return View::make('users/signIn');
+
+	public function signout()
+	{
+		Sentry::logout();
+
+		return Redirect::route('home');
 	}
-	public function signOut(){
-		//return View::make('users/signOut');
+
+	public function edit()
+	{
+		return View::make('users/edit', compact('user'));
 	}
-	
-	public function edit($id){
-		$user = User::find($id);
-		if(!isset($user)) App::abort(404);
-		
-		return View::make('users/edit',compact('user'));
+
+	public function update()
+	{
 	}
-	
-	public function show($id){
+
+	private function given_new_password_in_params()
+	{
+		return strlen(Input::get('password')) > 0 or strlen(Input::get('password_confirm')) > 0;
+	}
+
+	private function update_with_password()
+	{
+
+	}
+
+	private function update_without_password()
+	{
+
+	}
+
+	public function dump($id)
+	{
 		return var_dump(User::find($id));
 	}
+
 }

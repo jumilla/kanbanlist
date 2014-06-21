@@ -1,5 +1,6 @@
-<a href="https://github.com/volpe28v/kanban-list"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+@extends('layouts/default')
 
+@section('content')
 <div id="wrapper">
 <div class="hero-unit">
   <h1>かんばんりすと</h1>
@@ -30,9 +31,10 @@
   </p>
 
   <p>
-    {{ link_to 'ユーザー登録', [ :new, :user_registration ] ,:class => 'btn btn-primary btn-large' }}
-    {{ link_to 'ログイン', [ :new, :user_session ],:class => 'btn btn-primary btn-large' }}
-  </p>
-  There are <span id="user_count">{{ @all_user_count }}</span> users and <span id="today_tasks">{{ @today_task_count }}</span>/<span id="all_tasks">{{ @all_task_count }}</span> [today/all] tasks in かんばんりすと.
+    <a href="{{ route('user.signup') }}" class="btn btn-primary btn-large">ユーザー登録</a>
+    <a href="{{ route('user.signin') }}" class="btn btn-primary btn-large">ログイン</a>
+ </p>
+  There are <span id="user_count"><?php echo $all_user_count ?></span> users and <span id="today_tasks"><?php echo $today_task_count ?></span>/<span id="all_tasks"><?php echo $all_task_count ?></span> [today/all] tasks in かんばんりすと.
 </div>
 </div>
+@stop

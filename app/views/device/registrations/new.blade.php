@@ -1,43 +1,43 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
-    {{ devise_error_messages! }}
-    {{ form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "form-horizontal"}) do |f| }}
+    {{ $devise_error_messages }}
+    {{ Form::open(['url' => 'registration_path($resource_name)', 'method' => 'post', 'class' => 'form-horizontal']) }}
       <fieldset>
         <legend>Sign up</legend>
         <div class="control-group">
-          {{ f.label :name, :class => "control-label" }}
+          {{ Form::label('name', 'name', [ 'class' => "control-label" ] ) }}
           <div class="controls">
-            {{ f.text_field :name }}
+            {{ Form::text('name') }}
           </div>
         </div>
 
         <div class="control-group">
-          {{ f.label :email, :class => "control-label" }}
+          {{ Form::label('email', 'email', [ 'class' => "control-label" ] ) }}
           <div class="controls">
-            {{ f.email_field :email }}
+            {{ Form::email('email') }}
           </div>
         </div>
 
         <div class="control-group">
-          {{ f.label :password, :class => "control-label" }}
+          {{ Form::label('password', 'password', [ 'class' => "control-label" ] ) }}
           <div class="controls">
-            {{ f.password_field :password }}
+            {{ Form::password('password') }}
           </div>
         </div>
         <div class="control-group">
-          {{ f.label :password_confirmation, :class => "control-label" }}
+          {{ Form::label('password_confirmation', 'password_confirmation', [ 'class' => "control-label" ] ) }}
           <div class="controls">
-            {{ f.password_field :password_confirmation }}
+            {{ Form::password('password_confirmation') }}
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
-            {{ f.submit "Sign in", :class => "btn btn-primary" }}
+            {{ Form::submit('Sign in', [ 'class' => 'btn btn-primary' ]) }}
           </div>
         </div>
       </fieldset>
-    @end
+    {{ Form::close() }}
     </div>
   </div>
 </div>
