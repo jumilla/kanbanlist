@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12"></div>
-    {{ Form::open(['url' => 'users/sign_in', 'method' => 'post', 'class' => 'form-horizontal']}}
+    {{ Form::open(['url' => 'users/sign_in', 'method' => 'post', 'class' => 'form-horizontal']) }}
       <fieldset>
         <legend>ログイン</legend>
         <div class="control-group">
