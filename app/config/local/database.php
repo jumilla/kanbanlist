@@ -8,13 +8,13 @@ return array(
 
 		'sqlite' => array(
 			'driver'   => 'sqlite',
-			'database' => __DIR__.'/../../database/local.sqlite',
+			'database' => storage_path() . '/database/local.sqlite',
 			'prefix'   => '',
 		),
 
 		'mysql' => array(
 			'host'      => 'localhost',
-			'database'  => 'kanbanlist_dev',
+			'database'  => 'kanbanlist',
 			'username'  => 'laravellers',
 			'password'  => 'laravellers',
 			'prefix'    => '',
@@ -22,7 +22,7 @@ return array(
 
 		'pgsql' => array(
 			'host'     => 'localhost',
-			'database' => 'kanbanlist_dev',
+			'database' => 'kanbanlist',
 			'username' => 'laravellers',
 			'password' => 'laravellers',
 			'prefix'   => '',
