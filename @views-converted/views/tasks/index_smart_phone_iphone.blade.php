@@ -1,64 +1,64 @@
 <div data-role="page" id="todo_nav" data-theme="d">
-  {{ render "header_smart_phone_iphone", {:state => 'todo'} }}
+  @include("header_smart_phone_iphone", {:state => 'todo'} }}
 
   <div data-role="content">
     <ul data-role="listview" id="todo_h" data-inset="true" class="sortable">
       <span id="todo_h_label" class="cancel"><div class="task-label">High</div></span>
-      @foreach (@tasks[:todo_high_tasks] as t)
-        {{ render "task_smart_phone_iphone", {:task => t} }}
+      @foreach ($tasks['todo_high_tasks'] as $t)
+        @include("task_smart_phone_iphone", {:task => t} }}
       @end
     </ul>
     <ul data-role="listview" id="todo_m" data-inset="true" class="sortable">
       <span id="todo_m_label" class="cancel"><div class="task-label">Middle</div></span>
-      @foreach (@tasks[:todo_mid_tasks] as t)
-        {{ render "task_smart_phone_iphone", {:task => t} }}
+      @foreach ($tasks[:todo_mid_tasks] as $t)
+        @include("task_smart_phone_iphone", {:task => t} }}
       @end
     </ul>
     <ul data-role="listview" id="todo_l" data-inset="true" class="sortable">
       <span id="todo_l_label" class="cancel"><div class="task-label">Low</div></span>
-      @foreach (@tasks[:todo_low_tasks] as t)
-        {{ render "task_smart_phone_iphone", {:task => t} }}
+      @foreach ($tasks[:todo_low_tasks] as $t)
+        @include("task_smart_phone_iphone", {:task => t} }}
       @end
     </ul>
   </div>
 
-  {{ render "footer_smart_phone_iphone", {:state => 'todo'} }}
+  @include("footer_smart_phone_iphone", {:state => 'todo'} }}
 </div>
 
 <div data-role="page" id="doing_nav" data-theme="d">
-  {{ render "header_smart_phone_iphone", {:state => 'doing'} }}
+  @include("header_smart_phone_iphone", {:state => 'doing'} }}
 
   <div data-role="content">
     <ul data-role="listview" id="doing" data-inset="true">
       <span id="doing_label" class="cancel"><div class="task-label">Doing</div></span>
-      @foreach (@tasks[:doing_tasks] as t)
-        {{ render "task_smart_phone_iphone", {:task => t} }}
+      @foreach ($tasks[:doing_tasks] as $t)
+        @include("task_smart_phone_iphone", {:task => t} }}
       @end
     </ul>
     <ul data-role="listview" id="waiting" data-inset="true">
       <span id="waiting_label" class="cancel"><div class="task-label">Waiting</div></span>
-      @foreach (@tasks[:waiting_tasks] as t)
-        {{ render "task_smart_phone_iphone", {:task => t} }}
+      @foreach ($tasks[:waiting_tasks] as $t)
+        @include("task_smart_phone_iphone", {:task => t} }}
       @end
     </ul>
   </div>
 
-  {{ render "footer_smart_phone_iphone", {:state => 'doing'} }}
+  @include("footer_smart_phone_iphone", {:state => 'doing'} }}
 </div>
 
 <div data-role="page" id="done_nav" data-theme="a">
-  {{ render "header_smart_phone_iphone", {:state => 'done'} }}
+  @include("header_smart_phone_iphone", {:state => 'done'} }}
 
   <div data-role="content">
     <ul data-role="listview" id="done" data-inset="true">
       <span id="done_label" class="cancel"><div class="task-label">Done</div></span>
-      @foreach (@tasks[:done_tasks] as t)
-        {{ render "task_smart_phone_iphone", {:task => t} }}
+      @foreach ($tasks[:done_tasks] as $t)
+        @include("task_smart_phone_iphone", {:task => t} }}
       @end
     </ul>
   </div>
 
-  {{ render "footer_smart_phone_iphone", {:state => 'done'} }}
+  @include("footer_smart_phone_iphone", {:state => 'done'} }}
 </div>
 
 <div data-role="page" id="setting" data-theme="c" class="swipe-back">
@@ -101,7 +101,7 @@
 </div>
 
 <div data-role="page" id="add_todo_page" data-theme="d">
-  {{ render "header_smart_phone_iphone", {:state => 'add'} }}
+  @include("header_smart_phone_iphone", {:state => 'add'} }}
 
   <div data-role="content">
     <form method="post" class="add_todo_form form-inline">
@@ -118,7 +118,7 @@
 </div>
 
 <div data-role="page" id="book_list_page" data-theme="d">
-  {{ render "header_smart_phone_iphone", {:state => 'book'} }}
+  @include("header_smart_phone_iphone", {:state => 'book'} }}
   <div data-role="content">
     <div class="ui-grid-b">
       <?php block_name = ["a","b","c"]  ?>

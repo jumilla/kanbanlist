@@ -12,22 +12,22 @@
         <Cell><Data ss:Type="String">Status</Data></Cell>
         <Cell><Data ss:Type="String">UpdatedAt</Data></Cell>
       </Row>
-    @foreach ([:doing,:todo_h,:todo_m, :todo_l, :waiting] as st)
-      @foreach (@tasks.by_status(st) as t)
+    @foreach (['doing",'todo_h','todo_m', 'todo_l', 'waiting'] as $st)
+      @foreach ($tasks.by_status($st) as $t)
       <Row>
-        <Cell><Data ss:Type="String">{{ t.book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ t.msg_without_book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ t.status_sym }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ t.updated_at.strftime("%Y/%m/%d %H:%M") }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{$t.book_name }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{$t.msg_without_book_name }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{$t.status_sym }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t.updated_at)}}</Data></Cell>
       </Row>
       @end
     @end
-    @foreach (@tasks.done as t)
+    @foreach ($tasks.done as $t)
       <Row>
-        <Cell><Data ss:Type="String">{{ t.book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ t.msg_without_book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ t.status_sym }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ t.updated_at.strftime("%Y/%m/%d %H:%M") }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{ $t.book_name }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{ $t.msg_without_book_name }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{ $t.status_sym }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t.updated_at)}}</Data></Cell>
       </Row>
     @end
     </Table>

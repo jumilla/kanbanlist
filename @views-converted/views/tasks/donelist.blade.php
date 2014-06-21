@@ -4,7 +4,7 @@
     <div class="row-fluid">
       <div class="span4">
         <ul class="nav nav-tabs nav-stacked">
-          @foreach (@month_list as l)
+          @foreach ($month_list as $l)
             <li>{{ link_to raw("#{l[:date].strftime("%Y-%m")} (#{l[:count]}) <i class='icon-chevron-right'></i>") , :year => l[:date].year ,:month => l[:date].mon }}</li>
           @end
         </ul>
@@ -12,10 +12,10 @@
       </div>
 
       <div class="span8">
-        {{ will_paginate(@tasks) }}
+        {{ will_paginate($tasks) }}
         <table id="done_list_table" class="table table-striped table-bordered">
           <?php latest_day = nil  ?>
-          @foreach (@tasks as task)
+          @foreach ($tasks as $task)
             <?php current_day = task.updated_at.strftime("%Y-%m-%d")  ?>
             <tr>
               @if (latest_day == nil or latest_day != current_day )
@@ -35,7 +35,7 @@
             </tr>
           @end
         </table>
-        {{ will_paginate(@tasks) }}
+        {{ will_paginate($tasks) }}
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@ $(document).ready(function() {
       },
       xAxis: {
         categories: [
-        @foreach (@month_done_list as m)
+        @foreach ($month_done_list as $m)
           '{{ m[:date].strftime("%m") }}',
         @end
         ]
@@ -77,7 +77,7 @@ $(document).ready(function() {
       series: [
       { name: 'Done',
         data: [
-        @foreach (@month_done_list as m)
+        @foreach ($month_done_list as $m)
           { name: 'done', y: {{ m[:count] }} },
         @end
         ],
