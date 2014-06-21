@@ -14,22 +14,22 @@
       <div class="span8">
         {{ will_paginate($tasks) }}
         <table id="done_list_table" class="table table-striped table-bordered">
-          <?php latest_day = nil  ?>
+          <?php $latest_day = null  ?>
           @foreach ($tasks as $task)
-            <?php current_day = task.updated_at.strftime("%Y-%m-%d")  ?>
+            <?php $current_day = $task.updated_at.strftime("%Y-%m-%d")  ?>
             <tr>
-              @if (latest_day == nil or latest_day != current_day )
-                <?php latest_day = current_day  ?>
+              @if ($latest_day == null || $latest_day != $current_day )
+                <?php $latest_day = $current_day  ?>
                 <td class="done-list-day"><span class="label label-info">{{ current_day }}</span></td>
-                <td class="done-list-time"><span class="label">{{ $task.updated_at.strftime("%2H:%2S") }}</span></td>
+                <td class="done-list-time"><span class="label">{{ strftime("%2H:%2S", $task.updated_at) }}</span></td>
                 <td id="done_{{ $task.id }}"></td>
               @else
                 <td></td>
-                <td><span class="label">{{ $task.updated_at.strftime("%2H:%2S") }}</span></td>
+                <td><span class="label">{{ strftime("%2H:%2S", $task.updated_at) }}</span></td>
                 <td id="done_{{ $task.id }}"></td>
               @endif
               <script>
-                var msg_array = {{ to_js_array(task.msg) }};
+                var msg_array = {{ to_js_array($task.msg) }};
                 $("#done_{{ $task.id }}").html(taskAction.display_filter(msg_array.join('\n')));
               </script>
             </tr>
