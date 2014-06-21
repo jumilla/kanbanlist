@@ -1,3 +1,6 @@
+@extends('layouts.default')
+
+@section('content')
 <div class="container-fluid">
   <div id="sending_mail" class="alert alert-info" style="display:none"></div>
   <div id="send_mail_result" class="alert alert-success" style="display:none"></div>
@@ -41,7 +44,7 @@
   </div>
 
   <div id="loader" class="well" style="display:none">
-    <center><img src="{{ asset 'loader.gif' }}"></center>
+    <center><img src="{{ image_path('loader.gif') }}"></center>
     <center><p id="loading_msg_area">Tips: <span id="loading_msg"></span></p></center>
   </div>
 
@@ -51,9 +54,12 @@
 
   <div id="download_link">
     Download:
-    {{ link_to "CSV", tasks_path(format: "csv") }} |
-    {{ link_to "Excel", tasks_path(format: "xls") }}
+    {{-- link_to "CSV", tasks_path(format: "csv") --}} |
+    {{-- link_to "Excel", tasks_path(format: "xls") --}}
   </div>
 </div>
-{{ javascript_include_tag 'tasks' }}
-{{ javascript_include_tag 'add_todo_form' }}
+{{ javascript_include_tag('tasks') }}
+{{ javascript_include_tag('add_todo_form') }}
+
+@stop
+
