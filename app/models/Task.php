@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class Task extends Eloquent
 {
     public $status_table = [
@@ -10,9 +12,10 @@ class Task extends Eloquent
         'waiting' => 4,
         'done' => 5,
     ];
+
     public $book_name_patterns = [
         '/^\[(.+?)\][ ]*/)',
-        '/^ã€(.+?)ã€‘[ ]*/)',
+        '/^¡¾(.+?)¡¿[ ]*/)',
     ];
 
     public function user()
@@ -127,9 +130,9 @@ class Task extends Eloquent
 //    }
     }
 
-    public function created_today_count()
-    {
-//    self.where('created_at >= ? and created_at <= ?', 1.day.ago, Time.now).count
+	public static function todayCount()
+	{
+		return static::where('created_at', '>=', Carbon::today())->where('created_at' <= Carbon::now())->count();
     }
 
     public function today_touch()
@@ -150,7 +153,7 @@ class Task extends Eloquent
 //      self.done.each do |t|
 //csv << [t.book_name, t.msg_without_book_name, t.status_sym, t.updated_at]
 //    }
-//    #SJISã«å¤‰æ›ã™ã‚‹ã‹ã©ã†ã‹æ‚©ã‚€
+//    #SJIS¤Ë‰ä“Q¤¹¤ë¤«¤É¤¦¤«˜¤à
 //    #csv_data.encode(Encoding::SJIS)
     }
 
