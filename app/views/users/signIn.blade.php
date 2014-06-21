@@ -2,7 +2,9 @@
 @section('content')
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span12"></div>
+    <div class="span12">
+@include('layouts.notification')
+
     {{ Form::open(['route' => 'user.signin', 'method' => 'post', 'class' => 'form-horizontal']) }}
       <fieldset>
         <legend>ログイン</legend>
@@ -29,11 +31,12 @@
     {{ Form::close() }}
   </div>
 </div>
+
 <script>
 $(document).ready(function() {
   $("#login_with_sample").click(function(){
-    $("#user_email").val("sample@kanban.list");
-    $("#user_password").val("sample");
+    $("#email").val("sample@kanban.list");
+    $("#password").val("sample");
     submit();
   });
 });

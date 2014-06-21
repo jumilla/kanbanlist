@@ -15,7 +15,7 @@ class UserController extends BaseController {
 		//TODO: validator add 
 		$validator = Validator::make(Input::all(), User::$rules);
 		if ($validator->fails()) {
-			return Redirect::route('user.signup'))->withErrors($validator);
+			return Redirect::route('user.signup')->withErrors($validator)->withInput();
 		}
 
 		try {
@@ -23,30 +23,40 @@ class UserController extends BaseController {
 			$user = Sentry::register(array(
 				'email'    => Input::get('email'),
 				'password' => Input::get('password'),
-				'name'     => Input::get('name')
+				'name'     => Input::get('name'),
+				'activated' => true,
 			));
 		
 			// Let's get the activation code
-			$activationCode = $user->getActivationCode();
+			//$activationCode = $user->getActivationCode();
 		
 			// Send activation code to the user so he can activate the account
+
+			Sentry::login($user);
 		}
 		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
 		{
-			echo 'Login field is required.';
-			//validated in validator
-			
+			return Redirect::route('user.signin')
+				->withErrors(['username_reired', 'Login field is required.'])
+				->withInput()
+			;
 		}
 		catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
 		{
-			echo 'Password field is required.';
-			//validated in validator
+			return Redirect::route('user.signin')
+				->withErrors(['password_reired', 'Password field is required.'])
+				->withInput()
+			;
 		}
 		catch (Cartalyst\Sentry\Users\UserExistsException $e)
 		{
-			return Redirect::route('user.signup'))
-					->withErrors(array('existed_error','User with this login already exists.'));
+			return Redirect::route('user.signup')
+				->withErrors(['existed_error', 'User with this login already exists.'])
+				->withInput()
+			;
 		}
+
+		return Redirect::route('dashboard');
 	}
 
 	public function getSignin()
@@ -56,12 +66,48 @@ class UserController extends BaseController {
 
 	public function postSignin()
 	{
-		return View::make('users/signin');
+		try {
+			// Let's register a user.
+			$user = Sentry::authenticate(array(
+				'email'    => Input::get('email'),
+				'password' => Input::get('password'),
+			));
+		
+			// Let's get the activation code
+			$activationCode = $user->getActivationCode();
+		
+			// Send activation code to the user so he can activate the account
+		}
+		catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+		{
+			return Redirect::route('user.signin')
+				->withErrors(['username_reired', 'Login field is required.'])
+				->withInput()
+			;
+		}
+		catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+		{
+			return Redirect::route('user.signin')
+				->withErrors(['password_reired', 'Password field is required.'])
+				->withInput()
+			;
+		}
+		catch (Cartalyst\Sentry\Users\UserExistsException $e)
+		{
+			return Redirect::route('user.signin')
+				->withErrors(['existed_error', 'User with this login already exists.'])
+				->withInput()
+			;
+		}
+
+		return Redirect::route('dashboard');
 	}
 
 	public function signout()
 	{
-		//return View::make('users/signOut');
+		Sentry::logout();
+
+		return Redirect::route('home');
 	}
 
 	public function edit()

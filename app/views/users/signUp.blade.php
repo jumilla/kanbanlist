@@ -2,7 +2,9 @@
 @section('content')
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span12"></div>
+    <div class="span12">
+@include('layouts.notification')
+
     {{ Form::open(array('route' => 'user.signup', 'method' => 'post')) }}
       <fieldset>
         <legend>Sign up</legend>

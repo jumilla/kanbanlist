@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\View;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', ['as' => 'home',
+	'uses' => 'HomeController@index']);
 
-Route::get('dashboard', 'DashboardController@getIndex');
+Route::get('dashboard', ['as' => 'dashboard',
+	'uses' => 'DashboardController@getIndex']);
 
 Route::group(['prefix' => 'tasks'], function() {
 	Route::get('', ['as'=>'tasks', 'uses'=>'TasksController@index']);
