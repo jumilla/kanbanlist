@@ -59,6 +59,7 @@
   </div>
 </div>
 {{ javascript_include_tag('tasks') }}
+*
 {{ javascript_include_tag('add_todo_form') }}
 @stop
 
