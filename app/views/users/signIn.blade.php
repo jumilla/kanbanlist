@@ -27,7 +27,6 @@
         </div>
       </fieldset>
     {{ Form::close() }}
-    </div>
   </div>
 </div>
 <script>
