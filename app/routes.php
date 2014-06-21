@@ -41,3 +41,9 @@ Route::get('user/{id}/edit', ['as' => 'user.edit',
 	'uses' => 'UserController@edit']);
 Route::post('user/{id}/edit', ['as' => 'user.update',
 	'uses' => 'UserController@update']);
+
+Route::post('tasks/update_order', ['as' => 'tasks.update_order', 'uses' => 'TasksController@updateOrder']);
+Route::post('tasks/filter_or_update', ['as' => 'tasks.filter_or_update', 'uses' => 'TasksController@filterOrUpdate']);
+Route::post('tasks/silent_update', ['as' => 'tasks.silent_update', 'uses' => 'TasksController@silentUpdate']);
+Route::post('tasks/send_mail', ['as' => 'tasks.send_mail', 'uses' => 'TasksController@sendMail']);
+Route::get('tasks/donelist', ['as' => 'tasks.donelist', 'uses' => 'TasksController@donelist']);
