@@ -19,7 +19,7 @@ Route::get('dashboard', ['as' => 'dashboard',
 	'uses' => 'DashboardController@getIndex']);
 
 Route::group(['prefix' => 'tasks'], function() {
-	Route::get('', ['as'=>'tasks', 'uses'=>'TasksController@index']);
+	Route::get('', ['as'=>'tasks.index', 'uses'=>'TasksController@index']);
 	Route::post('filter_or_update', ['as'=>'getTasks', 'uses'=>'TasksController@filterOrUpdate']); 
 });
 

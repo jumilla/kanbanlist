@@ -31,6 +31,8 @@ class TasksController extends BaseController
         //            format.xls
         //        end
 //        }
+
+        return View::make('tasks/index');
     }
 
     public function create() {
