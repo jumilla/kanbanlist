@@ -1,12 +1,13 @@
 <h2>Resend unlock instructions</h2>
 
-{{ form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| }}
-  {{ devise_error_messages! }}
+{{ Form::open(['url' => 'unlock_path($resource_name)', 'method' => 'post']) }}
+  {{ $devise_error_messages }}
 
-  <p>{{ f.label :email }}<br />
-  {{ f.email_field :email }}</p>
+  <p>{{ Form::label('email', 'email') }}<br />
+  {{ Form::email('email') }}</p>
 
-  <p>{{ f.submit "Resend unlock instructions" }}</p>
-@end
+  <p>{{ Form::submit('Resend unlock instructions') }}</p>
+{{ Form::close() }}
 
-{{ render :partial => "devise/shared/links" }}
+
+@include("device/shared/links")

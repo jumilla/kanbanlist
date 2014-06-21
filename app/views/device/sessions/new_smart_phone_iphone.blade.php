@@ -2,25 +2,25 @@
   <div data-role="header"><h1>ログイン</h1></div>
 
   <div data-role="content">
-    {{ form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| }}
+    {{ Form::open(['url' => 'users/sign_in', 'method' => 'post', 'class' => 'form-horizontal']) }}
       <fieldset>
         <div class="control-group">
           <div class="controls">
-            {{ f.email_field :email, :placeholder => "Email" }}
+            {{ Form::text('email', ['placeholder' => "Email"]) }}
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
-            {{ f.password_field :password, :placeholder => "Password" }}
+            {{ Form::password('email', ['placeholder' => "Password"]) }}
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
-            {{ f.submit "ログイン", :class => "btn btn-primary" }}
+            {{ Form::submit('ログイン', ['class' => 'btn btn-primary']) }}
           </div>
         </div>
       </fieldset>
-    @end
+    {{ Form::close() }}
   </div>
 </div>
