@@ -6,7 +6,7 @@ class DashboardController extends BaseController {
 	{
 		
 $user = Auth::User();
-$tmp = $user->tasks->newestAdd()->get();
+$tmp = $user->tasks()->where('status', '!=', 0)->orderBy('created_at', 'desc')->take(10)->get();;
 var_dump($tmp);
 		
 		return View::make('dashboard.index', [

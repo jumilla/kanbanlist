@@ -22,7 +22,7 @@ class BaseController extends Controller {
 
 	public function currentTasks()
 	{
-		return $this->currentBook() ? $this->currentBook()->tasks : Auth::user()->tasks;
+		return $this->currentBook() ? $this->currentBook()->tasks() : Auth::user()->tasks();
 	}
 
 	public function userEmail()
@@ -115,11 +115,11 @@ class BaseController extends Controller {
 	public function getTaskListHtml($filter_str, $done_num)
 	{
 		$this->recent_done_num = $done_num;
-		$this->tasks = get_tasks($filter_str, $done_num);
+		$this->tasks = $this->getTasks($filter_str, $done_num);
 
 		$layout = Session::get('layout');
 		Session::put('layout', $layout ?: 'default');
-		View::make('tasks/tasklist_' . Session::get('layout'));
+		return View::make('tasks/tasklist_' . Session::get('layout'));
 	}
 
 }

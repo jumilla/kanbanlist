@@ -52,7 +52,7 @@ Route::group(['prefix' => 'tasks', 'before' => 'auth'], function() {
     	['as' => 'tasks.destroy', 'uses' => 'TasksController@destroy']);
     Route::post('update_order',
     	['as' => 'tasks.update_order', 'uses' => 'TasksController@updateOrder']);
-    Route::post('filter_or_update',
+    Route::any('filter_or_update',
     	['as' => 'tasks.filter_or_update', 'uses' => 'TasksController@filterOrUpdate']);
     Route::post('silent_update',
     	['as' => 'tasks.silent_update', 'uses' => 'TasksController@silentUpdate']);
