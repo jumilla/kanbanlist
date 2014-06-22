@@ -92,7 +92,7 @@ class Task extends Eloquent
 
 	public function scopeNewestAdd($query)
 	{
-		return $query
+		return $query->where('status', '!=', $this->$status_table['done'])->orderBy('created_at', 'desc')->take(10);
 //        where("status != ?", @@status_table[:done]).order('created_at DESC' ).limit(10);
 		;
 	}

@@ -4,6 +4,11 @@ class DashboardController extends BaseController {
 
 	public function getIndex()
 	{
+		
+$user = Auth::User();
+$tmp = $user->tasks->newestAdd()->get();
+var_dump($tmp);
+		
 		return View::make('dashboard.index', [
 			'add_tasks' => [],
 			'done_tasks' => [],

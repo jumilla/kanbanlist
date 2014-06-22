@@ -20,6 +20,18 @@ class DatabaseSeeder extends Seeder {
 			'password' => Hash::make('sample'),
 			'activated' => true,
 		]);
+		DB::table('tasks')->truncate();
+		Task::create([
+			'user_id' => '1',
+			'book_id' => '1',
+			'status' => '1',
+			'name' => 'sample_name',
+			'msg' => 'sample_msg',
+			'doing_at' => 'now()',
+			'pomo' => '1',
+			'order_no' => '1',
+			
+		]);
 	}
 
 }
