@@ -25,14 +25,9 @@ class BaseController extends Controller {
 		return $this->currentBook() ? $this->currentBook()->tasks() : Auth::user()->tasks();
 	}
 
-	public function userEmail()
-	{
-		$this->user_email = Auth::user() ? Auth::user()->email : '';
-	}
-
 	public function getBookname()
 	{
-		return $this->currentBook() ? $this->currentBook()->name : Book::default_name();
+		return $this->currentBook() ? $this->currentBook()->name : Book::$DEFAULT_NAME;
 	}
 
 	public function getPrefix()
@@ -83,7 +78,7 @@ class BaseController extends Controller {
 			'todo_low_tasks'  => $target_tasks->byStatus('todo_l'),
 			'doing_tasks'     => $target_tasks->byStatus('doing'),
 			'waiting_tasks'   => $target_tasks->byStatus('waiting'),
-			'done_tasks'      => $target_tasks->done->limit($done_num),
+			'done_tasks'      => $target_tasks->byStatus('done')->limit($done_num),
 		];
 		return $tasks;
 	}
@@ -119,7 +114,7 @@ class BaseController extends Controller {
 
 		$layout = Session::get('layout');
 		Session::put('layout', $layout ?: 'default');
-		return View::make('tasks/tasklist_' . Session::get('layout'));
+		return View::make('tasks/_tasklist_' . Session::get('layout'));
 	}
 
 }

@@ -92,23 +92,18 @@ class Task extends Eloquent
 
 	public function scopeNewestAdd($query)
 	{
-		return $query->where('status', '!=', $this->$status_table['done'])->orderBy('created_at', 'desc')->take(10);
-//        where("status != ?", @@status_table[:done]).order('created_at DESC' ).limit(10);
-		;
+		return $query->where('status', '!=', static::$status_table['done'])->orderBy('created_at', 'desc')->take(10);
 	}
 
 	public function scopeNewestDone($query)
 	{
-		return $query
-//        where("status = ?", @@status_table[:done]).order('updated_at DESC' ).limit(10);
+		return $query->where('status', '=', static::$status_table['done'])->orderBy('updated_at', 'desc')->take(10);
 		;
 	}
 
 	public function scopeOldestUpdate($query)
 	{
-		return $query
-//        where("status != ?", @@status_table[:done]).order('updated_at ASC' ).limit(10);
-		;
+		return $query->where('status', '!=', static::$status_table['done'])->orderBy('updated_at', 'asc')->take(10);
 	}
 
 	public static function doneMonthList()
@@ -151,9 +146,12 @@ class Task extends Eloquent
 		return static::where('created_at', '>=', Carbon::today())->where('created_at', '<=', Carbon::now())->count();
 	}
 
-	public static function todayTouch()
+	public static function scopeTodayTouch($query)
 	{
-//    self.where('status != ? and updated_at >= ? and updated_at <= ?', @@status_table[:done], 1.day.ago, Time.now).order("updated_at DESC")
+		return $query->where('status', '!=', static::$status_table['done'])
+			->where('updated_at', '>=', Carbon::today())
+			->where('updated_at', '<=', Carbon::now())
+			->orderBy('updated_at', 'DESC');
 	}
 
 	public static function csv($options = [])

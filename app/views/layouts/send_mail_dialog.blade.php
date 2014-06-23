@@ -5,7 +5,7 @@
   <div class="modal-body">
     <p>Please type email address(es).</p>
     <form id="mail_form">
-      <input type="text" id="mail_addr" class="span4" placeholder="Mail Address" value="<%= @user_email %>"/>
+      <input type="text" id="mail_addr" class="span4" placeholder="Mail Address" value="{{ Auth::user()->email }}"/>
       (separated by ",")
     </form>
 
@@ -15,7 +15,7 @@
     </form>
 
     <div class="alert">
-      Email will be sent from "{{--<%= ENV['MAIL_ADDR'] %>--}}".
+      Email will be sent from "{{ isset($_SERVER['MAIL_ADDR']) ? $_SERVER['MAIL_ADDR'] : '' }}".
     </div>
 
   </div>

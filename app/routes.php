@@ -23,6 +23,8 @@ Route::group(['prefix' => ''], function() {
 		['as' => 'user.signin', 'uses' => 'UserController@getSignin']);
 	Route::post('signin',
 		['as' => '', 'uses' => 'UserController@postSignin']);
+	Route::get('signout',
+		['as' => 'user.signout', 'uses' => 'UserController@signout']);
 });
 
 Route::group(['prefix' => 'dashboard', 'before' => 'auth'], function() {
@@ -31,8 +33,6 @@ Route::group(['prefix' => 'dashboard', 'before' => 'auth'], function() {
 });
 
 Route::group(['prefix' => 'user', 'before' => 'auth'], function() {
-	Route::get('signout',
-		['as' => 'user.signout', 'uses' => 'UserController@signout']);
 	Route::get('{id}',
 		['as' => 'user.show', 'uses' => 'UserController@show']);
 	Route::get('{id}/edit',

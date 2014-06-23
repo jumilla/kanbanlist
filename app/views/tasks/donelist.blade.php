@@ -1,4 +1,4 @@
-{{ javascript_include_tag 'donelist' }}
+{{ javascript_include_tag('donelist') }}
 <div class="container-fluid">
   <div class="donenote">
     <div class="row-fluid">

@@ -6,11 +6,9 @@
 
   <title>かんばんりすと</title>
   
-  <?= stylesheet_link_tag() ?>
-  <?= stylesheet_link_tag('task_default', ['id'=>'task_theme']) ?>
-
-  <?= javascript_include_tag() ?>
-
+  {{ stylesheet_link_tag('application') }}
+  {{ stylesheet_link_tag('task_default', ['id' => 'task_theme']) }}
+  {{ javascript_include_tag('application') }}
 
 </head>
 <body id="body_core" style="
@@ -21,20 +19,17 @@
  padding-top: 60px;
 ">
  
-  {{--
-  <% if ENV['GOOGLE_ANALYTICS_ID'] %>
-
+@if ($_SERVER['GOOGLE_ANALYTICS_ID'])
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', '<%= ENV['GOOGLE_ANALYTICS_ID'] %>', 'heroku.com');
+    ga('create', '{{ $_SERVER['GOOGLE_ANALYTICS_ID'] }}', 'heroku.com');
     ga('send', 'pageview');
   </script>
-  <% end %>
-  --}}
+@end
 
 <header>
   <div class="navbar navbar-fixed-top">
@@ -43,27 +38,21 @@
         <a class="brand" href="/">かんばんりすと</a>
         <div class="nav-collapse">
           <ul class="nav pull-left">
-          {{--
-
-            <% if current_user %>
-              <li><%= link_to raw('<i class="icon-eye-open"></i>'), dashboard_index_path, { rel: "tooltip", title: "Go to your dashboard" } %></li>
-              <li><%= link_to raw('<i class="icon-home"></i>'), tasks_path, { rel: "tooltip", title: "Go to your kanbanlist" } %></li>
-            <% end %>
-          --}}
-            @yield('headerTaskIndex')
-
+@if (Auth::user())
+              <li><a href="{{ route('dashboard') }}" rel="tooltip" title="Go to your dashboard"><i class="icon-eye-open"></i></a></li>
+              <li><a href="{{ route('user.signout') }}" rel="tooltip" title="Go to your kanbanlist"><i class="icon-home"></i></a></li>
+@end
+@include('header_task_index')
           </ul>
 
-            @yield('headerTaskIndexForm')
-
-          {{--
+@include('header_task_index_form')
 
           <ul class="nav pull-right">
-            @yield('headerTaskIndexLi')
+@include('header_task_index_li')
 
-            <% if current_user %>
-              <li><%= link_to('Logout', [ :destroy, :user_session ], :class => '') %></li>
-            <% end %>
+@if (Auth::user())
+              <li><a href="{{ route('user.signout') }}">Logout</a></li>
+@end
           </ul>
 
           --}}
@@ -79,7 +68,7 @@
 @include('layouts.set_bg_image_dialog')
 @include('layouts.delete_task_dialog')
 
- @yield('content')
+@yield('content')
 
   <footer>
     <span>

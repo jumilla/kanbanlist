@@ -11,11 +11,6 @@ class Book extends Eloquent {
 
 	protected $guarded = ['id'];
 
-	public function defaulf_name()
-	{
-		return static::$DEFAULT_NAME;
-	}
-
 	public function user()
 	{
 		return $this->belongsTo('User');

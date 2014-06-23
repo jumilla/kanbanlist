@@ -25,7 +25,7 @@
 
     <h3>ソースコード</h3>
     <ul>
-      <li><a href=https://github.com/volpe28v/kanban-list>https://github.com/volpe28v/kanban-list</a></li>
+      <li><a href="https://github.com/volpe28v/kanban-list">https://github.com/volpe28v/kanban-list</a></li>
       <li>ご意見ご要望などあれば GitHub の issue などでお気軽に連絡ください</li>
     </ul>
   </p>
@@ -34,7 +34,7 @@
     <a href="{{ route('user.signup') }}" class="btn btn-primary btn-large">ユーザー登録</a>
     <a href="{{ route('user.signin') }}" class="btn btn-primary btn-large">ログイン</a>
  </p>
-  There are <span id="user_count"><?php echo $all_user_count ?></span> users and <span id="today_tasks"><?php echo $today_task_count ?></span>/<span id="all_tasks"><?php echo $all_task_count ?></span> [today/all] tasks in かんばんりすと.
+  There are <span id="user_count">{{ $all_user_count }}</span> users and <span id="today_tasks">{{ $today_task_count }}</span>/<span id="all_tasks">{{ $all_task_count }}</span> [today/all] tasks in かんばんりすと.
 </div>
 </div>
 @stop

@@ -5,7 +5,7 @@
   <div class="modal-body">
     <p>Please type email address(es).</p>
     <form id="mail_form">
-      <input type="text" id="mail_addr" class="span4" placeholder="Mail Address" value="{{ @user_email }}"/>
+      <input type="text" id="mail_addr" class="span4" placeholder="Mail Address" value="{{ Auth::user()->email }}"/>
       (separated by ",")
     </form>
 
