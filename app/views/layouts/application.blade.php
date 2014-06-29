@@ -48,7 +48,7 @@
           <ul class="nav pull-right">
 @section('top-right-menu')
 @if (Auth::user())
-            <li><a href="{{ route('user.signout') }}">Logout</a></li>
+            <li><a href="{{ route('app.signout') }}">Logout</a></li>
 @endif
 @show
           </ul>

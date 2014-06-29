@@ -31,8 +31,8 @@
   </p>
 
   <p>
-    <a href="{{ route('user.signup') }}" class="btn btn-primary btn-large">ユーザー登録</a>
-    <a href="{{ route('user.signin') }}" class="btn btn-primary btn-large">ログイン</a>
+    <a href="{{ route('app.signup') }}" class="btn btn-primary btn-large">ユーザー登録</a>
+    <a href="{{ route('app.signin') }}" class="btn btn-primary btn-large">ログイン</a>
  </p>
   There are <span id="user_count">{{ $all_user_count }}</span> users and <span id="today_tasks">{{ $today_task_count }}</span>/<span id="all_tasks">{{ $all_task_count }}</span> [today/all] tasks in かんばんりすと.
 </div>

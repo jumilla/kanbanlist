@@ -5,7 +5,7 @@
     <div class="span12">
 @include('layouts.notification')
 
-    {{ Form::open(array('route' => 'user.signup', 'method' => 'post')) }}
+    {{ Form::open(array('route' => 'app.signup', 'method' => 'post')) }}
       <fieldset>
         <legend>Sign up</legend>
         <div class="control-group">

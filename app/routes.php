@@ -14,17 +14,17 @@ use Illuminate\Support\Facades\View;
 
 Route::group(['prefix' => ''], function() {
 	Route::get('/',
-		['as' => 'home', 'uses' => 'HomeController@index']);
+		['as' => 'app.home', 'uses' => 'AppController@index']);
 	Route::get('signup',
-		['as' => 'user.signup', 'uses' => 'UserController@getSignup']);
+		['as' => 'app.signup', 'uses' => 'AppController@getSignup']);
 	Route::post('signup',
-		['as' => '', 'uses' => 'UserController@postSignup']);
+		['as' => '', 'uses' => 'AppController@postSignup']);
 	Route::get('signin',
-		['as' => 'user.signin', 'uses' => 'UserController@getSignin']);
+		['as' => 'app.signin', 'uses' => 'AppController@getSignin']);
 	Route::post('signin',
-		['as' => '', 'uses' => 'UserController@postSignin']);
+		['as' => '', 'uses' => 'AppController@postSignin']);
 	Route::get('signout',
-		['as' => 'user.signout', 'uses' => 'UserController@signout']);
+		['as' => 'app.signout', 'uses' => 'AppController@signout']);
 });
 
 Route::group(['prefix' => 'dashboard', 'before' => 'auth'], function() {

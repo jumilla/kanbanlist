@@ -38,7 +38,7 @@
           <ul class="nav pull-left">
 @if (Auth::user())
               <li><a href="{{ route('dashboard') }}" rel="tooltip" title="Go to your dashboard"><i class="icon-eye-open"></i></a></li>
-              <li><a href="{{ route('user.signout') }}" rel="tooltip" title="Go to your kanbanlist"><i class="icon-home"></i></a></li>
+              <li><a href="{{ route('app.signout') }}" rel="tooltip" title="Go to your kanbanlist"><i class="icon-home"></i></a></li>
 @end
 @include('layouts/book_list_dropdown_li')
 @include('layouts/layout_dropdown_li')
