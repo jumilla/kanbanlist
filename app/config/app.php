@@ -126,6 +126,7 @@ return array(
 		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
 		'Jumilla\Erb2Blade\ServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Jenssegers\Agent\AgentServiceProvider',
 
 	),
 
@@ -194,6 +195,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		'Agent'           => 'Jenssegers\Agent\Facades\Agent',
 
 	),
 
