@@ -1,4 +1,4 @@
-@extends('layouts/default')
+@extends('layouts.application')
 
 @section('content')
 <div id="wrapper">

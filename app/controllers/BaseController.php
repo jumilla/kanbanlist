@@ -47,15 +47,31 @@ class BaseController extends Controller {
 
 	public function allCountsInfo()
 	{
-		$all_info = Auth::user()->tasks()->select('status', DB::raw('count(*) as total'))->groupBy('status')->get()->toArray();
+		$all_info = [];
 		$all_info['id'] = 0;
 		$all_info['name'] = Book::$DEFAULT_NAME;
+		foreach (array_keys(Task::$status_table) as $status_name) {
+			$all_info[$status_name] = 0;
+		}
+		foreach (Auth::user()->tasks()->select('status', DB::raw('count(*) as total'))->groupBy('status')->get() as $result) {
+			$status_name = array_search($result->status, Task::$status_table);
+			$all_info[$status_name] = $result->total;
+		}
+		Log::info(print_r($all_info, true));
 		return $all_info;
 	}
 
 	public function booksCountInfoArray()
 	{
-		return []; //Auth::user()->books
+		//Auth::user()->books
+		return [
+/*			'todo_h' => 0,
+			'todo_m' => 0,
+			'todo_l' => 0,
+			'doing' => 0,
+			'waiting' => 0,
+			'done' => 0,*/
+		];
 	}
 
 	public function getTasks($filtered_str = '', $done_num = 10)

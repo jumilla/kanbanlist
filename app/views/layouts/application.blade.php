@@ -37,29 +37,20 @@
         <a class="brand" href="/">かんばんりすと</a>
         <div class="nav-collapse">
           <ul class="nav pull-left">
+@section('top-left-menu')
 @if (Auth::user())
               <li><a href="{{ route('dashboard') }}" rel="tooltip" title="Go to your dashboard"><i class="icon-eye-open"></i></a></li>
-              <li><a href="{{ route('user.signout') }}" rel="tooltip" title="Go to your kanbanlist"><i class="icon-home"></i></a></li>
+              <li><a href="{{ route('tasks.index') }}" rel="tooltip" title="Go to your kanbanlist"><i class="icon-home"></i></a></li>
 @endif
-@include('layouts/book_list_dropdown_li')
-@include('layouts/layout_dropdown_li')
-@include('layouts/theme_dropdown_li')
+@show
           </ul>
 
-          <form id="filter_form" method="post" class="navbar-search pull-left">
-            <input type="text" id="filter_str" class="search-query span2" value="" placeholder="Filter"/>
-          </form>
-
-          <div class="pull-left">
-@include('layouts/task_count_table')
-          </div>
-
           <ul class="nav pull-right">
-@include('layouts/trial_feature_dropdown_li')
-
+@section('top-right-menu')
 @if (Auth::user())
-              <li><a href="{{ route('user.signout') }}">Logout</a></li>
+            <li><a href="{{ route('user.signout') }}">Logout</a></li>
 @endif
+@show
           </ul>
         </div>
       </div>
@@ -69,7 +60,7 @@
 
 @include('layouts/new_book_dialog')
 @include('layouts/remove_book_dialog')
-@include('layouts/send_mail_dialog')
+{{-- @include('layouts/send_mail_dialog') --}}
 @include('layouts/set_bg_image_dialog')
 @include('layouts/delete_task_dialog')
 

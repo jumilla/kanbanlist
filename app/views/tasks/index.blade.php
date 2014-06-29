@@ -1,5 +1,22 @@
 @extends('layouts.application')
 
+@section('top-left-menu')
+  @parent
+  @include('tasks._list_dropdown')
+
+          <div class="pull-left">
+            <form id="filter_form" method="post" class="navbar-search pull-left">
+              <input type="text" id="filter_str" class="search-query span2" value="" placeholder="Filter"/>
+            </form>
+@include('layouts/task_count_table')
+          </div>
+@stop
+
+@section('top-right-menu')
+  @include('layouts/trial_feature_dropdown_li')
+  @parent
+@stop
+
 @section('content')
 <div class="container-fluid">
   <div id="sending_mail" class="alert alert-info" style="display:none"></div>
