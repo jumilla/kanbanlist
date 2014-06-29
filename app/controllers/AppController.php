@@ -9,6 +9,8 @@ class AppController extends BaseController {
 
 	public function index()
 	{
+		Log::info(get_class(App::make('view.finder')));
+
 		$all_user_count = User::count(); 
 		$today_task_count = Task::todayCount();
 		$all_task_count = Task::count();
