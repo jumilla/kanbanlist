@@ -2,6 +2,11 @@
 
 class BaseController extends Controller {
 
+	public function __construct()
+	{
+		DeviceAutoDetectFinder::install();
+	}
+
 	/**
 	 * Setup the layout used by the controller.
 	 *

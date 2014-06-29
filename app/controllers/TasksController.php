@@ -4,6 +4,11 @@ use Carbon\Carbon;
 
 class TasksController extends BaseController
 {
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function index()
 	{
 		if (Input::get('book_id') != null) {

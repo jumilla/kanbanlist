@@ -2,6 +2,11 @@
 
 class AppController extends BaseController {
 
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function index()
 	{
 		$all_user_count = User::count(); 

@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class UserController extends BaseController {
 
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
 	public function edit()
 	{
 		return View::make('user.edit', compact('user'));
