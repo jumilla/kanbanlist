@@ -7,7 +7,7 @@ class UserController extends BaseController {
 
 	public function getSignup()
 	{
-		return View::make('users/signup');
+		return View::make('users.signup');
 	}
 
 	public function postSignup()
@@ -61,7 +61,7 @@ class UserController extends BaseController {
 
 	public function getSignin()
 	{
-		return View::make('users/signin');
+		return View::make('users.signin');
 	}
 
 	public function postSignin()
@@ -102,7 +102,8 @@ class UserController extends BaseController {
 
 	public function signout()
 	{
-		Sentry::logout();
+//		Sentry::logout();
+		Auth::logout();
 
 		return Redirect::route('home');
 	}
