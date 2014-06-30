@@ -66,44 +66,6 @@ class BaseController extends Controller {
 		];
 	}
 
-	public function getTasks($filtered_str = '', $done_num = 10)
-	{
-		$target_tasks = $this->currentTasks();
-
-		if (empty($filtered_str)) {
-			return $this->getUnfilteredTasks($target_tasks, $done_num);
-		}
-		else {
-			return $this->getFilteredTasks($target_tasks, $filtered_str, $done_num);
-		}
-	}
-
-	public function getUnfilteredTasks($target_tasks, $done_num = 10)
-	{
-		$tasks = [
-			'todo_high_tasks' => $target_tasks->byStatus('todo_h')->get(),
-			'todo_mid_tasks'  => $target_tasks->byStatus('todo_m')->get(),
-			'todo_low_tasks'  => $target_tasks->byStatus('todo_l')->get(),
-			'doing_tasks'     => $target_tasks->byStatus('doing')->get(),
-			'waiting_tasks'   => $target_tasks->byStatus('waiting')->get(),
-			'done_tasks'      => $target_tasks->byStatus('done')->limit($done_num)->get(),
-		];
-		return $tasks;
-	}
-
-	public function getFilteredTasks($target_tasks, $filter_word, $done_num = 10)
-	{
-		$tasks = [
-			'todo_high_tasks' => $target_tasks->byStatusAndFilter('todo_h')->get(),
-			'todo_mid_tasks'  => $target_tasks->byStatusAndFilter('todo_m')->get(),
-			'todo_low_tasks'  => $target_tasks->byStatusAndFilter('todo_l')->get(),
-			'doing_tasks'     => $target_tasks->byStatusAndFilter('doing')->get(),
-			'waiting_tasks'   => $target_tasks->byStatusAndFilter('waiting')->get(),
-			'done_tasks'      => $target_tasks->doneAndFilter($filter_word)->limit($done_num)->get(),
-		];
-		return $tasks;
-	}
-
 	public function renderJsonForUpdateBookJson($filter_str = '', $done_num)
 	{
 		return Response::json([
@@ -122,6 +84,42 @@ class BaseController extends Controller {
 
 		$layout = Session::get('layout', 'default');
 		return View::make('tasks.layouts.' . $layout, compact('tasks', 'recent_done_num'))->render();
+	}
+
+	public function getTasks($filtered_str = '', $done_num = 10)
+	{
+		if (empty($filtered_str)) {
+			return $this->getUnfilteredTasks($done_num);
+		}
+		else {
+			return $this->getFilteredTasks($filtered_str, $done_num);
+		}
+	}
+
+	public function getUnfilteredTasks($done_num = 10)
+	{
+		$tasks = [
+			'todo_high_tasks' => $this->currentTasks()->byStatus('todo_h')->get(),
+			'todo_mid_tasks'  => $this->currentTasks()->byStatus('todo_m')->get(),
+			'todo_low_tasks'  => $this->currentTasks()->byStatus('todo_l')->get(),
+			'doing_tasks'     => $this->currentTasks()->byStatus('doing')->get(),
+			'waiting_tasks'   => $this->currentTasks()->byStatus('waiting')->get(),
+			'done_tasks'      => $this->currentTasks()->byStatus('done')->limit($done_num)->get(),
+		];
+		return $tasks;
+	}
+
+	public function getFilteredTasks($filter_word, $done_num = 10)
+	{
+		$tasks = [
+			'todo_high_tasks' => $this->currentTasks()->byStatusAndFilter('todo_h')->get(),
+			'todo_mid_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_m')->get(),
+			'todo_low_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_l')->get(),
+			'doing_tasks'     => $this->currentTasks()->byStatusAndFilter('doing')->get(),
+			'waiting_tasks'   => $this->currentTasks()->byStatusAndFilter('waiting')->get(),
+			'done_tasks'      => $this->currentTasks()->doneAndFilter($filter_word)->limit($done_num)->get(),
+		];
+		return $tasks;
 	}
 
 }

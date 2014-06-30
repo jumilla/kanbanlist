@@ -17,12 +17,17 @@ class Task extends Eloquent
 
 	public function user()
 	{
-		$this->hasOne('User');
+		return $this->hasOne('User');
 	}
 
 	public function book()
 	{
-		$this->hasOne('Book');
+		return $this->hasOne('Book');
+	}
+
+	public function done()
+	{
+		return $this->status == static::$status_table['done'];
 	}
 
 	public function scopeByNameAndStatus($query, $name, $status)
