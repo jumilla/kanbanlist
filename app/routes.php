@@ -41,6 +41,15 @@ Route::group(['prefix' => 'user', 'before' => 'auth'], function() {
 		['as' => 'user.update', 'uses' => 'UserController@update']);
 });
 
+Route::group(['prefix' => 'books', 'before' => 'auth'], function() {
+	Route::post('create',
+		['as' => 'books.create', 'uses' => 'BooksController@create']);
+	Route::get('{id}',
+		['as' => 'books.show', 'uses' => 'BooksController@show']);
+	Route::post('{id}/destroy',
+		['as' => 'books.destroy', 'uses' => 'BooksController@destroy']);
+});
+
 Route::group(['prefix' => 'tasks', 'before' => 'auth'], function() {
 	Route::get('',
 		['as'=>'tasks.index', 'uses'=>'TasksController@index']);
