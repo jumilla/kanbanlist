@@ -23,8 +23,8 @@ return array(
 		'mysql' => array(
 			'host'      => 'localhost',
 			'database'  => 'kanbanlist_dev',
-			'username'  => 'laravellers',
-			'password'  => 'laravellers',
+			'username'  => 'laravelers',
+			'password'  => 'laravelers',
 		),
 
 	),
