@@ -3,7 +3,7 @@
 <li id="id_{{ $task.id }}" class="task_elem" style="display:{{ display }}">
 <div class="sorttime" alt="{{ $task.updated_at }}" id="ms_notyet_{{ $task.id }}">
   {{-- for active display --}}
-  <div id="edit_link_ms_{{ $task.id }}" style="display:{{ done == false ? "block" : "none" }}">
+  <div id="edit_link_ms_{{ $task.id }}" style="display:{{ done == false ? 'block' : "none" }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">
@@ -49,7 +49,7 @@
   </div>
 
   {{-- for done display --}}
-  <div id="fixed_{{ $task.id }}" style="display:{{ done == false ? "none" : "block" }}">
+  <div id="fixed_{{ $task.id }}" style="display:{{ done == false ? "none" : 'block' }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">

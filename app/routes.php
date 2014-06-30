@@ -61,3 +61,13 @@ Route::group(['prefix' => 'tasks', 'before' => 'auth'], function() {
     Route::get('donelist',
     	['as' => 'tasks.donelist', 'uses' => 'TasksController@donelist']);
 });
+
+// for DEBUG
+if (Config::get('app.debug')) {
+	// route 'crud/{table}'
+	Shin1x1\LaravelTableAdmin\TableAdminFacade::route([
+    	'users',
+    	'books',
+    	'tasks',
+	]);
+}

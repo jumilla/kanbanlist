@@ -124,9 +124,11 @@ return array(
 
 		'Cartalyst\Sentry\SentryServiceProvider',
 		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
-		'Jumilla\Erb2Blade\ServiceProvider',
+		'Zizaco\Confide\ConfideServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Jenssegers\Agent\AgentServiceProvider',
+		'Jumilla\Erb2Blade\ServiceProvider',
+		'Shin1x1\LaravelTableAdmin\TableAdminServiceProvider',
 
 	),
 
