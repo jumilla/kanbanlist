@@ -10,3 +10,4 @@
 //= require send_csrf_token
 //= require twitter/bootstrap
 //= require highcharts
+//= require kanbanlist
