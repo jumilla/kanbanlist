@@ -6,7 +6,7 @@
 </div>
 @endif
 
-@if ($errors->any())
+@if (isset($errors) && $errors->any())
 <div class="alert alert-danger fade in">
   <button type="button" class="close" data-dismiss="alert"></button>
 @foreach ($errors->all() as $error)
