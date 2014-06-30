@@ -15,16 +15,16 @@ return array(
 		'mysql' => array(
 			'host'      => 'localhost',
 			'database'  => 'kanbanlist',
-			'username'  => 'laravellers',
-			'password'  => 'laravellers',
+			'username'  => 'laravelers',
+			'password'  => 'laravelers',
 			'prefix'    => '',
 		),
 
 		'pgsql' => array(
 			'host'     => 'localhost',
 			'database' => 'kanbanlist',
-			'username' => 'laravellers',
-			'password' => 'laravellers',
+			'username' => 'laravelers',
+			'password' => 'laravelers',
 			'prefix'   => '',
 			'schema'   => 'public',
 		),
