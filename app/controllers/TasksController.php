@@ -72,11 +72,11 @@ class TasksController extends BaseController
 		])->setCallback('addTodoResponse');
 	}
 
-	public function update()
+	public function update($id)
 	{
-		Log::debug(__METHOD__);
+		Log::debug(__METHOD__."id=$id");
 
-		$task = Task::find(Input::get('id'));
+		$task = Task::find($id);
 		$task->book_id = Book::getIdInMsg(Auth::user(), Input::get('msg'));
 		if (Input::get('status') != '') {
 			$task->status = Task::$status_table[Input::get('status')];
@@ -94,11 +94,11 @@ class TasksController extends BaseController
 		])->setCallback('updateTaskJson');
 	}
 
-	public function destroy()
+	public function destroy($id)
 	{
 		Log::debug(__METHOD__);
 
-		$task = Task::find(Input::get('id'));
+		$task = Task::find($id);
 		$task->delete();
 
 		return Response::json([

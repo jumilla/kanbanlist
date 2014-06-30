@@ -46,7 +46,7 @@ Route::group(['prefix' => 'books', 'before' => 'auth'], function() {
 		['as' => 'books.create', 'uses' => 'BooksController@create']);
 	Route::get('{id}',
 		['as' => 'books.show', 'uses' => 'BooksController@show']);
-	Route::post('{id}/destroy',
+	Route::delete('{id}',
 		['as' => 'books.destroy', 'uses' => 'BooksController@destroy']);
 });
 
@@ -55,10 +55,6 @@ Route::group(['prefix' => 'tasks', 'before' => 'auth'], function() {
 		['as'=>'tasks.index', 'uses'=>'TasksController@index']);
     Route::post('',
     	['as' => 'tasks.create', 'uses' => 'TasksController@create']);
-    Route::post('update',
-    	['as' => 'tasks.update', 'uses' => 'TasksController@update']);
-    Route::post('destroy',
-    	['as' => 'tasks.destroy', 'uses' => 'TasksController@destroy']);
     Route::post('update_order',
     	['as' => 'tasks.update_order', 'uses' => 'TasksController@updateOrder']);
     Route::any('filter_or_update',
@@ -69,6 +65,10 @@ Route::group(['prefix' => 'tasks', 'before' => 'auth'], function() {
     	['as' => 'tasks.send_mail', 'uses' => 'TasksController@sendMail']);
     Route::get('donelist',
     	['as' => 'tasks.donelist', 'uses' => 'TasksController@donelist']);
+    Route::put('{id}',
+    	['as' => 'tasks.update', 'uses' => 'TasksController@update']);
+    Route::delete('{id}',
+    	['as' => 'tasks.destroy', 'uses' => 'TasksController@destroy']);
 });
 
 // for DEBUG
