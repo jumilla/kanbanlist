@@ -7,19 +7,6 @@ class BaseController extends Controller {
 		DeviceAutoDetectFinder::install();
 	}
 
-	/**
-	 * Setup the layout used by the controller.
-	 *
-	 * @return void
-	 */
-	protected function setupLayout()
-	{
-		if ( ! is_null($this->layout))
-		{
-			$this->layout = View::make($this->layout);
-		}
-	}
-
 	public function currentBook()
 	{
 		return Session::has('book_id') ? Book::find(Session::get('book_id')) : null;
@@ -84,22 +71,22 @@ class BaseController extends Controller {
 		$target_tasks = $this->currentTasks();
 
 		if (empty($filtered_str)) {
-			$this->getUnfilteredTasks($target_tasks, $done_num);
+			return $this->getUnfilteredTasks($target_tasks, $done_num);
 		}
 		else {
-			$this->getFilteredTasks($target_tasks, $filtered_str, $done_num);
+			return $this->getFilteredTasks($target_tasks, $filtered_str, $done_num);
 		}
 	}
 
-	public function getUnfilteredTasks($target_tasks, $done_num)
+	public function getUnfilteredTasks($target_tasks, $done_num = 10)
 	{
 		$tasks = [
-			'todo_high_tasks' => $target_tasks->byStatus('todo_h'),
-			'todo_mid_tasks'  => $target_tasks->byStatus('todo_m'),
-			'todo_low_tasks'  => $target_tasks->byStatus('todo_l'),
-			'doing_tasks'     => $target_tasks->byStatus('doing'),
-			'waiting_tasks'   => $target_tasks->byStatus('waiting'),
-			'done_tasks'      => $target_tasks->byStatus('done')->limit($done_num),
+			'todo_high_tasks' => $target_tasks->byStatus('todo_h')->get(),
+			'todo_mid_tasks'  => $target_tasks->byStatus('todo_m')->get(),
+			'todo_low_tasks'  => $target_tasks->byStatus('todo_l')->get(),
+			'doing_tasks'     => $target_tasks->byStatus('doing')->get(),
+			'waiting_tasks'   => $target_tasks->byStatus('waiting')->get(),
+			'done_tasks'      => $target_tasks->byStatus('done')->limit($done_num)->get(),
 		];
 		return $tasks;
 	}
@@ -107,12 +94,12 @@ class BaseController extends Controller {
 	public function getFilteredTasks($target_tasks, $filter_word, $done_num = 10)
 	{
 		$tasks = [
-			'todo_high_tasks' => $target_tasks->byStatusAndFilter('todo_h'),
-			'todo_mid_tasks'  => $target_tasks->byStatusAndFilter('todo_m'),
-			'todo_low_tasks'  => $target_tasks->byStatusAndFilter('todo_l'),
-			'doing_tasks'     => $target_tasks->byStatusAndFilter('doing'),
-			'waiting_tasks'   => $target_tasks->byStatusAndFilter('waiting'),
-			'done_tasks'      => $target_tasks->doneAndFilter($filter_word)->limit($done_num),
+			'todo_high_tasks' => $target_tasks->byStatusAndFilter('todo_h')->get(),
+			'todo_mid_tasks'  => $target_tasks->byStatusAndFilter('todo_m')->get(),
+			'todo_low_tasks'  => $target_tasks->byStatusAndFilter('todo_l')->get(),
+			'doing_tasks'     => $target_tasks->byStatusAndFilter('doing')->get(),
+			'waiting_tasks'   => $target_tasks->byStatusAndFilter('waiting')->get(),
+			'done_tasks'      => $target_tasks->doneAndFilter($filter_word)->limit($done_num)->get(),
 		];
 		return $tasks;
 	}
@@ -130,12 +117,11 @@ class BaseController extends Controller {
 
 	public function getTaskListHtml($filter_str, $done_num)
 	{
-		$this->recent_done_num = $done_num;
-		$this->tasks = $this->getTasks($filter_str, $done_num);
+		$recent_done_num = $done_num;
+		$tasks = $this->getTasks($filter_str, $done_num);
 
-		$layout = Session::get('layout');
-		Session::put('layout', $layout ?: 'default');
-		return View::make('tasks/_tasklist_' . Session::get('layout'));
+		$layout = Session::get('layout', 'default');
+		return View::make('tasks.layouts.' . $layout, compact('tasks', 'recent_done_num'))->render();
 	}
 
 }

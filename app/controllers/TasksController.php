@@ -11,6 +11,8 @@ class TasksController extends BaseController
 
 	public function index()
 	{
+		Log::debug(__METHOD__);
+
 		if (Input::get('book_id') != null) {
 			Session::set('book_id', Input::get('book_id'));
 		}
@@ -37,11 +39,13 @@ class TasksController extends BaseController
 		//        end
 //        }
 
-		return View::make('tasks/index');
+		return View::make('tasks.index');
 	}
 
 	public function create()
 	{
+		Log::debug(__METHOD__);
+
 		$task = Task::create([
 			'user_id' => Auth::user()->id,
 			'book_id' => Book::getIdInMsg(Auth::user(), Input::get('msg')),
@@ -70,6 +74,8 @@ class TasksController extends BaseController
 
 	public function update()
 	{
+		Log::debug(__METHOD__);
+
 		$task = Task::find(Input::get('id'));
 		$task->book_id = Book::getIdInMsg(Auth::user(), Input::get('msg'));
 		if (Input::get('status') != '') {
@@ -90,6 +96,8 @@ class TasksController extends BaseController
 
 	public function destroy()
 	{
+		Log::debug(__METHOD__);
+
 		$task = Task::find(Input::get('id'));
 		$task->delete();
 
@@ -102,7 +110,9 @@ class TasksController extends BaseController
 
 	public function updateOrder()
 	{
-		if (Input::get('id') == null){
+		Log::debug(__METHOD__);
+
+		if (Input::get('id') == null) {
 		  return 'update_order noop';
 		}
 
@@ -120,12 +130,16 @@ class TasksController extends BaseController
 
 	public function filterOrUpdate()
 	{
+		Log::debug(__METHOD__);
+
 		$this->setLayout(Input::get('layout'));
 		return $this->renderJsonForUpdateBookJson(Input::get('filter'), 15);
 	}
 
 	public function silentUpdate()
 	{
+		Log::debug(__METHOD__);
+
 		$this->user_name = Auth::user()->name;
 
 		return Response::json([
@@ -137,6 +151,8 @@ class TasksController extends BaseController
 
 	public function donelist()
 	{
+		Log::debug(__METHOD__);
+
 		$this->tasks = $this->curretTasks()->done;
 		if (Input::get('year')->blank == false){
 			$select_month = Carbon::createFromDate( Input::get('year'), Input::get('month'), 0);
@@ -152,6 +168,8 @@ class TasksController extends BaseController
 
 	public function sendMail()
 	{
+		Log::debug(__METHOD__);
+
 		$mail_addr    = Input::get('mail_addr');
 		$mail_comment = Input::get('comment');
 
@@ -177,12 +195,12 @@ class TasksController extends BaseController
 		}
 	}
 
-	public function isMovedFromBook($task)
+	private function isMovedFromBook($task)
 	{
 		return ($this->currentBook() != null) and ($this->currentBook()->id != ($task->book ? $task->book->id : 0 ));
 	}
 
-	public function setLayout($layout_name)
+	private function setLayout($layout_name)
 	{
 		if (!empty($layout_name)){
 			Session::set('layout', $layout_name);
