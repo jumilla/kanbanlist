@@ -4,7 +4,6 @@ class BaseController extends Controller {
 
 	public function __construct()
 	{
-		DeviceAutoDetectFinder::install();
 	}
 
 	public function currentBook()

@@ -13,6 +13,7 @@
 
 $app = new Illuminate\Foundation\Application;
 
+
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment
@@ -59,6 +60,13 @@ $framework = $app['path.base'].
                  '/vendor/laravel/framework/src';
 
 require $framework.'/Illuminate/Foundation/start.php';
+
+/*
+|--------------------------------------------------------------------------
+| Install View Hook 
+|--------------------------------------------------------------------------
+*/
+DeviceAutoDetectFinder::install($app);
 
 /*
 |--------------------------------------------------------------------------
