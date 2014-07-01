@@ -21,7 +21,7 @@ class TasksController extends BaseController
 			$this->setLayout(Input::get('layout'));
 		}
 
-		if (Agent::isSmartphone()){
+		if (Agent::isMobile()) {
 			$this->user_name = Auth::user()->name;
 			$this->get_task_counts = $this->getTaskCounts();
 			$this->book_name = $this->getBookName();
