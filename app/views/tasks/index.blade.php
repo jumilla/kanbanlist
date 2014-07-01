@@ -8,6 +8,8 @@
             <form id="filter_form" method="post" class="navbar-search pull-left">
               <input type="text" id="filter_str" class="search-query span2" value="" placeholder="Filter"/>
             </form>
+          </div>
+          <div class="pull-left">
 @include('layouts/task_count_table')
           </div>
 @stop
