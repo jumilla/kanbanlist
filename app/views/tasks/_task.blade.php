@@ -12,7 +12,7 @@
           <table class="task-tool-active-area" cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
             <tr>
               <td class="taskLabel" align="left" width="10px">
-                <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("%m/%d") }}</span></font>&nbsp;
+                <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("m/d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel taskBody" align="left">
                 <div id="msg_{{ $task->id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;

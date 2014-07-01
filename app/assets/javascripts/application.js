@@ -8,5 +8,6 @@
 //= require jquery.autofit
 //= require jquery.decora
 //= require send_csrf_token
-//= require twitter/bootstrap
+//= require bootstrap
 //= require highcharts
+//= require kanbanlist

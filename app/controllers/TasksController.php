@@ -21,23 +21,24 @@ class TasksController extends BaseController
 			$this->setLayout(Input::get('layout'));
 		}
 
-//        if (UserAgent::isSmartphone()){
-//            $this->user_name = Auth::user()->name;
-//            $this->get_task_counts = getTaskCounts();
-//            $this->book_name = getBookName();
-//            $this->current_book_id = $this->currentBook() ? $this->currentBook()->id : 0;
-//            $this->prefix = $this->getPrefix();
-//            $this->recent_done_now = 10;
-//            $this->books = $this->getAllBookCounts();
-//            $this->tasks = $this->getTasks('', $this->recent_done_now);
-//        } else {
+		if (Agent::isSmartphone()){
+			$this->user_name = Auth::user()->name;
+			$this->get_task_counts = $this->getTaskCounts();
+			$this->book_name = $this->getBookName();
+			$this->current_book_id = $this->currentBook() ? $this->currentBook()->id : 0;
+			$this->prefix = $this->getPrefix();
+			$this->recent_done_now = 10;
+ 			$this->books = $this->getAllBookCounts();
+			$this->tasks = $this->getTasks('', $this->recent_done_now);
+		}
+		else {
 			$this->tasks = $this->currentTasks();
 		//        respond_to do |format|
 		//            format.html
 		//            format.csv { send_data(current_tasks.csv) }
 		//            format.xls
 		//        end
-//        }
+		}
 
 		return View::make('tasks.index');
 	}

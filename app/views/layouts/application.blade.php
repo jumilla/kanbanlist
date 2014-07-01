@@ -58,11 +58,11 @@
   </div>
 </header>
 
-@include('layouts/new_book_dialog')
-@include('layouts/remove_book_dialog')
+@include('layouts.new_book_dialog')
+@include('layouts.remove_book_dialog')
 {{-- @include('layouts/send_mail_dialog') --}}
-@include('layouts/set_bg_image_dialog')
-@include('layouts/delete_task_dialog')
+@include('layouts.set_bg_image_dialog')
+@include('layouts.delete_task_dialog')
 
 @yield('content')
 
