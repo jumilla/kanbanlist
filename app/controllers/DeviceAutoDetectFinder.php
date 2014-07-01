@@ -22,6 +22,7 @@ class DeviceAutoDetectFinder extends FileViewFinder {
 	{
 //		Log::info('View Hook!! ' . $name);
 		if (Agent::isMobile()) {
+			Log::debug(__METHOD__.": try find {$name}.phone");
 			try {
 				return parent::find($name.'.phone');
 			}
