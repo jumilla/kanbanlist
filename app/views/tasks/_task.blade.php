@@ -58,7 +58,7 @@
           <table class="task-tool-active-area" cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
             <tr>
               <td align="left" width="10px">
-                <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("%m/%d") }}</span></font>&nbsp;
+                <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("m/d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel" align="left">
                 <div id="fixed_msg_{{ $task->id }}" style="display:inline;word-break:break-all;"></div>
