@@ -166,11 +166,11 @@ class Task extends Eloquent
 //csv << ["Book", "Task", "Status", "UpdatedAt"]
 //[:doing,:todo_h,:todo_m, :todo_l, :waiting].each do |st|
 //self.by_status(st).each do |t|
-//csv << [t.book_name, t.msg_without_book_name, t.status_sym, t.updated_at]
+//csv << [t.book_name, t.msg_without_book_name, t.statusSymbol(), t.updated_at]
 //        }
 //      }
 //      self.done.each do |t|
-//csv << [t.book_name, t.msg_without_book_name, t.status_sym, t.updated_at]
+//csv << [t.book_name, t.msg_without_book_name, t.statusSymbol(), t.updated_at]
 //    }
 //    #SJISに変換するかどうか悩む
 //      #csv_data.encode(Encoding::SJIS)

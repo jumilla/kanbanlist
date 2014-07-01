@@ -12,7 +12,7 @@
 <script>
 (function(){
   var taskAction = KanbanList.taskAction;
-  var msg_array = {{ to_js_array(task.msg) }};
-  taskAction.initial({{ $task->id }}, "{{ $task->status_sym }}", msg_array);
+  var msg_array = ["{{ $task->msg }}"];
+  taskAction.initial({{ $task->id }}, "{{ $task->statusSymbol() }}", msg_array);
 }());
 </script>

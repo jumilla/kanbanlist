@@ -22,14 +22,17 @@ class TasksController extends BaseController
 		}
 
 		if (Agent::isMobile()) {
-			$this->user_name = Auth::user()->name;
-			$this->get_task_counts = $this->getTaskCounts();
-			$this->book_name = $this->getBookName();
-			$this->current_book_id = $this->currentBook() ? $this->currentBook()->id : 0;
-			$this->prefix = $this->getPrefix();
-			$this->recent_done_now = 10;
- 			$this->books = $this->getAllBookCounts();
-			$this->tasks = $this->getTasks('', $this->recent_done_now);
+			$user_name = Auth::user()->name;
+			$get_task_counts = $this->getTaskCounts();
+			$book_name = $this->getBookName();
+			$current_book_id = $this->currentBook() ? $this->currentBook()->id : 0;
+			$prefix = $this->getPrefix();
+			$recent_done_now = 10;
+ 			$books = $this->getAllBookCounts();
+			$tasks = $this->getTasks('', $recent_done_now);
+			return View::make('tasks.index', compact(
+				'user_name', 'book_name', 'current_book_id', 'prefix', 'recent_done_now', 'tasks', 'books'
+			));
 		}
 		else {
 			$this->tasks = $this->currentTasks();
@@ -38,9 +41,9 @@ class TasksController extends BaseController
 		//            format.csv { send_data(current_tasks.csv) }
 		//            format.xls
 		//        end
+			return View::make('tasks.index');
 		}
 
-		return View::make('tasks.index');
 	}
 
 	public function create()
@@ -186,7 +189,7 @@ class TasksController extends BaseController
 
 	private function doHooks($task)
 	{
-		switch ($task->status_sym) {
+		switch ($task->statusSymbol()) {
 			case 'done':
 				$hook_name = dirname(__FILE__) . '/hooks/update_task_' . Auth::user()->email;
 				$command = 'source ' . $hook_name . ' \"DONE\" \"#{helper.strip_tags task.msg}\"';

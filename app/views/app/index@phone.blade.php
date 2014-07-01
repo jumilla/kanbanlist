@@ -1,3 +1,6 @@
+@extends('layouts.application')
+
+@section('content')
 <div data-role="header" data-position="fixed">
   <h1>かんばんりすと for iPhone</h1>
 </div>
@@ -25,4 +28,4 @@
     </ul>
   </p>
 </div>
-
+@stop

@@ -17,7 +17,7 @@
       <Row>
         <Cell><Data ss:Type="String">{{$t->book_name }}</Data></Cell>
         <Cell><Data ss:Type="String">{{$t->msg_without_book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{$t->status_sym }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{$t->statusSymbol() }}</Data></Cell>
         <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t->updated_at)}}</Data></Cell>
       </Row>
       @endforeach
@@ -26,7 +26,7 @@
       <Row>
         <Cell><Data ss:Type="String">{{ $t->book_name }}</Data></Cell>
         <Cell><Data ss:Type="String">{{ $t->msg_without_book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ $t->status_sym }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{ $t->statusSymbol() }}</Data></Cell>
         <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t->updated_at)}}</Data></Cell>
       </Row>
     @endforeach
