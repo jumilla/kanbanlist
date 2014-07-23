@@ -4,10 +4,9 @@
 
 ## インストール方法
 
-### git cloneする
-
-### composer updateする
+- git cloneする
+- composer updateする
 
 ## 起動方法
 
-### php artisan serveする
+- php artisan serveする
