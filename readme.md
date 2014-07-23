@@ -10,3 +10,4 @@
 ## 起動方法
 
 - php artisan serveする
+
