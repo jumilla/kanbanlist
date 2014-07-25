@@ -4,10 +4,19 @@
 
 ## インストール方法
 
-### git cloneする
-
-### composer updateする
+```
+git clone https://github.com/jumilla/kanbanlist
+cd kanbanlist
+composer update
+```
 
 ## 起動方法
 
-### php artisan serveする
+```
+php artisan serve
+open http://localhost:8000
+```
+
+## 開発
+
+`develop`ブランチを使います。
