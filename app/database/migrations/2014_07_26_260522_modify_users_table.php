@@ -18,7 +18,7 @@ class ModifyUsersTable extends Migration {
 	{
 		Schema::table('users',function(Blueprint $table) {
 			$table->text('permissions')->nullable();
-//			$table->boolean('activated')->default(0);
+			$table->boolean('activated')->default(false);
 //			$table->string('activation_code')->nullable();
 //			$table->timestamp('activated_at')->nullable();
 			$table->timestamp('last_login')->nullable();
