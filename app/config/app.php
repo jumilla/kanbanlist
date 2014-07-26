@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'Asia/Tokyo',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,13 +122,16 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Cartalyst\Sentry\SentryServiceProvider',
 		'Codesleeve\AssetPipeline\AssetPipelineServiceProvider',
-		'Zizaco\Confide\ConfideServiceProvider',
-		'Barryvdh\Debugbar\ServiceProvider',
+		'Zizaco\Confide\ServiceProvider',
 		'Jenssegers\Agent\AgentServiceProvider',
-		'Jumilla\Erb2Blade\ServiceProvider',
+
+		// for Debug
+		'Barryvdh\Debugbar\ServiceProvider',
 		'Shin1x1\LaravelTableAdmin\TableAdminServiceProvider',
+
+		// for Development Support
+		'Jumilla\Erb2Blade\ServiceProvider',
 
 	),
 
@@ -196,7 +199,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+
+		'Confide'         => 'Zizaco\Confide\Facade',
 		'Agent'           => 'Jenssegers\Agent\Facades\Agent',
 
 	),

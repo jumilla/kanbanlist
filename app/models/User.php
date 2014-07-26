@@ -1,26 +1,11 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
+use Zizaco\Confide\ConfideUserInterface;
+use Zizaco\Confide\ConfideUser;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends Eloquent implements ConfideUserInterface {
 
-	use UserTrait, RemindableTrait;
-
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
-	public static $rules = array(
-		 'email' => 'required | email',
-		 'name'  => 'required',
-		 'password'=>'required',
-		 'password_confirmation' => 'same:password'
-	);
+	use ConfideUser;
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -41,20 +26,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasMany('Task');
 	}
 	
-	public function bgImgPath(){
-		if ($this->background_image){
-			return $this->background_image;
-		}else{
-			return null;
-		}
+	public function bgImgPath()
+	{
+		return $this->background_image ?: null;
 	}
-		
-	public static function byName($name){
+
+	public static function byName($name)
+	{
 		return User::where('name', '=', $name)->first();
-		
 	}
-	
-	public function exist($name){
+
+	public function exist($name)
+	{
 		$user = self::byName($name);
 		if ($user){
 			return true;
@@ -62,7 +45,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return false;
 	}
 	
-	public function bgImgByName($name){
+	public function bgImgByName($name)
+	{
 		$user = self::byName($name);
 		if ($user){
 			return $user->background_image;
@@ -71,7 +55,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 	
 	
-	public function layoutByName($name){
+	public function layoutByName($name)
+	{
 		$user = self::byName($name);
 		if ($user){
 			return $user->layout;
@@ -79,7 +64,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return null;
 	}
 	
-	public function incPomo($name){
+	public function incPomo($name)
+	{
 		$user = self::byName($name);
 		if (!$user){
 			return null;
@@ -87,4 +73,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		$user->pomo += 1;
 		$user->save();
 	}
+
 }

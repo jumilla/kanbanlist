@@ -6,7 +6,7 @@
     <div class="span12">
 @include('layouts.notification')
 
-    {{ Form::open(['route' => 'app.signin', 'method' => 'post', 'class' => 'form-horizontal']) }}
+    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal']) }}
       <fieldset>
         <legend>ログイン</legend>
         <div class="control-group">

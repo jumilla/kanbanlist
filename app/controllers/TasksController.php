@@ -85,7 +85,7 @@ class TasksController extends BaseController
 		if (Input::get('status') != '') {
 			$task->status = Task::$status_table[Input::get('status')];
 		}
-		$task->msg = Input::get('msg');
+		$task->message = Input::get('msg');
 		$task->save();
 
 		$moveId = $this->isMovedFromBook($task) ? $task->id : 0;

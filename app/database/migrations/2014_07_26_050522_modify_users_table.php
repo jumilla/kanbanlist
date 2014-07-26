@@ -17,13 +17,7 @@ class ModifyUsersTable extends Migration {
 	public function up()
 	{
 		Schema::table('users',function(Blueprint $table) {
-			$table->text('permissions')->nullable();
-			$table->boolean('activated')->default(false);
-//			$table->string('activation_code')->nullable();
-//			$table->timestamp('activated_at')->nullable();
-			$table->timestamp('last_login')->nullable();
-//			$table->string('persist_code')->nullable();
-//			$table->string('reset_password_code')->nullable();
+			$table->timestamp('last_logged_at')->nullable();
 			$table->string('background_image')->nullable();
 			$table->string('layout')->nullable();
 			$table->integer('pomo')->default(0);
@@ -37,7 +31,6 @@ class ModifyUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('users');
 	}
 
 }

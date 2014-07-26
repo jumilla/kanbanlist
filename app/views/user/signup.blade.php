@@ -1,35 +1,36 @@
 @extends('layouts.application')
+
 @section('content')
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
 @include('layouts.notification')
 
-    {{ Form::open(array('route' => 'app.signup', 'method' => 'post')) }}
+    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal']) }}
       <fieldset>
         <legend>Sign up</legend>
         <div class="control-group">
-          <?php echo Form::label('name', 'Name', array('class' => 'control-label')); ?>
+          <?php echo Form::label('username', 'Name', ['class' => 'control-label']); ?>
           <div class="controls">
-            <?php echo Form::text('name'); ?>
+            <?php echo Form::text('username'); ?>
           </div>
         </div>
 
         <div class="control-group">
-          <?php echo Form::label('email', 'email', array('class' => 'control-label')); ?>
+          <?php echo Form::label('email', 'Email', ['class' => 'control-label']); ?>
           <div class="controls">
-			  <?php echo Form::text('email'); ?>
+			      <?php echo Form::text('email'); ?>
           </div>
         </div>
 
         <div class="control-group">
-          <?php echo Form::label('password', 'password', array('class' => 'control-label')); ?>
-         <div class="controls">
+          <?php echo Form::label('password', 'Password', ['class' => 'control-label']); ?>
+          <div class="controls">
             <?php echo Form::password('password'); ?>
           </div>
         </div>
         <div class="control-group">
-          <?php echo Form::label('password_confirmation', 'password confirmation', array('class' => 'control-label')); ?>
+          <?php echo Form::label('password_confirmation', 'Password confirmation', ['class' => 'control-label']); ?>
           <div class="controls">
             <?php echo Form::password('password_confirmation'); ?>
           </div>

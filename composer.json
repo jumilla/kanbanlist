@@ -6,9 +6,6 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"codesleeve/asset-pipeline": "2.*",
-		"cartalyst/sentry": "2.*",
-		"laravelbook/ardent": "dev-master",
-		"zizaco/confide": "3.2.*",
 		"jenssegers/agent": "*"
 	},
 	"require-dev": {
@@ -26,7 +23,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+			"packages/confide4-BETA"
 		]
 	},
 	"scripts": {
