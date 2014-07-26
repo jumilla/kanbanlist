@@ -42,8 +42,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 	
 	public function bgImgPath(){
-		if ($this->bg_img){
-			return $this->bg_img;
+		if ($this->background_image){
+			return $this->background_image;
 		}else{
 			return null;
 		}
@@ -65,7 +65,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function bgImgByName($name){
 		$user = self::byName($name);
 		if ($user){
-			return $user->bg_img;
+			return $user->background_image;
 		}
 		return null;
 	}
