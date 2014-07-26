@@ -5,7 +5,7 @@ KanbanList.taskAction = (function(){
   var utility = KanbanList.utility;
   var pomodoroTimer = KanbanList.pomodoroTimer;
   var MIN_HEIGHT = 100;
-  var edit_before_msg = {};
+  var edit_before_message = {};
 
   function display_filter(text){
     return $.decora.to_html(text);
@@ -14,8 +14,8 @@ KanbanList.taskAction = (function(){
   function moveToDone(move_id) {
     var to_status = "done";
     var id = move_id.slice(4);
-    var msg = $("#ms_" + id + "_edit" ).val();
-    $("#fixed_msg_" + id ).html(display_filter(msg));
+    var message = $("#ms_" + id + "_edit" ).val();
+    $("#fixed_message_" + id ).html(display_filter(message));
 
     $("#edit_link_ms_" + id ).css("display","none");
     $("#edit_form_ms_" + id ).css("display","none");
@@ -30,7 +30,7 @@ KanbanList.taskAction = (function(){
     $('#viewSortlist').html("moveToDone " + move_id);
 
     //TODO: グローバルのメソッドを呼んでいるので修正する
-    sendCurrentTodo(id, to_status, msg);
+    sendCurrentTodo(id, to_status, message);
     pomodoroTimer.addDone();
   }
 
@@ -48,14 +48,14 @@ KanbanList.taskAction = (function(){
 
     $('#viewSortlist').html("returnToTodo " + ret_id);
 
-    var msg = $("#ms_" + id + "_edit" ).val();
+    var message = $("#ms_" + id + "_edit" ).val();
     //TODO: グローバルのメソッドを呼んでいるので修正する
-    sendCurrentTodo(id, to_status, msg);
+    sendCurrentTodo(id, to_status, message);
   }
 
   function deleteTodo( delete_id ) {
-    var msg_id = '#msg_' + delete_id.slice(4);
-    $('#delete_task_string').html($(msg_id).html());
+    var message_id = '#message_' + delete_id.slice(4);
+    $('#delete_task_string').html($(message_id).html());
     $('#delete_task_in').modal('show');
 
     $('#delete_task_ok_button').click(function(){
@@ -82,25 +82,25 @@ KanbanList.taskAction = (function(){
 
   function updateToDoMsg(id) {
     var $from = $('#ms_' + id + '_edit')
-       ,$to = $('#msg_' + id );
-    var msg = sanitize($from.val());
-    msg = msg.replace(/'/g,"\"");
+       ,$to = $('#message_' + id );
+    var message = sanitize($from.val());
+    message = message.replace(/'/g,"\"");
 
-    $from.val(msg);
-    $to.html(display_filter(msg));
+    $from.val(message);
+    $to.html(display_filter(message));
 
     var status = $("#id_" + id).parent().get(0).id;
     //TODO: グローバルのメソッドを呼んでいるので修正する
-    sendCurrentTodo(id, status, msg);
-    edit_before_msg[id] = $('#ms_' + id + '_edit').val();
+    sendCurrentTodo(id, status, message);
+    edit_before_message[id] = $('#ms_' + id + '_edit').val();
   }
 
   function isChangedMsg(id){
-    return $('#ms_' + id + '_edit').val() != edit_before_msg[id];
+    return $('#ms_' + id + '_edit').val() != edit_before_message[id];
   }
 
-  function realize_task(id, msg_array){
-    var msg = msg_array.join('\n');
+  function realize_task(id, message_array){
+    var message = message_array.join('\n');
 
     $(".task-tool-active-area").hover(
       function(){
@@ -111,9 +111,9 @@ KanbanList.taskAction = (function(){
       }
     );
 
-    $('#ms_' + id + '_edit').val(msg);
-    $('#msg_' + id ).html(display_filter(msg));
-    $('#fixed_msg_' + id ).html(display_filter(msg));
+    $('#ms_' + id + '_edit').val(message);
+    $('#message_' + id ).html(display_filter(message));
+    $('#fixed_message_' + id ).html(display_filter(message));
 
     $('#ms_' + id + '_edit').maxlength({
       'feedback' : '.task-chars-left'
@@ -155,7 +155,7 @@ KanbanList.taskAction = (function(){
       autoLoadingTimer.stop();
       draggableTask.stopByElem($('#id_' + id ).parent());
 
-      edit_before_msg[id] = $('#ms_' + id + '_edit').val();
+      edit_before_message[id] = $('#ms_' + id + '_edit').val();
 
       utility.toggleDisplay('edit_link_ms_' + id ,'edit_form_ms_' + id );
       $('#ms_' + id + '_edit').get(0).focus();
@@ -221,7 +221,7 @@ KanbanList.taskAction = (function(){
       autoLoadingTimer.start();
       draggableTask.startByElem($('#id_' + id ).parent());
 
-      $('#ms_' + id + '_edit').val(edit_before_msg[id]);
+      $('#ms_' + id + '_edit').val(edit_before_message[id]);
       utility.toggleDisplay('edit_form_ms_' + id ,'edit_link_ms_' + id );
       return false;
     });

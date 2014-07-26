@@ -68,7 +68,7 @@
   <div data-role="header"><h1>タスクの編集</h1></div>
   <div data-role="content">
     <form id="edit_form" method="post" style="display:inline">
-      <textarea id="edit_msg" maxlength="200"/></textarea>
+      <textarea id="edit_message" maxlength="200"/></textarea>
       <div data-role="controlgroup" data-type="horizontal" data-mini="true">
         <a id="update_btn" data-role="button" data-inline="true" data-rel="back">Update</a>
         <a id="cancel_edit_btn" data-role="button" data-inline="true" data-rel="back">Cancel</a>
@@ -109,7 +109,7 @@
   <div data-role="content">
     <form method="post" class="add_todo_form form-inline">
       <input type="text" class="prefix" data-mini="true" width="8" value="" placeholder="Book Name"/>
-      <textarea class="add_todo_form_msg" data-mini="true" maxlength="200" placeholder="Task Name"></textarea>
+      <textarea class="add_todo_form_message" data-mini="true" maxlength="200" placeholder="Task Name"></textarea>
     </form>
 
     <div class="ui-grid-a">

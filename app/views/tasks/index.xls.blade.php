@@ -16,7 +16,7 @@
       @foreach ($tasks->by_status($st) as $t)
       <Row>
         <Cell><Data ss:Type="String">{{$t->book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{$t->msg_without_book_name }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{$t->message_without_book_name }}</Data></Cell>
         <Cell><Data ss:Type="String">{{$t->statusSymbol() }}</Data></Cell>
         <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t->updated_at)}}</Data></Cell>
       </Row>
@@ -25,7 +25,7 @@
     @foreach ($tasks->done as $t)
       <Row>
         <Cell><Data ss:Type="String">{{ $t->book_name }}</Data></Cell>
-        <Cell><Data ss:Type="String">{{ $t->msg_without_book_name }}</Data></Cell>
+        <Cell><Data ss:Type="String">{{ $t->message_without_book_name }}</Data></Cell>
         <Cell><Data ss:Type="String">{{ $t->statusSymbol() }}</Data></Cell>
         <Cell><Data ss:Type="String">{{strftime("%Y/%m/%d %H:%M", $t->updated_at)}}</Data></Cell>
       </Row>

@@ -15,7 +15,7 @@
                 <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("m/d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel taskBody" align="left">
-                <div id="msg_{{ $task->id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;
+                <div id="message_{{ $task->id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;
               </td>
               <td align="right" width="40px">
                 <div id="ms_{{ $task->id }}_menu" style="display:inline;">
@@ -61,7 +61,7 @@
                 <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("m/d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel" align="left">
-                <div id="fixed_msg_{{ $task->id }}" style="display:inline;word-break:break-all;"></div>
+                <div id="fixed_message_{{ $task->id }}" style="display:inline;word-break:break-all;"></div>
               </td>
               <td align="right" width="40px">
                 <span class="task-tool" style="display: none">
@@ -80,8 +80,8 @@
 
 <script>
 (function(){
-  var msg_array = ["{{ $task->msg }}"];
+  var message_array = ["{{ $task->message }}"];
   var taskAction = KanbanList.taskAction;
-  taskAction.realize({{ $task->id }}, msg_array);
+  taskAction.realize({{ $task->id }}, message_array);
 }());
 </script>

@@ -92,16 +92,16 @@ class {{ $class }} extends Controller
             return Redirect::intended('/');
         } else {
             if ($repo->isThrottled($input)) {
-                $err_msg = Lang::get('confide::confide.alerts.too_many_attempts');
+                $err_message = Lang::get('confide::confide.alerts.too_many_attempts');
             } elseif ($repo->existsButNotConfirmed($input)) {
-                $err_msg = Lang::get('confide::confide.alerts.not_confirmed');
+                $err_message = Lang::get('confide::confide.alerts.not_confirmed');
             } else {
-                $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
+                $err_message = Lang::get('confide::confide.alerts.wrong_credentials');
             }
 
             return Redirect::action('{{ $namespace ? $namespace.'\\' : '' }}{{ $class }}@login')
                 ->withInput(Input::except('password'))
-                ->with('error', $err_msg);
+                ->with('error', $err_message);
         }
     }
 
@@ -115,13 +115,13 @@ class {{ $class }} extends Controller
     public function {{ (! $restful) ? 'confirm' : 'getConfirm' }}($code)
     {
         if (Confide::confirm($code)) {
-            $notice_msg = Lang::get('confide::confide.alerts.confirmation');
+            $notice_message = Lang::get('confide::confide.alerts.confirmation');
             return Redirect::action('{{ $namespace ? $namespace.'\\' : '' }}{{ $class }}@login')
-                ->with('notice', $notice_msg);
+                ->with('notice', $notice_message);
         } else {
-            $error_msg = Lang::get('confide::confide.alerts.wrong_confirmation');
+            $error_message = Lang::get('confide::confide.alerts.wrong_confirmation');
             return Redirect::action('{{ $namespace ? $namespace.'\\' : '' }}{{ $class }}@login')
-                ->with('error', $error_msg);
+                ->with('error', $error_message);
         }
     }
 
@@ -143,14 +143,14 @@ class {{ $class }} extends Controller
     public function {{ (! $restful) ? 'doForgotPassword' : 'postForgot' }}()
     {
         if (Confide::forgotPassword(Input::get('email'))) {
-            $notice_msg = Lang::get('confide::confide.alerts.password_forgot');
+            $notice_message = Lang::get('confide::confide.alerts.password_forgot');
             return Redirect::action('{{ $namespace ? $namespace.'\\' : '' }}{{ $class }}@login')
-                ->with('notice', $notice_msg);
+                ->with('notice', $notice_message);
         } else {
-            $error_msg = Lang::get('confide::confide.alerts.wrong_password_forgot');
+            $error_message = Lang::get('confide::confide.alerts.wrong_password_forgot');
             return Redirect::action('{{ $namespace ? $namespace.'\\' : '' }}{{ $class }}@forgot_password')
                 ->withInput()
-                ->with('error', $error_msg);
+                ->with('error', $error_message);
         }
     }
 
@@ -183,14 +183,14 @@ class {{ $class }} extends Controller
 
         // By passing an array with the token, password and confirmation
         if ($repo->resetPassword($input)) {
-            $notice_msg = Lang::get('confide::confide.alerts.password_reset');
+            $notice_message = Lang::get('confide::confide.alerts.password_reset');
             return Redirect::action('{{ $namespace ? $namespace.'\\' : '' }}{{ $class }}@login')
-                ->with('notice', $notice_msg);
+                ->with('notice', $notice_message);
         } else {
-            $error_msg = Lang::get('confide::confide.alerts.wrong_password_reset');
+            $error_message = Lang::get('confide::confide.alerts.wrong_password_reset');
             return Redirect::action('{{ $namespace ? $namespace.'\\' : '' }}{{ $class }}@reset_password', array('token'=>$input['token']))
                 ->withInput()
-                ->with('error', $error_msg);
+                ->with('error', $error_message);
         }
     }
 

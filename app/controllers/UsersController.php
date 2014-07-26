@@ -119,14 +119,14 @@ class UsersController extends Controller
 	public function confirm($code)
 	{
 		if (Confide::confirm($code)) {
-			$notice_msg = Lang::get('confide::confide.alerts.confirmation');
+			$notice_message = Lang::get('confide::confide.alerts.confirmation');
 			return Redirect::action('UsersController@login')
-				->with('notice', $notice_msg);
+				->with('notice', $notice_message);
 		}
 		else {
-			$error_msg = Lang::get('confide::confide.alerts.wrong_confirmation');
+			$error_message = Lang::get('confide::confide.alerts.wrong_confirmation');
 			return Redirect::action('UsersController@login')
-				->withErrors($error_msg);
+				->withErrors($error_message);
 		}
 	}
 
@@ -148,15 +148,15 @@ class UsersController extends Controller
 	public function doForgotPassword()
 	{
 		if (Confide::forgotPassword(Input::get('email'))) {
-			$notice_msg = Lang::get('confide::confide.alerts.password_forgot');
+			$notice_message = Lang::get('confide::confide.alerts.password_forgot');
 			return Redirect::action('UsersController@login')
-				->with('notice', $notice_msg);
+				->with('notice', $notice_message);
 		}
 		else {
-			$error_msg = Lang::get('confide::confide.alerts.wrong_password_forgot');
+			$error_message = Lang::get('confide::confide.alerts.wrong_password_forgot');
 			return Redirect::action('UsersController@forgot_password')
 				->withInput()
-				->withErrors($error_msg);
+				->withErrors($error_message);
 		}
 	}
 
@@ -191,13 +191,13 @@ class UsersController extends Controller
 		if ($repo->resetPassword($input)) {
 			$noticeMessage = Lang::get('confide::confide.alerts.password_reset');
 			return Redirect::action('UsersController@login')
-				->with('notice', $notice_msg);
+				->with('notice', $notice_message);
 		}
 		else {
-			$error_msg = Lang::get('confide::confide.alerts.wrong_password_reset');
+			$error_message = Lang::get('confide::confide.alerts.wrong_password_reset');
 			return Redirect::action('UsersController@reset_password', array('token'=>$input['token']))
 				->withInput()
-				->withErrors($error_msg);
+				->withErrors($error_message);
 		}
 	}
 

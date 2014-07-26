@@ -65,7 +65,7 @@
 		
 		// Private methods
 		
-		_show: function(title, msg, value, type, callback) {
+		_show: function(title, message, value, type, callback) {
 			
 			$.alerts._hide();
 			$.alerts._overlay('show');
@@ -92,7 +92,7 @@
 			
 			$("#popup_title").text(title);
 			$("#popup_content").addClass(type);
-			$("#popup_message").text(msg);
+			$("#popup_message").text(message);
 			$("#popup_message").html( $("#popup_message").text().replace(/\n/g, '<br />') );
 			
 			$("#popup_container").css({

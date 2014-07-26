@@ -12,7 +12,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $add_task->id }}">{{{ $add_task->updated_at->format("m/d") }}}</span> 
-          <a href="#" data-id="{{ $add_task->book_id }}">{{{ Str::limit($add_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $add_task->book_id }}">{{{ Str::limit($add_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -24,7 +24,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $done_task->id }}">{{{ $done_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $done_task->book_id }}">{{{ Str::limit($done_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $done_task->book_id }}">{{{ Str::limit($done_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -36,7 +36,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $oldest_task->id }}">{{{ $oldest_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $oldest_task->book_id }}">{{{ Str::limit($oldest_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $oldest_task->book_id }}">{{{ Str::limit($oldest_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -52,7 +52,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $doing_task->id }}">{{{ $doing_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $doing_task->book_id }}">{{{ Str::limit($doing_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $doing_task->book_id }}">{{{ Str::limit($doing_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -64,7 +64,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $today_task->id }}">{{{ $today_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $today_task->book_id }}">{{{ Str::limit($today_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $today_task->book_id }}">{{{ Str::limit($today_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach

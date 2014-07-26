@@ -1,8 +1,8 @@
 KanbanList.namespace('addForm');
 KanbanList.addForm = (function(){
   function initial(current_book){
-    function addTodoWithPrefix( prefix, msg ){
-      if ( msg == "" ){
+    function addTodoWithPrefix( prefix, message ){
+      if ( message == "" ){
         return;
       }
 
@@ -11,43 +11,43 @@ KanbanList.addForm = (function(){
         prefix_text = "[" + prefix + "]";
       }
 
-      addTodoAjax( prefix_text + " " + msg );
+      addTodoAjax( prefix_text + " " + message );
     }
 
-    function addTodoAjax(msg) {
+    function addTodoAjax(message) {
       $.ajax({
         type: "POST",
         cache: false,
         url: "tasks",
         data: {
-          msg: escapeInvalidChar(msg)
+          message: escapeInvalidChar(message)
         },
         dataType: "jsonp"
      });
     }
 
-    function escapeInvalidChar(msg){
-      var escaped_msg = msg.replace(/&/g,"");
-      escaped_msg = escaped_msg.replace(/'/g,"\"");
-      escaped_msg = escaped_msg.replace(/!/g,"|");
-      return escaped_msg;
+    function escapeInvalidChar(message){
+      var escaped_message = message.replace(/&/g,"");
+      escaped_message = escaped_message.replace(/'/g,"\"");
+      escaped_message = escaped_message.replace(/!/g,"|");
+      return escaped_message;
     }
 
     var is_added_task = false;
     function addTodoAction($content){
-      addTodoWithPrefix($content.find('.prefix').val() , sanitize($content.find('.add_todo_form_msg').val()));
-      $content.find('.add_todo_form_msg').val('');
+      addTodoWithPrefix($content.find('.prefix').val() , sanitize($content.find('.add_todo_form_message').val()));
+      $content.find('.add_todo_form_message').val('');
 
       is_added_task = true;
     }
 
-    $(".add_todo_form_msg").maxlength({
+    $(".add_todo_form_message").maxlength({
       'feedback' : '.task-chars-left-add-form'
     });
 
     $(document).delegate('#show_add_todo_form', 'click',function(){
       setTimeout(function(){
-        $('.add_todo_form_msg').focus();
+        $('.add_todo_form_message').focus();
       },500);
     });
 

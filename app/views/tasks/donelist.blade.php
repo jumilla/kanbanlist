@@ -5,7 +5,7 @@
       <div class="span4">
         <ul class="nav nav-tabs nav-stacked">
           @foreach ($month_list as $l)
-            <li>{{ link_to raw("#{l['date'].strftime("%Y-%m")} (#{l['count']}) <i class='icon-chevron-right'></i>") , :year => l['date'].year ,:month => l['date'].mon }}</li>
+            <li><a href="{{ route('task.donelist', ['year' => $l['date']->year, 'month' => $l['date']->month]) }}">{{ $l['date'].strftime("%Y-%m") }} ({{ $l['count'] }}) <i class='icon-chevron-right'></i></a></li>
           @endforeach
         </ul>
         <div id="done_chart"></div>
@@ -29,8 +29,8 @@
                 <td id="done_{{ $task->id }}"></td>
               @endif
               <script>
-                var msg_array = {{ to_js_array($task->msg) }};
-                $("#done_{{ $task->id }}").html(taskAction.display_filter(msg_array.join('\n')));
+                var message_array = {{ to_js_array($task->message) }};
+                $("#done_{{ $task->id }}").html(taskAction.display_filter(message_array.join('\n')));
               </script>
             </tr>
           @endforeach
@@ -65,7 +65,7 @@ $(document).ready(function() {
       xAxis: {
         categories: [
         @foreach ($month_done_list as $m)
-          '{{ m['date'].strftime("%m") }}',
+          '{{ $m['date'].strftime("%m") }}',
         @endforeach
         ]
       },
@@ -78,7 +78,7 @@ $(document).ready(function() {
       { name: 'Done',
         data: [
         @foreach ($month_done_list as $m)
-          { name: 'done', y: {{ m['count'] }} },
+          { name: 'done', y: {{ $m['count'] }} },
         @endforeach
         ],
       }]

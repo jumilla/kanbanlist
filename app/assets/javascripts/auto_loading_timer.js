@@ -8,7 +8,7 @@ KanbanList.autoLoadingTimer = (function(){
   var timer_id = null;
 
   function loadLatestTasks(filter_str){
-    if ($('#add_todo_form_msg').val() != ""){ return; };
+    if ($('#add_todo_form_message').val() != ""){ return; };
 
     $.ajax({
        type: "POST",

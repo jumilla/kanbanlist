@@ -28,11 +28,11 @@ table#task_count_table td {
   text-align: center;
 }
 
-#info_msg li {
+#info_message li {
   margin: 0px 0px 0px 4px;
 }
 
-.refresh_alert_msg {
+.refresh_alert_message {
   white-space: nowrap;
   font-weight: bold;
   font-size:  10pt;
@@ -71,7 +71,7 @@ table#task_count_table td {
   text-shadow: 1px 1px 1px rgba(200, 200, 200, 0.9);
 }
 
-#prefix,#add_todo_form_msg  {
+#prefix,#add_todo_form_message  {
   background-color: #ff9;
 }
 
@@ -124,7 +124,7 @@ table#task_count_table td {
   text-shadow: 0px 1px 1px white;
 }
 
-#loading_msg_area {
+#loading_message_area {
   color: #888;
 }
 

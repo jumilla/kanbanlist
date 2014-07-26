@@ -28,41 +28,36 @@ class BaseController extends Controller {
 
 	public function getTaskCounts()
 	{
-		return $this->currentBook() ? $this->currentBook()->tasks->count() : Auth::user()->tasks->count();
+		return $this->currentBook() ? $this->currentBook()->tasks()->countsByStatus() : Auth::user()->tasks()->countsByStatus();
 	}
 
 	public function getAllBookCounts()
 	{
-		return array_merge($this->allCountsInfo(), $this->booksCountInfoArray());
+		return array_merge([$this->allCountsInfo()], $this->booksCountInfoArray());
 	}
 
 	public function allCountsInfo()
 	{
-		$all_info = [];
-		$all_info['id'] = 0;
-		$all_info['name'] = Book::$DEFAULT_NAME;
-		foreach (array_keys(Task::$status_table) as $status_name) {
-			$all_info[$status_name] = 0;
-		}
-		foreach (Auth::user()->tasks()->select('status', DB::raw('count(*) as total'))->groupBy('status')->get() as $result) {
-			$status_name = array_search($result->status, Task::$status_table);
-			$all_info[$status_name] = $result->total;
-		}
-		Log::info(print_r($all_info, true));
+		$all_info = [
+			'id' => 0,
+			'name' => Book::$DEFAULT_NAME,
+		] + Auth::user()->tasks()->countsByStatus();
+		Log::debug(print_r($all_info, true));
 		return $all_info;
 	}
 
 	public function booksCountInfoArray()
 	{
-		//Auth::user()->books
-		return [
-/*			'todo_h' => 0,
-			'todo_m' => 0,
-			'todo_l' => 0,
-			'doing' => 0,
-			'waiting' => 0,
-			'done' => 0,*/
-		];
+		$all_books_info = [];
+		foreach (Auth::user()->books as $book) {
+			$book_info = [
+				'id' => $book->id,
+				'name' => $book->name,
+			] + $book->tasks()->countsByStatus();
+			$all_books_info[] = $book_info;
+		}
+//		Log::debug(print_r($all_books_info, true));
+		return $all_books_info;
 	}
 
 	public function renderJsonForUpdateBookJson($filter_str = '', $done_num)

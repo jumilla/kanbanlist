@@ -31,7 +31,7 @@
 
         <div class="btn-toolbar" style="margin: 0;">
           <input type="text" id="prefix" class="span2" name="prefix" value="" placeholder="Book Name" maxlength="50"/>
-          <input type="text" id="add_todo_form_msg" class="span6" value="" placeholder="Task Name" maxlength="200"/>
+          <input type="text" id="add_todo_form_message" class="span6" value="" placeholder="Task Name" maxlength="200"/>
 
           <div class="btn-group" id="add_todo_btn_group" style="margin-bottom: 0;">
             <button class="btn" id="add_todo_button" data-state="todo_m"><i class="icon-plus"></i> <span id="add_todo_label">Middle</span></button>
@@ -64,7 +64,7 @@
 
   <div id="loader" class="well" style="display:none">
     <center>{{ image_tag('loader.gif') }}</center>
-    <center><p id="loading_msg_area">Tips: <span id="loading_msg"></span></p></center>
+    <center><p id="loading_message_area">Tips: <span id="loading_message"></span></p></center>
   </div>
 
   <div id="task_list">

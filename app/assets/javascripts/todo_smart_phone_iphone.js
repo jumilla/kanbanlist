@@ -221,7 +221,7 @@ function sendCurrentOrder(status, order) {
   taskAction.changeOrder(status, order);
 }
 
-function sendCurrentTodo(id, status, msg) {
+function sendCurrentTodo(id, status, message) {
   $("#updated_" + id ).html(getTodayStr());
 
   markTodayEditById( id );
@@ -232,7 +232,7 @@ function sendCurrentTodo(id, status, msg) {
     url: "tasks/" + id,
     data: {
       status: status,
-      msg: msg
+      message: message
     },
     dataType: "jsonp"
   });
@@ -320,8 +320,8 @@ function returnToTodo(ret_id){
 
   $('#viewSortlist').html("returnToTodo " + ret_id);
 
-  var msg = $("#msg_" + id).html();
-  sendCurrentTodo(id, to_status, msg);
+  var message = $("#message_" + id).html();
+  sendCurrentTodo(id, to_status, message);
 }
 
 function fillZero( num ){
@@ -346,8 +346,8 @@ function deleteTodo( delete_id ) {
       },500);
 }
 
-function addTodoWithPrefix( prefix, msg ){
-  if ( msg == "" ){
+function addTodoWithPrefix( prefix, message ){
+  if ( message == "" ){
     return;
   }
 
@@ -356,21 +356,21 @@ function addTodoWithPrefix( prefix, msg ){
     prefix_text = "【" + prefix + "】";
   }
 
-  addTodoAjax( prefix_text + msg );
+  addTodoAjax( prefix_text + message );
 }
 
-function addTodoAjax(msg) {
+function addTodoAjax(message) {
 //TODO: エスケープ処理しないとまずい。& ! ' など
-  msg = msg.replace(/&/g,"");
-  msg = msg.replace(/'/g,"\"");
-  msg = msg.replace(/!/g,"|");
+  message = message.replace(/&/g,"");
+  message = message.replace(/'/g,"\"");
+  message = message.replace(/!/g,"|");
 
   $.ajax({
     type: "POST",
     cache: false,
     url: "tasks",
     data: {
-      msg: msg
+      message: message
     }
  });
 }
@@ -426,7 +426,7 @@ function selectBook(book_id){
 function updateBookJson(book_info){
   $('#task_list').html(book_info.task_list_html);
   $('#task_list').fadeIn('fast', function(){
-        $('#add_todo_form_msg').focus();
+        $('#add_todo_form_message').focus();
       }
     );
 

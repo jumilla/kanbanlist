@@ -30,6 +30,23 @@ class Task extends Eloquent
 		return $this->status == static::$status_table['done'];
 	}
 
+	public function scopeCountsByStatus($query)
+	{
+//		return $query
+//			->select('status', DB::raw('count(*) as total'))->groupBy('status')
+//		;
+
+		$counts = [];
+		foreach (array_keys(Task::$status_table) as $status_name) {
+			$counts[$status_name] = 0;
+		}
+		foreach ($query->select('status', DB::raw('count(*) as total'))->groupBy('status')->get() as $result) {
+			$status_name = array_search($result->status, Task::$status_table);
+			$counts[$status_name] = (int)$result->total;
+		}
+		return $counts;
+	}
+
 	public function scopeByNameAndStatus($query, $name, $status)
 	{
 		return $query
@@ -51,17 +68,17 @@ class Task extends Eloquent
 	{
 		return $query
 			->where('status', static::$status_table[$status])
-			->whereLike('msg', 'like', "%#%")//todo
+			->whereLike('message', 'like', "%#%")//todo
 			->orderBy('order_no', 'ASC')
 			->orderBy('updated_at', 'DESC')
 		;
-		//where("status = ? and msg LIKE ?", @@status_table[status] , "%#{URI.decode(filter)}%").order('order_no ASC, updated_at DESC')
+		//where("status = ? and message LIKE ?", @@status_table[status] , "%#{URI.decode(filter)}%").order('order_no ASC, updated_at DESC')
 	}
 
 	public function scopeFiltered($query, $name, $filter)
 	{
 		return $query
-		//where("name = ? and msg LIKE ?", name ,"%#{URI.encode(filter)}%").order('order_no ASC, updated_at DESC')
+		//where("name = ? and message LIKE ?", name ,"%#{URI.encode(filter)}%").order('order_no ASC, updated_at DESC')
 		;
 	}
 
@@ -76,7 +93,7 @@ class Task extends Eloquent
 	public function scopeDoneAndFilter($query, $filter)
 	{
 		return $query
-		//where("status = ? and msg LIKE ?", @@status_table[:done] , "%#{URI.decode(filter)}%").order('updated_at DESC')
+		//where("status = ? and message LIKE ?", @@status_table[:done] , "%#{URI.decode(filter)}%").order('updated_at DESC')
 		;
 	}
 
@@ -87,10 +104,11 @@ class Task extends Eloquent
 		;
 	}
 
-	public function scopeSelectMonth($query)
+	public function scopeSelectMonth($query, $month)
 	{
 		return $query
-		//$select_mon;
+			->where('updated_at', '>=', $month)
+			->where('updated_at', '<' , $month->addMonth(1))
 //        where(" updated_at >= ? and updated_at < ? ", select_mon, select_mon + 1.month )
 		;
 	}
@@ -111,7 +129,7 @@ class Task extends Eloquent
 		return $query->where('status', '!=', static::$status_table['done'])->orderBy('updated_at', 'asc')->take(10);
 	}
 
-	public static function doneMonthList()
+	public function doneMonthList($query)
 	{
 //    from_month = Time.now - 1.year
 //    to_month   = self.to_done_month
@@ -122,6 +140,7 @@ class Task extends Eloquent
 //      to_month -= 1.month
 //    }
 //    return month_list
+		return $query;
 	}
 
 	public static function fromDoneMonth()
@@ -166,11 +185,11 @@ class Task extends Eloquent
 //csv << ["Book", "Task", "Status", "UpdatedAt"]
 //[:doing,:todo_h,:todo_m, :todo_l, :waiting].each do |st|
 //self.by_status(st).each do |t|
-//csv << [t.book_name, t.msg_without_book_name, t.statusSymbol(), t.updated_at]
+//csv << [t.book_name, t.message_without_book_name, t.statusSymbol(), t.updated_at]
 //        }
 //      }
 //      self.done.each do |t|
-//csv << [t.book_name, t.msg_without_book_name, t.statusSymbol(), t.updated_at]
+//csv << [t.book_name, t.message_without_book_name, t.statusSymbol(), t.updated_at]
 //    }
 //    #SJISに変換するかどうか悩む
 //      #csv_data.encode(Encoding::SJIS)
@@ -189,17 +208,17 @@ class Task extends Eloquent
 		return '';
 	}
 
-	public function msgWithoutBookName()
+	public function messageWithoutBookName()
 	{
 		if (!$this->book_id) {
-			return $this->msg;
+			return $this->message;
 		}
 
-		$msg = $this->msg;
+		$message = $this->message;
 		foreach (Book::$book_name_patterns as $book_name_pattern) {
-			$msg = preg_replace($book_name_pattern, '', $this->msg);
+			$message = preg_replace($book_name_pattern, '', $this->message);
 		}
-		return $msg;
+		return $message;
 	}
 
 }

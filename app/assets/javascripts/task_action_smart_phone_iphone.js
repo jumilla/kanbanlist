@@ -3,7 +3,7 @@ KanbanList.namespace('taskAction');
 KanbanList.taskAction = (function(){
 
   // メンバ変数
-  var org_msg = {};   // 編集前 msg 退避用ハッシュ
+  var org_message = {};   // 編集前 message 退避用ハッシュ
   var current_id = 0; // 選択中のタスクID
 
   function display_filter(text){
@@ -29,17 +29,17 @@ KanbanList.taskAction = (function(){
         return '<span class="book-name">[' + matched_prefix + ']</span> ';
       });
     prefixed_text = prefixed_text.replace(/\n/g,'<br>');
-    return '<span class="msg-body">' + prefixed_text + '</span>';
+    return '<span class="message-body">' + prefixed_text + '</span>';
   }
 
   function updateToDoMsg(id, status) {
-    var msg = sanitize($('#edit_msg').val());
-    $('#msg_' + id).html(display_filter(msg));
+    var message = sanitize($('#edit_message').val());
+    $('#message_' + id).html(display_filter(message));
 
-    org_msg[id].msg = msg;
-    if ( status != "" ){ org_msg[id].status = status; }
+    org_message[id].message = message;
+    if ( status != "" ){ org_message[id].status = status; }
 
-    sendCurrentTodo(id, status, msg);
+    sendCurrentTodo(id, status, message);
   }
 
   function changeStatus(id, from_id, to_id) {
@@ -50,8 +50,8 @@ KanbanList.taskAction = (function(){
     $from.listview('refresh');
     $to.listview('refresh');
 
-    org_msg[id].status = to_id;
-    sendCurrentTodo(id, to_id, org_msg[id].msg);
+    org_message[id].status = to_id;
+    sendCurrentTodo(id, to_id, org_message[id].message);
   }
 
   function changeOrder(status, order) {
@@ -62,7 +62,7 @@ KanbanList.taskAction = (function(){
   }
 
   function deleteTodo( id ) {
-    var msg_id = '#msg_' + id;
+    var message_id = '#message_' + id;
     var delete_id = '#id_' + id
     $.ajax({
       type: "DELETE",
@@ -98,14 +98,14 @@ KanbanList.taskAction = (function(){
         });
       },500);
     }else{
-      var display_msg = $("#msg_" + id).html();
+      var display_message = $("#message_" + id).html();
       var updated_date = $("#updated_" + id).html();
       var move_item =
         '<li id="id_' + id + '">' +
           '<a href="#setting?id=' + id + '">' +
             '<table style="width: 100%;"><tr>' +
               '<td style="width: 40px"><span class="label label-important" id="updated_' + id + '" style="display:inline;">' + updated_date + '</span></td>' +
-              '<td class="task-body"><span id="msg_' + id + '">' + display_msg + '</span></td>' +
+              '<td class="task-body"><span id="message_' + id + '">' + display_message + '</span></td>' +
             '</tr></table>' +
           '</a>' +
         '</li>';
@@ -120,14 +120,14 @@ KanbanList.taskAction = (function(){
     }
   }
 
-  function initial(id, status, msg_array){
-    var msg = msg_array.join('\n');
-    org_msg[id] = { msg: msg, status: status };
-    $('#msg_' + id ).html(display_filter(msg));
+  function initial(id, status, message_array){
+    var message = message_array.join('\n');
+    org_message[id] = { message: message, status: status };
+    $('#message_' + id ).html(display_filter(message));
   }
 
   function initial_setting(){
-    $('#edit_msg').maxlength({
+    $('#edit_message').maxlength({
       'feedback' : '.task-chars-left'
     });
 
@@ -177,11 +177,11 @@ KanbanList.taskAction = (function(){
     current_id = id;
 
     var $page = $('#setting');
-    $page.find('#edit_msg').val(org_msg[id].msg);
+    $page.find('#edit_message').val(org_message[id].message);
 
     // 状態遷移ボタンに色付けする
     $page.find('.status-btn').buttonMarkup({ theme: 'b' });
-    $page.find('#' + org_msg[id].status + '_btn').buttonMarkup({ theme: 'e' });
+    $page.find('#' + org_message[id].status + '_btn').buttonMarkup({ theme: 'e' });
 
     return $page;
   }

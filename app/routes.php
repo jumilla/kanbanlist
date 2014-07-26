@@ -53,7 +53,7 @@ Route::group(['prefix' => 'users'], function() {
 });
 
 Route::group(['prefix' => 'books', 'before' => 'auth'], function() {
-	Route::post('create',
+	Route::post('',
 		['as' => 'books.create', 'uses' => 'BooksController@create']);
 	Route::get('{id}',
 		['as' => 'books.show', 'uses' => 'BooksController@show']);
