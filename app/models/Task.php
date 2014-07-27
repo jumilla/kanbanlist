@@ -115,18 +115,24 @@ class Task extends Eloquent
 
 	public function scopeNewestAdd($query)
 	{
-		return $query->where('status', '!=', static::$status_table['done'])->orderBy('created_at', 'desc')->take(10);
+		return $query
+			->where('status', '!=', static::$status_table['done'])
+			->orderBy('created_at', 'desc')->take(10);
 	}
 
 	public function scopeNewestDone($query)
 	{
-		return $query->where('status', '=', static::$status_table['done'])->orderBy('updated_at', 'desc')->take(10);
+		return $query
+			->where('status', '=', static::$status_table['done'])
+			->orderBy('updated_at', 'desc')->take(10);
 		;
 	}
 
 	public function scopeOldestUpdate($query)
 	{
-		return $query->where('status', '!=', static::$status_table['done'])->orderBy('updated_at', 'asc')->take(10);
+		return $query
+			->where('status', '!=', static::$status_table['done'])
+			->orderBy('updated_at', 'asc')->take(10);
 	}
 
 	public function doneMonthList($query)

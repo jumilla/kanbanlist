@@ -43,7 +43,13 @@ class BooksController extends BaseController {
 
 		$filter = Input::get('filter');
 
-		// TODO
+		$book = $this->currentBook();
+		if ($book) {
+			$book->tasks()->delete();
+			$book->delete();
+		}
+
+		$this->setCurrentBook(0);
 
 		return $this->renderCurrentBook($filter);
 	}

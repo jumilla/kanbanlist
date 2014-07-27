@@ -11,6 +11,11 @@ class BaseController extends Controller {
 		return Session::has('book_id') ? Book::find(Session::get('book_id')) : null;
 	}
 
+	public function setCurrentBook($bookId)
+	{
+		Session::put('book_id', $bookId);
+	}
+
 	public function currentTasks()
 	{
 		return $this->currentBook() ? $this->currentBook()->tasks() : Auth::user()->tasks();
@@ -42,7 +47,7 @@ class BaseController extends Controller {
 			'id' => 0,
 			'name' => Book::$DEFAULT_NAME,
 		] + Auth::user()->tasks()->countsByStatus();
-		Log::debug(print_r($all_info, true));
+//		Log::debug(print_r($all_info, true));
 		return $all_info;
 	}
 

@@ -13,11 +13,10 @@ class TasksController extends BaseController
 	{
 		Log::debug(__METHOD__);
 
-		if (Input::get('book_id') != null) {
-			Session::set('book_id', Input::get('book_id'));
+		if (Input::has('book_id')) {
+			$this->setCurrentBook(Input::get('book_id'));
 		}
-
-		if (Input::get('layout') != null) {
+		if (Input::has('layout')) {
 			$this->setLayout(Input::get('layout'));
 		}
 
