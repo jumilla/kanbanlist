@@ -1,7 +1,8 @@
 # かんばんリスト
 
-![Build Badge](https://travis-ci.org/jumilla/kanbanlist.svg?branch=master)
-![License Badge](https://camo.githubusercontent.com/e65c945b219ec6c6f63826a83df905b3191ae52c/68747470733a2f2f706f7365722e707567782e6f72672f6c61726176656c2f6672616d65776f726b2f6c6963656e73652e737667)
+[![Build Status](https://travis-ci.org/jumilla/kanbanlist.svg?branch=master)](https://travis-ci.org/jumilla/kanbanlist)
+[![Coverage Status](https://coveralls.io/repos/jumilla/kanbanlist/badge.png?branch=master)](https://coveralls.io/r/jumilla/kanbanlist?branch=master)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 Rails3製のWebアプリケーションをLaravel4にポーティングしました。
 
