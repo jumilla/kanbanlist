@@ -37,8 +37,8 @@ open http://localhost:8000
 
 ## 開発参加方法
 
-イベント参加者はCollaboratorsに登録します。`develop`ブランチにコミットしてください。\
-イベント開催後に不具合修正や機能追加を投稿したい場合は、Pull Requestを投げてください。
+イベント参加者はCollaboratorsに登録します。`develop`ブランチにコミットしてください。  
+イベント開催後に不具合修正や機能追加を投稿したい場合は、Pull Requestを投げてください。  
 
 ## ライセンス
 
@@ -46,16 +46,16 @@ MIT License
 
 ## 著作権
 
-オリジナル(Rails3)版
+オリジナル(Rails3)版  
 Copyright (c) 2011 Naoki KODAMA naoki.koda@gmail.com
 
-Laravel4ポーティング版
+Laravel4ポーティング版  
 Copyright (c) 2014 [Laravel Tokyo](http://laravel.tokyo)
-@blue-goheimochi
-@chao2suke
-@fumiyasac
-@geduld
-@jumilla [Fumio Furukawa](fumio.furukawa@gmail.com)
-@monaye Monaye Win
-@shuogawa
-@yutayokoi
+* @blue-goheimochi
+* @chao2suke
+* @fumiyasac
+* @geduld
+* @jumilla [Fumio Furukawa](fumio.furukawa@gmail.com)
+* @monaye Monaye Win
+* @shuogawa
+* @yutayokoi
