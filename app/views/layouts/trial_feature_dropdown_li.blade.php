@@ -15,6 +15,6 @@
     <li><a id="auto_loading" href="#"></a></li>
   </ul>
 </li>
-@if (!is_sample_user())
+@if (!User::isSampleUser())
   <li><a href="{{ route('user.edit', [Auth::user()->id]) }}" rel="tooltip", title="Edit user info"><i class="icon-user"></i></a></li>
 @endif

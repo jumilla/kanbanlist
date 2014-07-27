@@ -7,6 +7,11 @@ class User extends Eloquent implements ConfideUserInterface {
 
 	use ConfideUser;
 
+	public static function isSampleUser()
+	{
+		return Auth::user()->email == "sample@kanban.list";
+	}
+
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
