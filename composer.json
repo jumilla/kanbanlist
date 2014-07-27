@@ -10,7 +10,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master",
-		"phpunit/phpunit": "3.7.*",
+		"phpunit/phpunit": "4.1.*",
+		"ext-xdebug": "2.2.*",
 		"barryvdh/laravel-debugbar": "dev-master",
         "barryvdh/laravel-ide-helper": "1.*",
 		"jumilla/erb2blade": "1.*",
