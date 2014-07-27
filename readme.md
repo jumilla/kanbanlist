@@ -51,11 +51,11 @@ Copyright (c) 2011 Naoki KODAMA naoki.koda@gmail.com
 
 Laravel4ポーティング版  
 Copyright (c) 2014 [Laravel Tokyo](http://laravel.tokyo)
-* @blue-goheimochi
-* @chao2suke
-* @fumiyasac
-* @geduld
-* @jumilla [Fumio Furukawa](fumio.furukawa@gmail.com)
-* @monaye Monaye Win
-* @shuogawa
-* @yutayokoi
+* [blue-goheimochi](http://github.com/blue-goheimochi)
+* [chao2suke](http://github.com/chao2suke)
+* [fumiyasac](http://github.com/fumiyasac)
+* [geduld](http://github.com/geduld)
+* [jumilla](http://github.com/jumilla) [Fumio Furukawa](fumio.furukawa@gmail.com)
+* [monaye](http://github.com/monaye) Monaye Win
+* [shuogawa](http://github.com/shuogawa)
+* [yutayokoi](http://github.com/yutayokoi)
