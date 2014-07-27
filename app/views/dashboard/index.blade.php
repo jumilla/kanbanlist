@@ -12,7 +12,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $add_task->id }}">{{{ $add_task->updated_at->format("m/d") }}}</span> 
-          <a href="#" data-id="{{ $add_task->book_id }}">{{{ Str::limit($add_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $add_task->book_id }}">{{{ Str::limit($add_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -24,7 +24,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $done_task->id }}">{{{ $done_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $done_task->book_id }}">{{{ Str::limit($done_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $done_task->book_id }}">{{{ Str::limit($done_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -36,7 +36,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $oldest_task->id }}">{{{ $oldest_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $oldest_task->book_id }}">{{{ Str::limit($oldest_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $oldest_task->book_id }}">{{{ Str::limit($oldest_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -52,7 +52,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $doing_task->id }}">{{{ $doing_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $doing_task->book_id }}">{{{ Str::limit($doing_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $doing_task->book_id }}">{{{ Str::limit($doing_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -64,7 +64,7 @@
       <tr>
         <td>
           <span class="label" id="dash_time_{{ $today_task->id }}">{{{ $today_task->updated_at->format("m/d") }}}</span>
-          <a href="#" data-id="{{ $today_task->book_id }}">{{{ Str::limit($today_task->msg,30) }}}</a>
+          <a href="#" data-id="{{ $today_task->book_id }}">{{{ Str::limit($today_task->message,30) }}}</a>
         </td>
       </tr>
 @endforeach
@@ -77,13 +77,13 @@
       <tr><th colspan="7">Books</th></tr>
 @foreach($books as $book)
       <tr>
-        <td><a href="#" data-id="{{ $book->id }}">{{ $book->name }}</a></td>
-        <td class="todo_h {{ ($book->todo_h == 0) ? 'zero' : '' }}">{{ $book->todo_h }}</td>
-        <td class="todo_m {{ ($book->todo_m == 0) ? 'zero' : '' }}">{{ $book->todo_m }}</td>
-        <td class="todo_l {{ ($book->todo_l == 0) ? 'zero' : '' }}">{{ $book->todo_l }}</td>
-        <td class="doing {{ ($book->doing == 0) ? 'zero' : '' }}">{{ $book->doing }}</td>
-        <td class="waiting {{ ($book->waiting == 0) ? 'zero' : '' }}">{{ $book->waiting }}</td>
-        <td class="done {{ ($book->done == 0) ? 'zero' : '' }}">{{ $book->done }}</td>
+        <td><a href="#" data-id="{{ $book['id'] }}">{{ $book['name'] }}</a></td>
+        <td class="todo_h {{ ($book['todo_h'] == 0) ? 'zero' : '' }}">{{ $book['todo_h'] }}</td>
+        <td class="todo_m {{ ($book['todo_m'] == 0) ? 'zero' : '' }}">{{ $book['todo_m'] }}</td>
+        <td class="todo_l {{ ($book['todo_l'] == 0) ? 'zero' : '' }}">{{ $book['todo_l'] }}</td>
+        <td class="doing {{ ($book['doing'] == 0) ? 'zero' : '' }}">{{ $book['doing'] }}</td>
+        <td class="waiting {{ ($book['waiting'] == 0) ? 'zero' : '' }}">{{ $book['waiting'] }}</td>
+        <td class="done {{ ($book['done'] == 0) ? 'zero' : '' }}">{{ $book['done'] }}</td>
       </tr>
 @endforeach
     </table>
@@ -151,7 +151,7 @@ $(document).ready(function() {
     xAxis: {
       categories: [
 @foreach($month_done_lists as $month_done_list)
-        '{{ $month_done_list->date->format("m") }}',
+        '{{ $month_done_list['date']->format("m") }}',
 @endforeach
       ]
     },
@@ -164,7 +164,7 @@ $(document).ready(function() {
     { name: 'Done',
       data: [
 @foreach($month_done_lists as $month_done_list)
-        { name: 'done', y: {{ $month_done_list->count }} },
+        { name: 'done', y: {{ $month_done_list['count'] }} },
 @endforeach
       ],
     }]
@@ -196,7 +196,7 @@ $(document).ready(function() {
     { name: 'tasks',
       data: [
 @foreach($books as $book)
-        { name: '{{ $book->name }}', y: {{ $book->active_task }} },
+        { name: '{{ $book['name'] }}', y: {{ $book['active_task'] }} },
 @endforeach
       ],
     }]

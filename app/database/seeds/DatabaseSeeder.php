@@ -15,22 +15,23 @@ class DatabaseSeeder extends Seeder {
 
 		DB::table('users')->truncate();
 		User::create([
-			'name' => 'Sampler',
+			'username' => 'Sampler',
 			'email' => 'sample@kanban.list',
-			'password' => Hash::make('sample'),
-			'activated' => true,
+			'password' => 'sample',
+			'password_confirmation' => 'sample',
+			'confirmed' => true,
 		]);
+
 		DB::table('tasks')->truncate();
 		Task::create([
-			'user_id' => '1',
-			'book_id' => '1',
-			'status' => '1',
+			'user_id' => 1,
+			'book_id' => 1,
+			'order_no' => 1,
+			'status' => 1,
 			'name' => 'sample_name',
-			'msg' => 'sample_msg',
+			'message' => 'sample_message',
 			'doing_at' => 'now()',
-			'pomo' => '1',
-			'order_no' => '1',
-			
+			'pomo' => 1,
 		]);
 	}
 

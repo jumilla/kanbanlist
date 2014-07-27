@@ -34,8 +34,8 @@ KanbanList.ajaxLoader = (function(){
   ];
 
   function start(callback){
-    var msg_no = Math.floor(Math.random() * LoadingMsg.length);
-    $('#loading_msg').html(LoadingMsg[msg_no]);
+    var message_no = Math.floor(Math.random() * LoadingMsg.length);
+    $('#loading_message').html(LoadingMsg[message_no]);
 
     $('#task_list').fadeOut('fast',function(){
       $('#loader').fadeIn('fast', function(){
@@ -49,7 +49,7 @@ KanbanList.ajaxLoader = (function(){
   function stop(){
     $('#loader').fadeOut('fast',function(){
       $('#task_list').fadeIn('fast', function(){
-        $('#add_todo_form_msg').focus();
+        $('#add_todo_form_message').focus();
       });
     });
   }

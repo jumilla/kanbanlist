@@ -12,8 +12,8 @@
       <li>「かんばんりすと」はWeb上で比較的お手軽にTodo管理を行うためのWebアプリです。</li>
     </ul>
 
-    <a href="{{ route('app.signup') }}" class="btn btn-primary btn-large" data-role="button" data-inline="true">ユーザー登録</a>
-    <a href="{{ route('app.signin') }}" class="btn btn-primary btn-large" data-role="button" data-inline="true">ログイン</a>
+    <a href="{{ route('user.create') }}" class="btn btn-primary btn-large" data-role="button" data-inline="true">ユーザー登録</a>
+    <a href="{{ route('user.login') }}" class="btn btn-primary btn-large" data-role="button" data-inline="true">ログイン</a>
 
     <h3>制限事項</h3>
     <ul>

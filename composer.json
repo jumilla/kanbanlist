@@ -6,18 +6,17 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"codesleeve/asset-pipeline": "2.*",
-		"cartalyst/sentry": "2.*",
-		"laravelbook/ardent": "dev-master",
-		"zizaco/confide": "3.2.*",
 		"jenssegers/agent": "*"
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master",
-		"phpunit/phpunit": "3.7.*",
+		"phpunit/phpunit": "4.1.*",
+		"ext-xdebug": "2.2.*",
 		"barryvdh/laravel-debugbar": "dev-master",
         "barryvdh/laravel-ide-helper": "1.*",
 		"jumilla/erb2blade": "1.*",
-		"shin1x1/laravel-table-admin": "dev-master"
+		"shin1x1/laravel-table-admin": "dev-master",
+		"satooshi/php-coveralls": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -26,7 +25,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+			"packages/confide4-BETA"
 		]
 	},
 	"scripts": {

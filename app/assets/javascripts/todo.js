@@ -24,7 +24,7 @@ function initForTaskList(){
   todayMarker.markAll();
 }
 
-function sendCurrentTodo(id, status, msg) {
+function sendCurrentTodo(id, status, message) {
   $("#edit_link_time_" + id ).html(utility.getTodayStr());
   $("#fixed_time_" + id ).html(utility.getTodayStr());
 
@@ -36,7 +36,7 @@ function sendCurrentTodo(id, status, msg) {
     url: "tasks/" + id,
     data: {
       status: status,
-      msg: sanitize(msg)
+      message: sanitize(message)
     },
     dataType: "jsonp"
   });
@@ -145,7 +145,7 @@ function updateSilentJson(book_info){
   last_task_list_html = book_info.task_list_html;
 
   $('#task_list').html(book_info.task_list_html);
-  $('#add_todo_form_msg').focus();
+  $('#add_todo_form_message').focus();
 
   bookNavi.updateByJson( book_info.all_books );
   updateCountsJson( book_info.task_counts );

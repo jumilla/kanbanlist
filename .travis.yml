@@ -1,0 +1,20 @@
+# .travis.yml
+language: php
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-source --no-interaction
+
+script:
+  - mkdir -p build/logs
+  - php artisan migrate --env=testing
+  - php artisan db:seed --env=testing
+  - php vendor/bin/phpunit -c phpunit.xml.dist
+
+after_script:
+  - php vendor/bin/coveralls -v

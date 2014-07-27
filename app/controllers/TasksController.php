@@ -13,16 +13,16 @@ class TasksController extends BaseController
 	{
 		Log::debug(__METHOD__);
 
-		if (Input::get('book_id') != null) {
-			Session::set('book_id', Input::get('book_id'));
+		if (Input::has('book_id')) {
+			$this->setCurrentBook(Input::get('book_id'));
 		}
 
-		if (Input::get('layout') != null) {
+		if (Input::has('layout')) {
 			$this->setLayout(Input::get('layout'));
 		}
 
 		if (Agent::isMobile()) {
-			$user_name = Auth::user()->name;
+			$user_name = Auth::user()->username;
 			$get_task_counts = $this->getTaskCounts();
 			$book_name = $this->getBookName();
 			$current_book_id = $this->currentBook() ? $this->currentBook()->id : 0;
@@ -49,15 +49,15 @@ class TasksController extends BaseController
 	public function create()
 	{
 		Log::debug(__METHOD__);
+//		Log::debug(print_r(Input::all(), true));
 
 		$task = Task::create([
 			'user_id' => Auth::user()->id,
-			'book_id' => Book::getIdInMsg(Auth::user(), Input::get('msg')),
+			'book_id' => Book::getIdInMessage(Auth::user(), Input::get('message')),
 			'status' => Task::$status_table[Input::get('priority', 'todo_m')],
-			'name' => Auth::user()->name,
-			'msg' => Input::get('msg'),
+			'name' => Auth::user()->username,
+			'message' => Input::get('message'),
 		]);
-		$task->save();
 
 		$moveId = $this->isMovedFromBook($task) ? $task->id : 0;
 		$taskHtml = View::make('tasks._task')->with([
@@ -81,11 +81,11 @@ class TasksController extends BaseController
 		Log::debug(__METHOD__."id=$id");
 
 		$task = Task::find($id);
-		$task->book_id = Book::getIdInMsg(Auth::user(), Input::get('msg'));
-		if (Input::get('status') != '') {
+		$task->book_id = Book::getIdInMessage(Auth::user(), Input::get('message'));
+		if (Input::has('status')) {
 			$task->status = Task::$status_table[Input::get('status')];
 		}
-		$task->msg = Input::get('msg');
+		$task->message = Input::get('message');
 		$task->save();
 
 		$moveId = $this->isMovedFromBook($task) ? $task->id : 0;
@@ -144,8 +144,6 @@ class TasksController extends BaseController
 	{
 		Log::debug(__METHOD__);
 
-		$this->user_name = Auth::user()->name;
-
 		return Response::json([
 			'task_list_html' => $this->getTaskListHtml(Input::get('filter'), 15),
 			'task_counts' => $this->getTaskCounts(),
@@ -157,17 +155,18 @@ class TasksController extends BaseController
 	{
 		Log::debug(__METHOD__);
 
-		$this->tasks = $this->curretTasks()->done;
-		if (Input::get('year')->blank == false){
-			$select_month = Carbon::createFromDate( Input::get('year'), Input::get('month'), 0);
-			$this->tasks = $this->tasks->selectMonth($select_month);
+		$tasks = $this->currentTasks()->done();
+		if (Input::has('year')){
+			$month = Carbon::createFromDate(Input::get('year'), Input::get('month'), 0);
+			$tasks = $tasks->selectMonth($month);
 		}
-		$this->tasks = $this->tasks->paginate(100);
+		$tasks = $tasks->paginate(100);
 
-		$this->month_list = $this->curretTasks()->done_month_list;
-//        $this->month_done_list = $this->curretTasks()->done_month_list->sortBy(function(){
-//            |a,b| a[:date] <=> b[:date]
-//        });
+		$month_list = Task::doneMonthList($this->currentTasks());
+
+		$month_done_list = array_sort(Task::doneMonthList($this->currentTasks()), function($value) { return $value['date']; });
+
+		return View::make('tasks.donelist', compact('tasks', 'month_list', 'month_done_list'));
 	}
 
 	public function sendMail()
@@ -192,7 +191,7 @@ class TasksController extends BaseController
 		switch ($task->statusSymbol()) {
 			case 'done':
 				$hook_name = dirname(__FILE__) . '/hooks/update_task_' . Auth::user()->email;
-				$command = 'source ' . $hook_name . ' \"DONE\" \"#{helper.strip_tags task.msg}\"';
+				$command = 'source ' . $hook_name . ' \"DONE\" \"#{helper.strip_tags task.message}\"';
 				if (file_exists($hook_name)) {
 					system($command);
 				}

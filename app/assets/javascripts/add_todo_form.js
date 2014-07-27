@@ -2,8 +2,8 @@ $(document).ready(function(){
   var COOKIE_EXPIRES = 365;
   var COOKIE_PRIORITY = 'kanbanlist_priority';
 
-  function addTodoWithPrefix( prefix, msg, priority ){
-    if ( msg == "" ){
+  function addTodoWithPrefix( prefix, message, priority ){
+    if ( message == "" ){
       return;
     }
 
@@ -12,45 +12,45 @@ $(document).ready(function(){
       prefix_text = "[" + prefix + "]";
     }
 
-    addTodoAjax( prefix_text + " " + msg, priority );
+    addTodoAjax( prefix_text + " " + message, priority );
   }
 
-  function addTodoAjax(msg, priority) {
+  function addTodoAjax(message, priority) {
     priority = priority == null ? "todo_m" : priority;
     $.ajax({
       type: "POST",
       cache: false,
       url: "tasks",
       data: {
-        msg: escapeInvalidChar(msg),
+        message: escapeInvalidChar(message),
         priority: priority
       },
       dataType: "jsonp"
    });
   }
 
-  function escapeInvalidChar(msg){
-    var escaped_msg = msg.replace(/&/g,"");
-    escaped_msg = escaped_msg.replace(/'/g,"\"");
-    escaped_msg = escaped_msg.replace(/!/g,"|");
-    return escaped_msg;
+  function escapeInvalidChar(message){
+    var escaped_message = message.replace(/&/g,"");
+    escaped_message = escaped_message.replace(/'/g,"\"");
+    escaped_message = escaped_message.replace(/!/g,"|");
+    return escaped_message;
   }
 
   function addTodoAction(){
     addTodoWithPrefix(
-      $('#prefix').val() , sanitize($('#add_todo_form_msg').val()),
+      $('#prefix').val() , sanitize($('#add_todo_form_message').val()),
       $('#add_todo_button').data('state')
     );
 
-    $('#add_todo_form_msg').val('');
-    $('#add_todo_form_msg').focus();
+    $('#add_todo_form_message').val('');
+    $('#add_todo_form_message').focus();
 
-    $("#add_todo_form_msg").maxlength({
+    $("#add_todo_form_message").maxlength({
       'feedback' : '.task-chars-left-add-form'
     });
   }
 
-  $("#add_todo_form_msg").maxlength({
+  $("#add_todo_form_message").maxlength({
     'feedback' : '.task-chars-left-add-form'
   });
 

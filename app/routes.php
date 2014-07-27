@@ -14,16 +14,6 @@
 Route::group(['prefix' => ''], function() {
 	Route::get('/',
 		['as' => 'app.home', 'uses' => 'AppController@index']);
-	Route::get('signup',
-		['as' => 'app.signup', 'uses' => 'AppController@getSignup']);
-	Route::post('signup',
-		['as' => '', 'uses' => 'AppController@postSignup']);
-	Route::get('signin',
-		['as' => 'app.signin', 'uses' => 'AppController@getSignin']);
-	Route::post('signin',
-		['as' => '', 'uses' => 'AppController@postSignin']);
-	Route::get('signout',
-		['as' => 'app.signout', 'uses' => 'AppController@signout']);
 });
 
 Route::group(['prefix' => 'dashboard', 'before' => 'auth'], function() {
@@ -31,17 +21,39 @@ Route::group(['prefix' => 'dashboard', 'before' => 'auth'], function() {
 		['as' => 'dashboard', 'uses' => 'DashboardController@getIndex']);
 });
 
-Route::group(['prefix' => 'user', 'before' => 'auth'], function() {
-	Route::get('{id}',
-		['as' => 'user.show', 'uses' => 'UserController@show']);
-	Route::get('{id}/edit',
-		['as' => 'user.edit', 'uses' => 'UserController@edit']);
-	Route::post('{id}/edit',
-		['as' => 'user.update', 'uses' => 'UserController@update']);
+// Confide routes
+Route::group(['prefix' => 'users'], function() {
+	// Confide routes
+	Route::get( 'create',
+		['as' => 'user.create', 'uses' => 'UsersController@create']);
+	Route::post('create',
+		['as' => 'user.store', 'uses' => 'UsersController@store']);
+	Route::get( 'login',
+		['as' => 'user.login', 'uses' => 'UsersController@login']);
+	Route::post('login',
+		['as' => 'user.do_login', 'uses' => 'UsersController@doLogin']);
+	Route::get( 'confirm/{code}',
+		['as' => 'user.confirm', 'uses' => 'UsersController@confirm']);
+	Route::get( 'forgot_password',
+		['as' => 'user.forgot_password', 'uses' => 'UsersController@forgotPassword']);
+	Route::post('forgot_password',
+		['as' => 'user.do_forgot_password', 'uses' => 'UsersController@doForgotPassword']);
+	Route::get( 'reset_password/{token}',
+		['as' => 'user.reset_password', 'uses' => 'UserController@resetPassword']);
+	Route::post('reset_password',
+		['as' => 'user.do_reset_password', 'uses' => 'UsersController@doResetPassword']);
+	Route::get( 'logout',
+		['as' => 'user.logout', 'uses' => 'UsersController@logout']);
+
+	// App routes
+	Route::get( 'edit',
+		['as' => 'user.edit', 'uses' => 'UsersController@edit']);
+	Route::post('edit',
+		['as' => 'user.update', 'uses' => 'UsersController@update']);
 });
 
 Route::group(['prefix' => 'books', 'before' => 'auth'], function() {
-	Route::post('create',
+	Route::post('',
 		['as' => 'books.create', 'uses' => 'BooksController@create']);
 	Route::get('{id}',
 		['as' => 'books.show', 'uses' => 'BooksController@show']);
@@ -79,3 +91,5 @@ if (Config::get('app.debug')) {
     	'tasks',
 	]);
 }
+//
+

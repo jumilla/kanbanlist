@@ -2,7 +2,7 @@
 <li id="id_{{ $task->id }}" class="task_elem" style="display:{{ $display }}">
 <div class="sorttime" alt="{{ $task->updated_at }}" id="ms_notyet_{{ $task->id }}">
   {{-- for active display --}}
-  <div id="edit_link_ms_{{ $task->id }}" style="display:{{ $task->done() == false ? 'block' : "none" }}">
+  <div id="edit_link_ms_{{ $task->id }}" style="display:{{ $task->isDone() ? 'none' : 'block' }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">
@@ -15,7 +15,7 @@
                 <font color="#00008B" style="font-size:10px;font-weight:normal;" ><span class="label" id="edit_link_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("m/d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel taskBody" align="left">
-                <div id="msg_{{ $task->id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;
+                <div id="message_{{ $task->id }}" class="task-text" style="display:inline;word-break:break-all;"></div>&nbsp;
               </td>
               <td align="right" width="40px">
                 <div id="ms_{{ $task->id }}_menu" style="display:inline;">
@@ -48,7 +48,7 @@
   </div>
 
   {{-- for done display --}}
-  <div id="fixed_{{ $task->id }}" style="display:{{ $task->done() == false ? "none" : 'block' }}">
+  <div id="fixed_{{ $task->id }}" style="display:{{ $task->isDone() ? 'block' : 'none' }}">
     <table cellpadding=0 cellpadding=0 hspace=0 vspace=0 width="100%">
       <tr>
         <td align="center" width="22px">
@@ -61,7 +61,7 @@
                 <font color="#00008B" style="font-size:10px;font-weight:normal;"><span class="label" id="fixed_time_{{ $task->id }}" style="display:inline;">{{ $task->updated_at->format("m/d") }}</span></font>&nbsp;
               </td>
               <td class="taskLabel" align="left">
-                <div id="fixed_msg_{{ $task->id }}" style="display:inline;word-break:break-all;"></div>
+                <div id="fixed_message_{{ $task->id }}" style="display:inline;word-break:break-all;"></div>
               </td>
               <td align="right" width="40px">
                 <span class="task-tool" style="display: none">
@@ -80,8 +80,8 @@
 
 <script>
 (function(){
-  var msg_array = ["{{ $task->msg }}"];
+  var message_array = {{ json_encode(explode("\n", $task->message)) }};
   var taskAction = KanbanList.taskAction;
-  taskAction.realize({{ $task->id }}, msg_array);
+  taskAction.realize({{ $task->id }}, message_array);
 }());
 </script>

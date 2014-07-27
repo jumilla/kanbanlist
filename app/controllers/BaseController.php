@@ -11,6 +11,11 @@ class BaseController extends Controller {
 		return Session::has('book_id') ? Book::find(Session::get('book_id')) : null;
 	}
 
+	public function setCurrentBook($bookId)
+	{
+		Session::put('book_id', $bookId);
+	}
+
 	public function currentTasks()
 	{
 		return $this->currentBook() ? $this->currentBook()->tasks() : Auth::user()->tasks();
@@ -28,41 +33,37 @@ class BaseController extends Controller {
 
 	public function getTaskCounts()
 	{
-		return $this->currentBook() ? $this->currentBook()->tasks->count() : Auth::user()->tasks->count();
+		return Task::countsByStatus($this->currentBook() ? $this->currentBook()->tasks() : Auth::user()->tasks());
 	}
 
 	public function getAllBookCounts()
 	{
-		return array_merge($this->allCountsInfo(), $this->booksCountInfoArray());
+		return array_merge([$this->allCountsInfo()], $this->booksCountInfoArray());
 	}
 
 	public function allCountsInfo()
 	{
-		$all_info = [];
-		$all_info['id'] = 0;
-		$all_info['name'] = Book::$DEFAULT_NAME;
-		foreach (array_keys(Task::$status_table) as $status_name) {
-			$all_info[$status_name] = 0;
-		}
-		foreach (Auth::user()->tasks()->select('status', DB::raw('count(*) as total'))->groupBy('status')->get() as $result) {
-			$status_name = array_search($result->status, Task::$status_table);
-			$all_info[$status_name] = $result->total;
-		}
-		Log::info(print_r($all_info, true));
+		$all_info = [
+			'id' => 0,
+			'name' => Book::$DEFAULT_NAME,
+		] + Task::countsByStatus(Auth::user()->tasks());
+//		Log::debug(print_r($all_info, true));
 		return $all_info;
 	}
 
 	public function booksCountInfoArray()
 	{
-		//Auth::user()->books
-		return [
-/*			'todo_h' => 0,
-			'todo_m' => 0,
-			'todo_l' => 0,
-			'doing' => 0,
-			'waiting' => 0,
-			'done' => 0,*/
-		];
+		$all_books_info = [];
+		foreach (Auth::user()->books as $book) {
+			$book_info = [
+				'id' => $book->id,
+				'name' => $book->name,
+				'active_task' => $book->tasks()->whereNotStatus(Task::$status_table['done'])->count(),
+			] + Task::countsByStatus($book->tasks());
+			$all_books_info[] = $book_info;
+		}
+//		Log::debug(print_r($all_books_info, true));
+		return $all_books_info;
 	}
 
 	public function renderJsonForUpdateBookJson($filter_str = '', $done_num)
@@ -111,11 +112,11 @@ class BaseController extends Controller {
 	public function getFilteredTasks($filter_word, $done_num = 10)
 	{
 		$tasks = [
-			'todo_high_tasks' => $this->currentTasks()->byStatusAndFilter('todo_h')->get(),
-			'todo_mid_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_m')->get(),
-			'todo_low_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_l')->get(),
-			'doing_tasks'     => $this->currentTasks()->byStatusAndFilter('doing')->get(),
-			'waiting_tasks'   => $this->currentTasks()->byStatusAndFilter('waiting')->get(),
+			'todo_high_tasks' => $this->currentTasks()->byStatusAndFilter('todo_h', $filter_word)->get(),
+			'todo_mid_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_m', $filter_word)->get(),
+			'todo_low_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_l', $filter_word)->get(),
+			'doing_tasks'     => $this->currentTasks()->byStatusAndFilter('doing', $filter_word)->get(),
+			'waiting_tasks'   => $this->currentTasks()->byStatusAndFilter('waiting', $filter_word)->get(),
 			'done_tasks'      => $this->currentTasks()->doneAndFilter($filter_word)->limit($done_num)->get(),
 		];
 		return $tasks;
