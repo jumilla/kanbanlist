@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 class Task extends Eloquent
 {
 	public static $status_table = [
-		'todo_h' => 0,
-		'todo_m' => 1,
-		'todo_l' => 2,
-		'doing' => 3,
-		'waiting' => 4,
-		'done' => 5,
+		'todo_h' => 1,
+		'todo_m' => 2,
+		'todo_l' => 3,
+		'doing' => 4,
+		'waiting' => 5,
+		'done' => 6,
 	];
 
 	public function statusSymbol()
@@ -78,17 +78,19 @@ class Task extends Eloquent
 	{
 		return $query
 			->where('status', static::$status_table[$status])
-			->whereLike('message', 'like', "%#%")//todo
+			->where('message', 'like', "%$filter%")
 			->orderBy('order_no', 'ASC')
 			->orderBy('updated_at', 'DESC')
 		;
-		//where("status = ? and message LIKE ?", @@status_table[status] , "%#{URI.decode(filter)}%").order('order_no ASC, updated_at DESC')
 	}
 
 	public function scopeFiltered($query, $name, $filter)
 	{
 		return $query
-		//where("name = ? and message LIKE ?", name ,"%#{URI.encode(filter)}%").order('order_no ASC, updated_at DESC')
+			->where('name', $name)
+			->where('message', 'like', "%$filter%")
+			->orderByOrderNo()
+			->orderByUpdatedAt('DESC')
 		;
 	}
 
@@ -103,7 +105,9 @@ class Task extends Eloquent
 	public function scopeDoneAndFilter($query, $filter)
 	{
 		return $query
-		//where("status = ? and message LIKE ?", @@status_table[:done] , "%#{URI.decode(filter)}%").order('updated_at DESC')
+			->where('status', static::$status_table['done'])
+			->where('message', 'like', "%$filter%")
+			->orderBy('updated_at', 'DESC')
 		;
 	}
 
@@ -118,7 +122,9 @@ class Task extends Eloquent
 	public function scopeTodayDone($query)
 	{
 		return $query
-		//where("status = ? and updated_at LIKE ?", @@status_table[:done], "#{Time.now.strftime("%Y-%m-%d")}%").order('updated_at DESC' )
+			->where('status', static::$status_table['done'])
+			->where('updated_at', 'like', Carbon::today()->format('Y-m-d'))
+			->orderBy('updated_at', 'DESC');
 		;
 	}
 
@@ -127,7 +133,6 @@ class Task extends Eloquent
 		return $query
 			->where('updated_at', '>=', $month)
 			->where('updated_at', '<' , Carbon::instance($month)->addMonth())
-//        where(" updated_at >= ? and updated_at < ? ", select_mon, select_mon + 1.month )
 		;
 	}
 
