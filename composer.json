@@ -14,7 +14,8 @@
 		"barryvdh/laravel-debugbar": "dev-master",
         "barryvdh/laravel-ide-helper": "1.*",
 		"jumilla/erb2blade": "1.*",
-		"shin1x1/laravel-table-admin": "dev-master"
+		"shin1x1/laravel-table-admin": "dev-master",
+		"satooshi/php-coveralls": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
