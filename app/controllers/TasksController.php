@@ -49,7 +49,7 @@ class TasksController extends BaseController
 	public function create()
 	{
 		Log::debug(__METHOD__);
-		Log::debug(print_r(Input::all(), true));
+//		Log::debug(print_r(Input::all(), true));
 
 		$task = Task::create([
 			'user_id' => Auth::user()->id,
@@ -143,8 +143,6 @@ class TasksController extends BaseController
 	public function silentUpdate()
 	{
 		Log::debug(__METHOD__);
-
-//		$this->user_name = Auth::user()->name;
 
 		return Response::json([
 			'task_list_html' => $this->getTaskListHtml(Input::get('filter'), 15),
