@@ -11,6 +11,8 @@ before_script:
 
 script:
   - mkdir -p build/logs
+  - php artisan migrate --env=testing
+  - php artisan db:seed --env=testing
   - php vendor/bin/phpunit -c phpunit.xml.dist
 
 after_script:
