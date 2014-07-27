@@ -112,11 +112,11 @@ class BaseController extends Controller {
 	public function getFilteredTasks($filter_word, $done_num = 10)
 	{
 		$tasks = [
-			'todo_high_tasks' => $this->currentTasks()->byStatusAndFilter('todo_h')->get(),
-			'todo_mid_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_m')->get(),
-			'todo_low_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_l')->get(),
-			'doing_tasks'     => $this->currentTasks()->byStatusAndFilter('doing')->get(),
-			'waiting_tasks'   => $this->currentTasks()->byStatusAndFilter('waiting')->get(),
+			'todo_high_tasks' => $this->currentTasks()->byStatusAndFilter('todo_h', $filter_word)->get(),
+			'todo_mid_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_m', $filter_word)->get(),
+			'todo_low_tasks'  => $this->currentTasks()->byStatusAndFilter('todo_l', $filter_word)->get(),
+			'doing_tasks'     => $this->currentTasks()->byStatusAndFilter('doing', $filter_word)->get(),
+			'waiting_tasks'   => $this->currentTasks()->byStatusAndFilter('waiting', $filter_word)->get(),
 			'done_tasks'      => $this->currentTasks()->doneAndFilter($filter_word)->limit($done_num)->get(),
 		];
 		return $tasks;
