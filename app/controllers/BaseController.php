@@ -58,7 +58,7 @@ class BaseController extends Controller {
 			$book_info = [
 				'id' => $book->id,
 				'name' => $book->name,
-				'active_task' => $book->tasks()->whereNotStatus(Task::$status_table['done'])->count(),
+				'active_task' => $book->tasks()->where('status', '<>', Task::$status_table['done'])->count(),
 			] + Task::countsByStatus($book->tasks());
 			$all_books_info[] = $book_info;
 		}
