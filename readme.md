@@ -55,7 +55,7 @@ Copyright (c) 2014 [Laravel Tokyo](http://laravel.tokyo)
 * [chao2suke](http://github.com/chao2suke)
 * [fumiyasac](http://github.com/fumiyasac)
 * [geduld](http://github.com/geduld)
-* [jumilla](http://github.com/jumilla) [Fumio Furukawa](fumio.furukawa@gmail.com)
+* [jumilla](http://github.com/jumilla) Fumio Furukawa [fumio.furukawa@gmail.com](mailto:fumio.furukawa@gmail.com)
 * [monaye](http://github.com/monaye) Monaye Win
 * [shuogawa](http://github.com/shuogawa)
 * [yutayokoi](http://github.com/yutayokoi)
