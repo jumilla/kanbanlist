@@ -33,7 +33,7 @@
                 <td id="done_{{ $task->id }}"></td>
               @endif
               <script>
-                var message_array = {{ json_encode([$task->message], true) }};
+                var message_array = {{ json_encode(explode("\n", $task->message)) }};
                 $("#done_{{ $task->id }}").html(taskAction.display_filter(message_array.join('\n')));
               </script>
             </tr>

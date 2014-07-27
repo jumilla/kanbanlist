@@ -16,6 +16,7 @@ class TasksController extends BaseController
 		if (Input::has('book_id')) {
 			$this->setCurrentBook(Input::get('book_id'));
 		}
+
 		if (Input::has('layout')) {
 			$this->setLayout(Input::get('layout'));
 		}
@@ -57,7 +58,6 @@ class TasksController extends BaseController
 			'name' => Auth::user()->username,
 			'message' => Input::get('message'),
 		]);
-		$task->save();
 
 		$moveId = $this->isMovedFromBook($task) ? $task->id : 0;
 		$taskHtml = View::make('tasks._task')->with([
@@ -82,7 +82,7 @@ class TasksController extends BaseController
 
 		$task = Task::find($id);
 		$task->book_id = Book::getIdInMessage(Auth::user(), Input::get('message'));
-		if (Input::get('status') != '') {
+		if (Input::has('status')) {
 			$task->status = Task::$status_table[Input::get('status')];
 		}
 		$task->message = Input::get('message');

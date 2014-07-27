@@ -80,7 +80,7 @@
 
 <script>
 (function(){
-  var message_array = ["{{ $task->message }}"];
+  var message_array = {{ json_encode(explode("\n", $task->message)) }};
   var taskAction = KanbanList.taskAction;
   taskAction.realize({{ $task->id }}, message_array);
 }());
