@@ -33,7 +33,7 @@ class BaseController extends Controller {
 
 	public function getTaskCounts()
 	{
-		return $this->currentBook() ? $this->currentBook()->tasks()->countsByStatus() : Auth::user()->tasks()->countsByStatus();
+		return Task::countsByStatus($this->currentBook() ? $this->currentBook()->tasks() : Auth::user()->tasks());
 	}
 
 	public function getAllBookCounts()
@@ -46,7 +46,7 @@ class BaseController extends Controller {
 		$all_info = [
 			'id' => 0,
 			'name' => Book::$DEFAULT_NAME,
-		] + Auth::user()->tasks()->countsByStatus();
+		] + Task::countsByStatus(Auth::user()->tasks());
 //		Log::debug(print_r($all_info, true));
 		return $all_info;
 	}
@@ -58,7 +58,8 @@ class BaseController extends Controller {
 			$book_info = [
 				'id' => $book->id,
 				'name' => $book->name,
-			] + $book->tasks()->countsByStatus();
+				'active_task' => $book->tasks()->whereNotStatus(Task::$status_table['done'])->count(),
+			] + Task::countsByStatus($book->tasks());
 			$all_books_info[] = $book_info;
 		}
 //		Log::debug(print_r($all_books_info, true));

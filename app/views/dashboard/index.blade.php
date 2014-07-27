@@ -77,13 +77,13 @@
       <tr><th colspan="7">Books</th></tr>
 @foreach($books as $book)
       <tr>
-        <td><a href="#" data-id="{{ $book->id }}">{{ $book->name }}</a></td>
-        <td class="todo_h {{ ($book->todo_h == 0) ? 'zero' : '' }}">{{ $book->todo_h }}</td>
-        <td class="todo_m {{ ($book->todo_m == 0) ? 'zero' : '' }}">{{ $book->todo_m }}</td>
-        <td class="todo_l {{ ($book->todo_l == 0) ? 'zero' : '' }}">{{ $book->todo_l }}</td>
-        <td class="doing {{ ($book->doing == 0) ? 'zero' : '' }}">{{ $book->doing }}</td>
-        <td class="waiting {{ ($book->waiting == 0) ? 'zero' : '' }}">{{ $book->waiting }}</td>
-        <td class="done {{ ($book->done == 0) ? 'zero' : '' }}">{{ $book->done }}</td>
+        <td><a href="#" data-id="{{ $book['id'] }}">{{ $book['name'] }}</a></td>
+        <td class="todo_h {{ ($book['todo_h'] == 0) ? 'zero' : '' }}">{{ $book['todo_h'] }}</td>
+        <td class="todo_m {{ ($book['todo_m'] == 0) ? 'zero' : '' }}">{{ $book['todo_m'] }}</td>
+        <td class="todo_l {{ ($book['todo_l'] == 0) ? 'zero' : '' }}">{{ $book['todo_l'] }}</td>
+        <td class="doing {{ ($book['doing'] == 0) ? 'zero' : '' }}">{{ $book['doing'] }}</td>
+        <td class="waiting {{ ($book['waiting'] == 0) ? 'zero' : '' }}">{{ $book['waiting'] }}</td>
+        <td class="done {{ ($book['done'] == 0) ? 'zero' : '' }}">{{ $book['done'] }}</td>
       </tr>
 @endforeach
     </table>
@@ -151,7 +151,7 @@ $(document).ready(function() {
     xAxis: {
       categories: [
 @foreach($month_done_lists as $month_done_list)
-        '{{ $month_done_list->date->format("m") }}',
+        '{{ $month_done_list['date']->format("m") }}',
 @endforeach
       ]
     },
@@ -164,7 +164,7 @@ $(document).ready(function() {
     { name: 'Done',
       data: [
 @foreach($month_done_lists as $month_done_list)
-        { name: 'done', y: {{ $month_done_list->count }} },
+        { name: 'done', y: {{ $month_done_list['count'] }} },
 @endforeach
       ],
     }]
@@ -196,7 +196,7 @@ $(document).ready(function() {
     { name: 'tasks',
       data: [
 @foreach($books as $book)
-        { name: '{{ $book->name }}', y: {{ $book->active_task }} },
+        { name: '{{ $book['name'] }}', y: {{ $book['active_task'] }} },
 @endforeach
       ],
     }]

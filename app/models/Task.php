@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Task extends Eloquent
 {
@@ -12,6 +13,11 @@ class Task extends Eloquent
 		'waiting' => 4,
 		'done' => 5,
 	];
+
+	public function statusSymbol()
+	{
+		return array_search($this->status, static::$status_table);
+	}
 
 	protected $guarded = ['id'];
 
@@ -25,26 +31,30 @@ class Task extends Eloquent
 		return $this->hasOne('Book');
 	}
 
-	public function done()
+	public function bookName()
 	{
-		return $this->status == static::$status_table['done'];
+		if ($this->book_id){
+			return $this->book->name;
+		}
+		return '';
 	}
 
-	public function scopeCountsByStatus($query)
+	public function messageWithoutBookName()
 	{
-//		return $query
-//			->select('status', DB::raw('count(*) as total'))->groupBy('status')
-//		;
+		if (!$this->book_id) {
+			return $this->message;
+		}
 
-		$counts = [];
-		foreach (array_keys(Task::$status_table) as $status_name) {
-			$counts[$status_name] = 0;
+		$message = $this->message;
+		foreach (Book::$book_name_patterns as $book_name_pattern) {
+			$message = preg_replace($book_name_pattern, '', $this->message);
 		}
-		foreach ($query->select('status', DB::raw('count(*) as total'))->groupBy('status')->get() as $result) {
-			$status_name = array_search($result->status, Task::$status_table);
-			$counts[$status_name] = (int)$result->total;
-		}
-		return $counts;
+		return $message;
+	}
+
+	public function isDone()
+	{
+		return $this->status == static::$status_table['done'];
 	}
 
 	public function scopeByNameAndStatus($query, $name, $status)
@@ -82,11 +92,11 @@ class Task extends Eloquent
 		;
 	}
 
-	public function scopeDone($query)
+	public function scopeDone($query, $order = 'DESC')
 	{
 		return $query
 			->where('status', static::$status_table['done'])
-			->orderBy('updated_at', 'DESC')
+			->orderBy('updated_at', $order)
 		;
 	}
 
@@ -95,6 +105,14 @@ class Task extends Eloquent
 		return $query
 		//where("status = ? and message LIKE ?", @@status_table[:done] , "%#{URI.decode(filter)}%").order('updated_at DESC')
 		;
+	}
+
+	public function scopeTodayTouch($query)
+	{
+		return $query->where('status', '!=', static::$status_table['done'])
+			->where('updated_at', '>=', Carbon::today())
+			->where('updated_at', '<=', Carbon::now())
+			->orderBy('updated_at', 'DESC');
 	}
 
 	public function scopeTodayDone($query)
@@ -108,7 +126,7 @@ class Task extends Eloquent
 	{
 		return $query
 			->where('updated_at', '>=', $month)
-			->where('updated_at', '<' , $month->addMonth(1))
+			->where('updated_at', '<' , Carbon::instance($month)->addMonth())
 //        where(" updated_at >= ? and updated_at < ? ", select_mon, select_mon + 1.month )
 		;
 	}
@@ -135,53 +153,62 @@ class Task extends Eloquent
 			->orderBy('updated_at', 'asc')->take(10);
 	}
 
-	public function doneMonthList($query)
+	public static function countsByStatus(Relation $relation)
 	{
-//    from_month = Time.now - 1.year
-//    to_month   = self.to_done_month
-//
-//    month_list = []
-//    while from_month <= to_month do
-//    month_list << { date: to_month, count: self.done.select_month(to_month).count}
-//      to_month -= 1.month
-//    }
-//    return month_list
-		return $query;
+		$counts = [];
+		foreach (array_keys(Task::$status_table) as $status_name) {
+			$counts[$status_name] = 0;
+		}
+		foreach ($relation->select('status', DB::raw('count(*) as total'))->groupBy('status')->get() as $result) {
+			$status_name = array_search($result->status, Task::$status_table);
+			$counts[$status_name] = (int)$result->total;
+		}
+		return $counts;
+	}
+
+	public static function doneMonthList(Relation $relation)
+	{
+		$fromMonth = Carbon::now()->firstOfMonth()->subYear();
+		$toMonth = static::toDoneMonth();
+
+		$monthList = [];
+		while ($toMonth > $fromMonth) {
+			$monthList[] = [
+				'date' => clone $toMonth,
+				'count' => static::done()->selectMonth($toMonth)->count(),
+			];
+			$toMonth = $toMonth->subMonth();
+		}
+		return $monthList;
 	}
 
 	public static function fromDoneMonth()
 	{
-//    last_task = self.done.last
-//    if last_task
-//    from_time = last_task.updated_at
-//      Time.new(from_time.year, from_time.mon)
-//    else
-//      Time.now
-//    }
+		$oldestDoneTask = Task::done('ASC')->first();
+		if (!$oldestDoneTask) {
+			return Carbon::now()->firstOfMonth();
+		}
+		else {
+			$loldestDoneAt = $oldestDoneTask->updated_at;
+			return $latestDoneAt->firstOfMonth();
+		}
 	}
 
 	public static function toDoneMonth()
 	{
-//    first_task = self.done.first
-//    if first_task
-//    to_time = first_task.updated_at
-//      Time.new(to_time.year, to_time.mon)
-//    else
-//      Time.now
-//    }
+		$latestDoneTask = Task::done('DESC')->first();
+		if (!$latestDoneTask) {
+			return Carbon::now()->firstOfMonth();
+		}
+		else {
+			$latestDoneAt = $latestDoneTask->updated_at;
+			return $latestDoneAt->firstOfMonth();
+		}
 	}
 
 	public static function todayCount()
 	{
 		return static::where('created_at', '>=', Carbon::today())->where('created_at', '<=', Carbon::now())->count();
-	}
-
-	public static function scopeTodayTouch($query)
-	{
-		return $query->where('status', '!=', static::$status_table['done'])
-			->where('updated_at', '>=', Carbon::today())
-			->where('updated_at', '<=', Carbon::now())
-			->orderBy('updated_at', 'DESC');
 	}
 
 	public static function csv($options = [])
@@ -199,32 +226,6 @@ class Task extends Eloquent
 //    }
 //    #SJISに変換するかどうか悩む
 //      #csv_data.encode(Encoding::SJIS)
-	}
-
-	public function statusSymbol()
-	{
-		return array_search($this->status, static::$status_table);
-	}
-
-	public function bookName()
-	{
-		if ($this->book_id){
-			return $this->book->name;
-		}
-		return '';
-	}
-
-	public function messageWithoutBookName()
-	{
-		if (!$this->book_id) {
-			return $this->message;
-		}
-
-		$message = $this->message;
-		foreach (Book::$book_name_patterns as $book_name_pattern) {
-			$message = preg_replace($book_name_pattern, '', $this->message);
-		}
-		return $message;
 	}
 
 }

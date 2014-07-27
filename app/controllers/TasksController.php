@@ -158,15 +158,16 @@ class TasksController extends BaseController
 		Log::debug(__METHOD__);
 
 		$tasks = $this->currentTasks()->done();
-		if (Input::get('year') == false){
+		if (Input::has('year')){
 			$month = Carbon::createFromDate(Input::get('year'), Input::get('month'), 0);
 			$tasks = $tasks->selectMonth($month);
 		}
 		$tasks = $tasks->paginate(100);
 
-		$month_list = $this->currentTasks()->doneMonthList()->get();
-		Log::debug(print_r($month_list, true));
-		$month_done_list = $this->currentTasks()->doneMonthList()->orderBy('date');
+		$month_list = Task::doneMonthList($this->currentTasks());
+
+		$month_done_list = array_sort(Task::doneMonthList($this->currentTasks()), function($value) { return $value['date']; });
+
 		return View::make('tasks.donelist', compact('tasks', 'month_list', 'month_done_list'));
 	}
 
