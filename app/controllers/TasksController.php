@@ -78,7 +78,7 @@ class TasksController extends BaseController
 
 	public function update($id)
 	{
-		Log::debug(__METHOD__."id=$id");
+		Log::debug(__METHOD__.sprintf('(id=%d, message="%s")', $id, Input::get('message')));
 
 		$task = Task::find($id);
 		$task->book_id = Book::getIdInMessage(Auth::user(), Input::get('message'));
