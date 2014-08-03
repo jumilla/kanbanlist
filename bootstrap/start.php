@@ -25,12 +25,12 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+$env = $app->detectEnvironment([
 
-	'staging' => array('*.hmk-temp.com'),
+	'staging' => array('*.straight-spirits.com'),
 	'local' => array('*'),
 
-));
+]);
 
 /*
 |--------------------------------------------------------------------------
