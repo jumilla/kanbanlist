@@ -5,8 +5,9 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"codesleeve/asset-pipeline": "2.*",
-		"jenssegers/agent": "*"
+		"zizaco/confide": "~4.0@dev",
+		"jenssegers/agent": "*",
+		"codesleeve/asset-pipeline": "2.*"
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master",
@@ -25,8 +26,7 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php",
-			"packages/confide4-BETA"
+			"app/tests/TestCase.php"
 		]
 	},
 	"scripts": {

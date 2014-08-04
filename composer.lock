@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "88c5b3e84efcce551bdff36009aabdeb",
+    "hash": "087ef1a00fba7d0da3aa9d08d740e570",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -308,7 +308,7 @@
             "authors": [
                 {
                     "name": "Anthony Ferrara",
-                    "email": "ircmaxell@ircmaxell.com",
+                    "email": "ircmaxell@php.net",
                     "homepage": "http://blog.ircmaxell.com"
                 }
             ],
@@ -1098,16 +1098,16 @@
         },
         {
             "name": "predis/predis",
-            "version": "v0.8.6",
+            "version": "v0.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "239864d9a0929f29bf8c5a8370ef743537c4953d"
+                "reference": "4123fcd85d61354c6c9900db76c9597dbd129bf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/239864d9a0929f29bf8c5a8370ef743537c4953d",
-                "reference": "239864d9a0929f29bf8c5a8370ef743537c4953d",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/4123fcd85d61354c6c9900db76c9597dbd129bf6",
+                "reference": "4123fcd85d61354c6c9900db76c9597dbd129bf6",
                 "shasum": ""
             },
             "require": {
@@ -1144,7 +1144,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2014-07-15 09:54:33"
+            "time": "2014-08-01 09:43:10"
         },
         {
             "name": "psr/log",
@@ -2140,6 +2140,72 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2014-07-15 14:22:44"
+        },
+        {
+            "name": "zizaco/confide",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zizaco/confide.git",
+                "reference": "9500f125f07db7f0834c3551f22d9941dae4134e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zizaco/confide/zipball/9500f125f07db7f0834c3551f22d9941dae4134e",
+                "reference": "9500f125f07db7f0834c3551f22d9941dae4134e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~4.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/auth": "~4.2",
+                "illuminate/console": "~4.2",
+                "illuminate/database": "~4.2",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "suggest": {
+                "zizaco/entrust": "add Role-based Permissions to Laravel 4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/migrations",
+                    "src/commands"
+                ],
+                "psr-4": {
+                    "Zizaco\\Confide\\": "src/Confide/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Elkins",
+                    "homepage": "http://www.andrewelkins.com"
+                },
+                {
+                    "name": "Zizaco Zizuini",
+                    "homepage": "http://www.zizaco.net"
+                }
+            ],
+            "description": "Confide is an authentication solution for Laravel 4",
+            "keywords": [
+                "auth",
+                "illuminate",
+                "laravel"
+            ],
+            "time": "2014-08-03 18:31:57"
         }
     ],
     "packages-dev": [
@@ -2436,7 +2502,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
+                    "name": "Jonathan H. Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -2533,7 +2599,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2664,7 +2730,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2718,7 +2784,7 @@
                 {
                     "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -2922,12 +2988,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "1b3b265a904cab6f28b72684d7d62abade836e25"
+                "reference": "5c8d5eee9ca58a618d3f7200012b4921fa887729"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/1b3b265a904cab6f28b72684d7d62abade836e25",
-                "reference": "1b3b265a904cab6f28b72684d7d62abade836e25",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/5c8d5eee9ca58a618d3f7200012b4921fa887729",
+                "reference": "5c8d5eee9ca58a618d3f7200012b4921fa887729",
                 "shasum": ""
             },
             "require": {
@@ -2980,7 +3046,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2014-07-23 18:59:52"
+            "time": "2014-07-28 12:51:16"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -4008,6 +4074,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "zizaco/confide": 20,
         "mockery/mockery": 20,
         "barryvdh/laravel-debugbar": 20,
         "shin1x1/laravel-table-admin": 20,
