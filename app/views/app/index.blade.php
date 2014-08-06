@@ -3,7 +3,7 @@
 @section('content')
 <div id="wrapper">
 <div class="hero-unit">
-  <h1>かんばんりすと</h1>
+  <h1>かんばんりすと made by Laravel4</h1>
   <p>
     <h3>かんばんりすと って？</h3>
     <ul>
@@ -25,8 +25,8 @@
 
     <h3>ソースコード</h3>
     <ul>
-      <li><a href="https://github.com/volpe28v/kanban-list">https://github.com/volpe28v/kanban-list</a></li>
-      <li>ご意見ご要望などあれば GitHub の issue などでお気軽に連絡ください</li>
+      <li><a href="https://github.com/jumilla/kanbanlist">https://github.com/jumilla/kanbanlist</a></li>
+      <li>ご意見ご要望などあれば <a href="https://github.com/volpe28v/kanban-list">GitHub(原作)</a> の issue などでお気軽に連絡ください</li>
     </ul>
   </p>
 
