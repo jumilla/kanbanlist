@@ -68,8 +68,8 @@
 
   <footer>
     <span>
-    Laravel4版 © 2014 <a href="http://github.com/jumilla/kanbanlist/blob/master/readme.md">Laravelers</a>. All rights reserved.
-    Rails3版 © 2011 Naoki KODAMA. All rights reserved.
+    Laravel4版 © 2014 <a href="http://github.com/jumilla/kanbanlist/blob/master/readme.md">Laravelers</a>. All rights reserved.<br>
+    Rails3版 © 2011 Naoki KODAMA. All rights reserved.<br>
     </span>
   </footer>
 </body>
