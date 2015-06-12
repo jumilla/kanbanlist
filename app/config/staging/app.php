@@ -2,7 +2,7 @@
 
 return array(
 
-	'debug' => true,
+	'debug' => false,
 
 	'url' => 'http://kanbanlist-dev.straight-spirits.com',
 

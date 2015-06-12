@@ -82,14 +82,3 @@ Route::group(['prefix' => 'tasks', 'before' => 'auth'], function() {
     	['as' => 'tasks.destroy', 'uses' => 'TasksController@destroy']);
 });
 
-// for DEBUG
-if (Config::get('app.debug')) {
-	// route 'crud/{table}'
-	Shin1x1\LaravelTableAdmin\TableAdminFacade::route([
-    	'users',
-    	'books',
-    	'tasks',
-	]);
-}
-//
-

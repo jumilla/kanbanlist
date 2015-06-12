@@ -128,7 +128,6 @@ return array(
 
 		// for Debug
 		'Barryvdh\Debugbar\ServiceProvider',
-		'Shin1x1\LaravelTableAdmin\TableAdminServiceProvider',
 
 		// for Development Support
 		'Jumilla\Erb2Blade\ServiceProvider',

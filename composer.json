@@ -5,18 +5,17 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"zizaco/confide": "~4.0@dev",
+		"zizaco/confide": "~4.0",
 		"jenssegers/agent": "*",
-		"codesleeve/asset-pipeline": "2.*"
+		"codesleeve/asset-pipeline": "~2.0"
 	},
 	"require-dev": {
-		"mockery/mockery": "dev-master",
-		"phpunit/phpunit": "4.1.*",
-		"ext-xdebug": "2.2.*",
-		"barryvdh/laravel-debugbar": "dev-master",
+		"mockery/mockery": "~0.8",
+		"phpunit/phpunit": "~4.2",
+		"ext-xdebug": "~2.2",
+		"barryvdh/laravel-debugbar": "1.*",
         "barryvdh/laravel-ide-helper": "1.*",
 		"jumilla/erb2blade": "1.*",
-		"shin1x1/laravel-table-admin": "dev-master",
 		"satooshi/php-coveralls": "dev-master"
 	},
 	"autoload": {
